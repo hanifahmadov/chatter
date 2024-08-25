@@ -67,22 +67,34 @@ export const PersistentLayout = () => {
 	};
 
 	useEffect(() => {
-		const initialize = async () => {
-			if (!signedUser) {
-				const user = await setup();
+		const setup = async () => {
+			return new Promise(async (resolve, reject) => {
+				try {
+					const response = await useRefreshAccessApi();
+					const { user } = await response.data;
 
-				if (user) {
-					setSignedUser(user);
-				} else {
-					setBackdrop(true);
+					resolve(user);
+				} catch (error) {
+					console.log("useRefreshAccessApi error, cant get the user");
+					reject(false);
 				}
-
-				setIsLoading(false);
-			}
+			});
 		};
 
-		initialize();
-	}, [signedUser]);
+		if (!signedUser) {
+			setup()
+				.then((user) => {
+					setSignedUser(user);
+					setIsLoading(false);
+				})
+
+				.catch((err) => {
+					setIsLoading(false);
+					setBackdrop(true);
+					// navigate("/signin", { state: { nouser: true } });
+				});
+		}
+	}, []);
 
 	if (isLoading) {
 		return <Loading_Container>Loading...</Loading_Container>;
