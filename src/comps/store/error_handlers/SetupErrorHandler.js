@@ -14,7 +14,7 @@ export const SetupErrorHandler = () => {
 				<motion.button
 					whileTap={{ scale: 0.99 }}
 					onClick={() => navigate("/signin", { replace: true })}
-					class='bg-blue-800 hover:bg-blue-700 
+					className='bg-blue-800 hover:bg-blue-700 
                            text-white font-bold 
                            py-1 px-3 mt-3 
                            rounded font-medium 

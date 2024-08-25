@@ -19,7 +19,7 @@ import { Loading_Container } from "./layouts.styled";
 
 /* helpers */
 import { SetupErrorHandler } from "../store/error_handlers/SetupErrorHandler";
-import  { Backdrop } from "./Backdrop"
+import { Backdrop } from "./Backdrop";
 
 export const PersistentLayout = () => {
 	/* backdrop  */
@@ -49,34 +49,40 @@ export const PersistentLayout = () => {
 	 *
 	 *
 	 */
+
+	const setup = async () => {
+		try {
+			const response = await useRefreshAccessApi();
+
+			if (!response || !response.data || !response.data.user) {
+				throw new Error("Invalid response from server");
+			}
+
+			const { user } = response.data;
+			return user;
+		} catch (error) {
+			console.error("useRefreshAccessApi error:", error.message);
+			return null;
+		}
+	};
+
 	useEffect(() => {
-		const setup = async () => {
-			return new Promise(async (resolve, reject) => {
-				try {
-					const response = await useRefreshAccessApi();
-					const { user } = await response.data;
-					resolve(user);
-				} catch (error) {
-					console.log("useRefreshAccessApi error, cant get the user");
-					reject(false);
+		const initialize = async () => {
+			if (!signedUser) {
+				const user = await setup();
+
+				if (user) {
+					setSignedUser(user);
+				} else {
+					setBackdrop(true);
 				}
-			});
+
+				setIsLoading(false);
+			}
 		};
 
-		if (!signedUser) {
-			setup()
-				.then((user) => {
-					setSignedUser(user);
-					setIsLoading(false);
-				})
-
-				.catch((err) => {
-					setIsLoading(false);
-					setBackdrop(true);
-					// navigate("/signin", { state: { nouser: true } });
-				});
-		}
-	}, []);
+		initialize();
+	}, [signedUser]);
 
 	if (isLoading) {
 		return <Loading_Container>Loading...</Loading_Container>;
