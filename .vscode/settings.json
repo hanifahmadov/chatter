@@ -1,0 +1,6 @@
+{
+    "html.format.wrapAttributesIndentSize": 4,
+    "editor.wordWrapColumn": 120,
+    "editor.wordWrap": "off",
+    "chat.editor.wordWrap": "off"
+}
