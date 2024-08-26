@@ -4,8 +4,11 @@ import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 
+/* apis */
+import { signin_api } from "../../apis/registerCalls";
+
 /* states */
-import { userDefault } from "../store/states/user_state";
+import { userDefault } from "../../store/states/user_state";
 
 export const Signin = () => {
 	/* location & navigation */
@@ -13,7 +16,8 @@ export const Signin = () => {
 	const navigate = useNavigate();
 
 	/* user */
-	const [user, setUser] = useRecoilState(userDefault);
+
+	const [signedUser, setSignedUser] = useRecoilState(userDefault);
 
 	/* sign in setup */
 	const [email, setEmail] = useState("");
@@ -24,6 +28,17 @@ export const Signin = () => {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		if (!email.length || !pwd.length) return;
+
+		signin_api({ email, pwd })
+			.then(async (response) => {
+				const { user } = await response.data;
+				setSignedUser(user);
+
+				navigate("/", { replace: true, state: { from: "signin" } });
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	return (
@@ -93,7 +108,7 @@ export const Signin = () => {
 					onClick={() => navigate("/signup")}
 					className='text-shadow-custom_01 
 									text-blue-900 
-									bg-gray-100
+									bg-gray-100 
 									hover:bg-gray-50
 									cursor-pointer 
 									font-medium mt-1 

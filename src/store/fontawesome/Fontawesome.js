@@ -12,7 +12,7 @@ import {
 	faFaceLaughBeam as faFaceLaughBeamRegular,
 	faCircleCheck as faCircleCheckRegular,
 	faUser as faUserRegular,
-	faImage as faImageRegular
+	faImage as faImageRegular,
 } from "@fortawesome/free-regular-svg-icons";
 
 import {
@@ -40,7 +40,8 @@ import {
 	faTriangleExclamation,
 	faUser,
 	faCircleInfo,
-	faWandMagicSparkles
+	faWandMagicSparkles,
+	faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -79,7 +80,8 @@ library.add(
 	faUserRegular,
 	faCircleInfo,
 	faImageRegular,
-	faWandMagicSparkles
+	faWandMagicSparkles,
+	faRightFromBracket
 );
 
 const defineType = (type) => {
@@ -142,6 +144,8 @@ const defineType = (type) => {
 			return faImageRegular;
 		case "faWandMagicSparkles":
 			return faWandMagicSparkles;
+		case "faRightFromBracket":
+			return faRightFromBracket;
 		default:
 			return null;
 	}

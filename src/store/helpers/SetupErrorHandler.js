@@ -7,8 +7,8 @@ export const SetupErrorHandler = () => {
 
 	return (
 		<div className='mx-auto  text-center p-4 text-shadow-custom_01'>
-			<div className=''>Cookies has expired</div>
-			<div>Please re-sign in.</div>
+			<div className=''>Cookies have expired</div>
+			<div>Please re-sign in</div>
 
 			<div>
 				<motion.button

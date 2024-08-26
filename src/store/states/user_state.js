@@ -7,7 +7,6 @@ export const userDefault = atom({
 	default: null,
 });
 
-
 /**
  *  current recepient user (reciever)
  *  for sending messages to
