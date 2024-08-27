@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilCallback } from "recoil";
 import { motion } from "framer-motion";
+import async from "async";
 
 /* apis */
 import { signin_api } from "../../apis/registerCalls";
+import { socketconnect } from "../../apis/socketCalls";
 
 /* states */
 import { userDefault } from "../../store/states/user_state";
+import { newOmitDefault, socketConnectionDefault } from "../../store/states/socket_state";
+import { messageDataCallDefault } from "../../store/states/message_state";
 
 export const Signin = () => {
 	/* location & navigation */
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	/* for socket */
+	const [messageDataCall, setMessageDataCall] = useRecoilState(messageDataCallDefault);
+	const [newOmit, setNewOmit] = useRecoilState(newOmitDefault);
+
 	/* user */
-
 	const [signedUser, setSignedUser] = useRecoilState(userDefault);
-
+	const updateUserState = useRecoilCallback(({ set }) => async (user) => {
+		return new Promise((resolve) => {
+			set(userDefault, user);
+			resolve(user);
+		});
+	});
 	/* sign in setup */
 	const [email, setEmail] = useState("");
 	const [pwd, setPwd] = useState("");
@@ -31,11 +43,20 @@ export const Signin = () => {
 
 		signin_api({ email, pwd })
 			.then(async (response) => {
-				const { user } = await response.data;
-				setSignedUser(user);
+				const { user } = response.data;
 
-				navigate("/", { replace: true, state: { from: "signin" } });
+				socketconnect(user.accessToken, messageDataCall, setMessageDataCall, newOmit, setNewOmit).then(
+					(socket) => {
+						console.log("sockettt");
+						window.socket = socket;
+					}
+				);
+
+				updateUserState(user).then(() => {
+					navigate("/", { replace: true, state: { from: "signin" } });
+				});
 			})
+
 			.catch((err) => {
 				console.log(err);
 			});

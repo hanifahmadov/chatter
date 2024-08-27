@@ -18,7 +18,7 @@ export const deviceDefault = atom({
 		small: null /* > 640 */,
 		medium: null /* > 768 */,
 		large: null /* > 1024 */,
-		xlarge: null /*  > 1440 */
+		xlarge: null /*  > 1440 */,
 	},
 });
 

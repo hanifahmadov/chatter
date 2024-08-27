@@ -22,10 +22,10 @@ export const changePwdApi = ({ oldPassword, newPassword }, accessToken) => {
 
 export const useRefreshAccessApi = () => {
 	return axios({
-		url: apiUrl + "/refreshAccess",
+		url: `${apiUrl}/refreshAccess`, // Ensure the URL is correct
 		method: "GET",
-		withCredentials: true,
-		credentials: "include",
+		withCredentials: true, // Ensure credentials are sent
+		credentials: "include", // Include credentials if needed for cross-origin requests
 	});
 };
 

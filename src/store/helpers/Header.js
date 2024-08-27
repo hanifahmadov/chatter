@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion } from "framer-motion";
-import "animate.css";
 
 /* apis */
-import { signout } from "../../../registerCalls";
+import { signout_api } from "../../apis/registerCalls";
 
 /* global states */
 import { userDefault } from "../states/user_state";
@@ -27,32 +26,39 @@ export const Header = () => {
 
 	/* sign out */
 	const handleSignout = () => {
-		signout(accessToken, _id).then((res) => {
-			navigate("/signin", { replace: true });
+		signout_api(accessToken, _id).then((res) => {
+			window.socket?.disconnect();
+			window.socket = null;
+			navigate("/welcome", { replace: true });
 		});
 	};
 
 	return (
 		<>
-			<div className='title h-full flex items-end  p-2 text-shadow-custom_005 text-[16px] w-[10rem]  justify-end'>
+			<div className='title h-full flex items-end p-2 text-shadow-custom_005 text-[16px] w-[5rem] lg:w-[10rem] justify-end'>
 				Chatter
 			</div>
 			<div className='account title h-full flex items-end p-2 text-[14px] relative'>
-				<div className='flex w-[10rem] text-left text-shadow-custom_005 '>
+				<motion.div
+					whileTap={{ scale: 0.99 }}
+					onClick={() => setAccount((account) => !account)}
+					id='logout'
+					className={"flex  w-[5rem] lg:w-[10rem] text-left text-shadow-custom_005 cursor-pointer"}
+				>
 					<span className='font-medium pointer-events-none'>
 						{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 					</span>
-					<motion.div
-						whileTap={{ scale: 1.11 }}
-						id='logout'
-						className='cursor-pointer'
-						onClick={() => setAccount((account) => !account)}
-					>
-						<span className='faRightFromBracket relative px-2 top-[1px] block pointer-events-none h-[20px] 2-[15px] flex items-center justify-center overflow-hidden'>
-							<Fontawesome type={"faRightFromBracket"} />
+					<div className={"cursor-pointer pointer-events-none"}>
+						<span
+							className='faRightFromBracket relative px-2 top-[1px] 
+											block pointer-events-none h-[20px] 2-[15px] 
+											flex items-center justify-center overflow-hidden											
+											'
+						>
+							<Fontawesome type={"faRightFromBracket"} className='pointer-events-none scale-100' />
 						</span>
-					</motion.div>
-				</div>
+					</div>
+				</motion.div>
 
 				{account && (
 					<OutsideClickHandler
@@ -63,8 +69,8 @@ export const Header = () => {
 						}}
 					>
 						<div
-							className='w-[11rem] absolute top-[65px] right-[65px] shadow-custom03 
-                                        rounded-lg transition-opacity duration-200 ease-in-out opacity-100 
+							className='w-[11rem] absolute top-[65px] right-[5px] lg:right-[65px] shadow-custom03 
+                                        rounded-md overflow-hidden transition-opacity duration-200 ease-in-out opacity-100 
                                         '
 						>
 							<div className='flex flex-col items-center w-full h-full p-3 text-center justify-top bg-slate-50'>

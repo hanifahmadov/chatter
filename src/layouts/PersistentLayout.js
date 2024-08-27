@@ -1,114 +1,100 @@
 /* npm packages */
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilCallback } from "recoil";
 import { useMediaQuery } from "react-responsive";
 import { ThemeProvider } from "styled-components";
 
 /* apis */
+import { useRefreshAccessApi } from "../apis/authCalls";
+import { addSocketListeners, establishSocketConnection, socketconnect } from "../apis/socketCalls";
 
 /* global states */
 import { userDefault } from "../store/states/user_state";
+import { newOmitDefault, socketConnectionDefault } from "../store/states/socket_state";
+import { messageDataCallDefault } from "../store/states/message_state";
 
 /* styled */
 import { Loading_Container } from "./layouts.styled";
 
 /* helpers */
+import { Backdrop } from "./Backdrop";
+import { backdropDefault } from "../store/states/app_state";
+import { SetupErrorHandler } from "../store/helpers/SetupErrorHandler";
 
 export const PersistentLayout = () => {
 	console.log("Persistent_layout");
 	/* backdrop  */
-	// const [backdrop, setBackdrop] = useRecoilState(backdropDefault);
+	const [backdrop, setBackdrop] = useRecoilState(backdropDefault);
 
 	/* navigate */
 	const navigate = useNavigate();
 
 	/* location */
 	// console.log(location.state?.from);
-	// const location = useLocation();
+	const location = useLocation();
+
+	console.log(location.pathname);
 
 	/** user */
 	const [signedUser, setSignedUser] = useRecoilState(userDefault);
+	console.log("signedUser right after fetching globally", signedUser);
+
+	const updateUserState = useRecoilCallback(({ set }) => async (user) => {
+		return new Promise((resolve) => {
+			set(userDefault, user);
+			resolve(true);
+		});
+	});
 
 	/* loading */
-	const [isLoading, setIsLoading] = useState(true);
-
-	/**
-	 *  Socket
-	 * 	Connections
-	 * 	Listeners
-	 * 	Events
-	 */
-	const [messageDataCall, setMessageDataCall] = useRecoilState(messageDataCallDefault);
-	const [socketConnection, setSocketConnection] = useRecoilState(socketConnectionDefault);
-	const [newOmit, setNewOmit] = useRecoilState(newOmitDefault);
+	const [isLoading, setIsLoading] = useState(false);
 
 	/**
 	 * 	this useEffect sets the refresh token check
 	 * 	and establish socket connection
 	 */
 
+	/* for socket */
+	const [messageDataCall, setMessageDataCall] = useRecoilState(messageDataCallDefault);
+	const [newOmit, setNewOmit] = useRecoilState(newOmitDefault);
+
 	const setup = async () => {
-		console.log("setup called");
-
-		console.log("signedUser", signedUser);
-
-		return new Promise(async (resolve, reject) => {
-			try {
-				const response = await useRefreshAccessApi();
+		useRefreshAccessApi()
+			.then(async (response) => {
 				const { user } = await response.data;
 
-				if (user && user.accessToken) {
-					const socket = await establishSocketConnection(user.accessToken);
-					const { result, userSocket } = await addSocketListeners(
-						socket,
-						socketConnection,
-						setSocketConnection,
-						messageDataCall,
-						setMessageDataCall,
-						newOmit,
-						setNewOmit
-					);
-
-					if (result) {
-						console.log(socket);
+				socketconnect(user.accessToken, messageDataCall, setMessageDataCall, newOmit, setNewOmit).then(
+					(socket) => {
+						console.log("sockettt");
 						window.socket = socket;
 					}
+				);
 
-					resolve(user);
+				updateUserState(user).then((ress) => {
+					console.log(ress);
+					setIsLoading(false);
+				});
+			})
+			.catch((error) => {
+				console.log("refresh error happened", error);
+				if (error.status == 401) {
+					navigate("/welcome", { replace: true });
+					setBackdrop(false);
+					setIsLoading(false);
+				} else {
+					setBackdrop(true);
 				}
-			} catch (error) {
-				console.log("useRefreshAccessApi error, cant get the user");
-				reject(false);
-			}
-		});
+			});
 	};
 
 	useEffect(() => {
-		console.log("signedUser", signedUser);
-		if (!signedUser) {
-			setup()
-				.then((user) => {
-					setSignedUser(user);
-					setIsLoading(false);
-				})
-
-				.catch((err) => {
-					setIsLoading(false);
-					setBackdrop(true);
-				});
-		}
+		!signedUser ? setup() : setIsLoading(true);
 	}, []);
 
-	// if (signedUser)
+	if (backdrop) {
+		return <Backdrop kids={<SetupErrorHandler setBackdrop={setBackdrop} />} />;
+	}
 
-	// if (isLoading) {
-	// 	return <Loading_Container>Loading...</Loading_Container>;
-	// }
-
-	// if (backdrop) {
-	// 	return <Backdrop kids={<SetupErrorHandler />} />;
-	// }
-
-	return <Outlet />;
+	return signedUser ? <Outlet /> : <Loading_Container>Loading...</Loading_Container>;
 };

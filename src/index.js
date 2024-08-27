@@ -47,32 +47,31 @@ import { App } from "./App";
  */
 const router = createBrowserRouter([
 	{
-		element: <PersistentLayout />,
+		// add welcome content to Register layout { advance context }
+		path: "/welcome",
+		element: <RegisterLayout />,
 		children: [
 			{
-				// add welcome content to Register layout { advance context }
-				path: "/welcome",
-				element: <RegisterLayout />,
-				children: [
-					{
-						path: "signin",
-						element: <Signin />,
-					},
-					// {
-					// 	path: "/signup",
-					// 	element: <Signup />,
-					// },
-					// {
-					// 	path: "/404",
-					// 	element: <NotFound />,s
-					// },
-					// {
-					// 	path: "*", // wildcard route for handling unknown routes
-					// 	element: <Navigate to='/404' replace />,
-					// },
-				],
+				path: "signin",
+				element: <Signin />,
 			},
-
+			// {
+			// 	path: "/signup",
+			// 	element: <Signup />,
+			// },
+			// {
+			// 	path: "/404",
+			// 	element: <NotFound />,s
+			// },
+			// {
+			// 	path: "*", // wildcard route for handling unknown routes
+			// 	element: <Navigate to='/404' replace />,
+			// },
+		],
+	},
+	{
+		element: <PersistentLayout />,
+		children: [
 			{
 				path: "/",
 				element: (

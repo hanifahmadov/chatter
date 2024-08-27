@@ -7,10 +7,8 @@ export const socketConnectionDefault = atom({
 	default: false,
 });
 
-
 /* Socket connection default state */
 export const newOmitDefault = atom({
 	key: "newOmitDefault",
 	default: false,
 });
-

@@ -74,7 +74,7 @@ export const Signup = () => {
 					name='avatar'
 					className='hidden'
 					ref={avatarRef}
-					accept='image/png, image/jpeg, image/jpg, image/avif, image/webp'
+					accept='image/png, image/jpeg, image/jpg, image/avif, image/webp  '
 					onChange={handleAvatarChange}
 				/>
 				<label htmlFor='avatar' className='label_avatar cursor-pointer'>
