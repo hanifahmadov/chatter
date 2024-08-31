@@ -128,6 +128,8 @@ export const App = () => {
 			});
 	}, [on_users]);
 
+	
+
 	/* call all-messages*/
 	useEffect(() => {
 		if (!currRecipient) return;
@@ -286,7 +288,7 @@ export const App = () => {
 				{/* right col - recipient details */}
 				<div className='content_right h-full w-[22rem] border-l-[1px] border-gray-200'>
 					<div className='user_details_wrapper flex flex-col gap-3'>
-						<div
+						<div 
 							className='user_details border-b-[1px] border-slate-200 min-h-[55px] t
 										ext-[16px] text-shadow-custom_01 text-center items-center 
 										flex justify-center font-[500]'
