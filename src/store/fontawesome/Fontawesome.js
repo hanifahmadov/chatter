@@ -42,6 +42,7 @@ import {
 	faCircleInfo,
 	faWandMagicSparkles,
 	faRightFromBracket,
+	faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -81,7 +82,8 @@ library.add(
 	faCircleInfo,
 	faImageRegular,
 	faWandMagicSparkles,
-	faRightFromBracket
+	faRightFromBracket,
+	faInfo
 );
 
 const defineType = (type) => {
@@ -144,6 +146,8 @@ const defineType = (type) => {
 			return faImageRegular;
 		case "faWandMagicSparkles":
 			return faWandMagicSparkles;
+		case "faInfo":
+			return faInfo;
 		case "faRightFromBracket":
 			return faRightFromBracket;
 		default:
@@ -154,6 +158,7 @@ const defineType = (type) => {
 export const Fontawesome = ({
 	type,
 	color,
+	backgroundColor,
 	size,
 	padding,
 	margin,
@@ -174,6 +179,7 @@ export const Fontawesome = ({
 	fontWeight,
 	height,
 	width,
+	lineHeight,
 }) => {
 	const icon = defineType(type);
 	return icon ? (
@@ -181,6 +187,8 @@ export const Fontawesome = ({
 			icon={icon}
 			style={{
 				color,
+				backgroundColor,
+				lineHeight,
 				size,
 				padding,
 				margin,
@@ -201,6 +209,7 @@ export const Fontawesome = ({
 				fontWeight,
 				height,
 				width,
+				transition: "all .1s ease-in-out",
 			}}
 		/>
 	) : null;

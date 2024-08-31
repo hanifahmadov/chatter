@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useRecoilState } from "recoil";
+
+/* states */
+import { userDefault } from "../store/states/user_state";
 
 export const RegisterLayout = () => {
 	const location = useLocation();
@@ -20,6 +24,8 @@ export const RegisterLayout = () => {
 	};
 
 	console.log("RegisterLayout rendered");
+
+	const [user] = useRecoilState(userDefault);
 
 	return (
 		<div

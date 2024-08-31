@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 import { apiUrl } from "./apiUrl";
 
-export const socketconnect = (userToken, messageDataCall, setMessageDataCall, newOmit, setNewOmit) => {
+export const socketconnect = (userToken, on_users, set_on_users, on_messages, set_on_messages) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const socket = io(apiUrl, {
@@ -11,19 +11,8 @@ export const socketconnect = (userToken, messageDataCall, setMessageDataCall, ne
 				},
 			});
 
-			socket.on("on_newpost", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_newcomment", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_newreply", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_new_pvtmessage", (data) => setMessageDataCall((messageDataCall) => !messageDataCall));
-
-			/*  */
-			socket.on("on_postreaction", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_commentreaction", (data) => setNewOmit((newOmit) => !newOmit));
-
-			socket.on("on_deletepost", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_deletecomment", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_deletereply", (data) => setNewOmit((newOmit) => !newOmit));
-			socket.on("on_delete_subreply", (data) => setNewOmit((newOmit) => !newOmit));
+			socket.on("on_users", (data) => set_on_users((on_users) => !on_users));
+			socket.on("on_messages", (data) => set_on_messages((on_messages) => !on_messages));
 
 			socket.on("disconnect", (res) => {
 				console.log("user disconnected");

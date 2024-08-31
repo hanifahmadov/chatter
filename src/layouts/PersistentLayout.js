@@ -7,12 +7,11 @@ import { ThemeProvider } from "styled-components";
 
 /* apis */
 import { useRefreshAccessApi } from "../apis/authCalls";
-import { addSocketListeners, establishSocketConnection, socketconnect } from "../apis/socketCalls";
+import { socketconnect } from "../apis/socketCalls";
 
 /* global states */
 import { userDefault } from "../store/states/user_state";
-import { newOmitDefault, socketConnectionDefault } from "../store/states/socket_state";
-import { messageDataCallDefault } from "../store/states/message_state";
+import { on_messages_state, on_users_state } from "../store/states/socket_state";
 
 /* styled */
 import { Loading_Container } from "./layouts.styled";
@@ -56,20 +55,22 @@ export const PersistentLayout = () => {
 	 */
 
 	/* for socket */
-	const [messageDataCall, setMessageDataCall] = useRecoilState(messageDataCallDefault);
-	const [newOmit, setNewOmit] = useRecoilState(newOmitDefault);
+	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
+	const [on_users, set_on_users] = useRecoilState(on_users_state);
 
 	const setup = async () => {
 		useRefreshAccessApi()
 			.then(async (response) => {
 				const { user } = await response.data;
 
-				socketconnect(user.accessToken, messageDataCall, setMessageDataCall, newOmit, setNewOmit).then(
-					(socket) => {
+				socketconnect(user.accessToken, on_users, set_on_users, on_messages, set_on_messages)
+					.then((socket) => {
 						console.log("sockettt");
 						window.socket = socket;
-					}
-				);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 
 				updateUserState(user).then((ress) => {
 					console.log(ress);

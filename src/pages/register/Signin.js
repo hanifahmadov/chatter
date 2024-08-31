@@ -11,7 +11,7 @@ import { socketconnect } from "../../apis/socketCalls";
 
 /* states */
 import { userDefault } from "../../store/states/user_state";
-import { newOmitDefault, socketConnectionDefault } from "../../store/states/socket_state";
+import { on_messages_state, on_users_state } from "../../store/states/socket_state";
 import { messageDataCallDefault } from "../../store/states/message_state";
 
 export const Signin = () => {
@@ -20,8 +20,8 @@ export const Signin = () => {
 	const navigate = useNavigate();
 
 	/* for socket */
-	const [messageDataCall, setMessageDataCall] = useRecoilState(messageDataCallDefault);
-	const [newOmit, setNewOmit] = useRecoilState(newOmitDefault);
+	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
+	const [on_users, set_on_users] = useRecoilState(on_users_state);
 
 	/* user */
 	const [signedUser, setSignedUser] = useRecoilState(userDefault);
@@ -45,15 +45,23 @@ export const Signin = () => {
 			.then(async (response) => {
 				const { user } = response.data;
 
-				socketconnect(user.accessToken, messageDataCall, setMessageDataCall, newOmit, setNewOmit).then(
-					(socket) => {
-						console.log("sockettt");
+				socketconnect(user.accessToken, on_users, set_on_users, on_messages, set_on_messages)
+					.then((socket) => {
+						console.log("socket connected and listeners setted up");
 						window.socket = socket;
-					}
-				);
+					})
+					.catch((err) => {
+						console.log("socket connection error >>", err);
+					});
 
 				updateUserState(user).then(() => {
-					navigate("/", { replace: true, state: { from: "signin" } });
+					// Preventing back navigation
+					history.pushState(null, null, window.location.href);
+					window.onpopstate = function () {
+						history.go(1);
+					};
+
+					navigate("/", { replace: true });
 				});
 			})
 
@@ -126,7 +134,7 @@ export const Signin = () => {
 				<div className='text-shadow-custom_01'>Dont have an account?</div>
 
 				<div
-					onClick={() => navigate("/signup")}
+					onClick={() => navigate("/welcome/signup")}
 					className='text-shadow-custom_01 
 									text-blue-900 
 									bg-gray-100 

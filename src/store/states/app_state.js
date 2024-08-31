@@ -31,3 +31,12 @@ export const backdropDefault = atom({
 	key: "backdropDefault",
 	default: false,
 });
+
+/* revents the animation effect on unmout-remount of comps */
+export const animateState = atom({
+	key: "animateState",
+	default: "",
+
+	/* "animate-in slide-in-from-bottom 1s ease-out forwards" */
+});
+

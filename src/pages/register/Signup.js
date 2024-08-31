@@ -5,14 +5,14 @@ import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
 
 /* image */
-import user_image from "../store/image/default-user.jpg";
+import user_image from "../../store/image/default-user.jpg";
 
 /* apis */
 import { apiUrl } from "../../apis/apiUrl";
-import { signup } from "../../apis/registerCalls";
+import { signup_api } from "../../apis/registerCalls";
 
 /* helpers */
-import { Fontawesome } from "../store/fontawesome/Fontawesome";
+import { Fontawesome } from "../../store/fontawesome/Fontawesome";
 
 export const Signup = () => {
 	/* location & navigation */
@@ -50,7 +50,7 @@ export const Signup = () => {
 		data.append("avatar", avatar);
 		data.append("baseurl", apiUrl);
 
-		signup(data)
+		signup_api(data)
 			.then((response) => {
 				console.log(response.data);
 				setEmail("");
@@ -58,7 +58,7 @@ export const Signup = () => {
 				setRepwd("");
 				setAvatar(undefined);
 
-				navigate("/signin", { replace: true });
+				navigate("/welcome/signin", { replace: true });
 			})
 			.catch((err) => {
 				console.log(err);
@@ -174,7 +174,7 @@ export const Signup = () => {
 				<div className='text-shadow-custom_01'>Already have an account?</div>
 
 				<div
-					onClick={() => navigate("/signin")}
+					onClick={() => navigate("/welcome/signin")}
 					className='text-shadow-custom_01 
 									text-blue-900 
 									bg-gray-100

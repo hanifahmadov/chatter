@@ -11,7 +11,10 @@ export const userDefault = atom({
  *  current recepient user (reciever)
  *  for sending messages to
  */
-export const currentRecipientDefault = atom({
-	key: "currentRecipientDefault",
+export const currentRecipientState = atom({
+	key: "currentRecipientState",
 	default: null,
 });
+
+
+

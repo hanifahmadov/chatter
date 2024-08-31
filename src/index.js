@@ -14,6 +14,7 @@ import { RequireAuth } from "./layouts/RequireAuth";
 
 /* pages */
 import { Signin } from "./pages/register/Signin";
+import { Signup } from "./pages/register/Signup";
 
 /* component */
 import { App } from "./App";
@@ -55,10 +56,10 @@ const router = createBrowserRouter([
 				path: "signin",
 				element: <Signin />,
 			},
-			// {
-			// 	path: "/signup",
-			// 	element: <Signup />,
-			// },
+			{
+				path: "signup",
+				element: <Signup />,
+			},
 			// {
 			// 	path: "/404",
 			// 	element: <NotFound />,s
