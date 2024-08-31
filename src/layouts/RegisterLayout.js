@@ -34,7 +34,7 @@ export const RegisterLayout = () => {
 						'
 		>
 			{showWelcome ? (
-				<div className='welcome-container flex flex-col items-center justify-center fixed'>
+				<div className='welcome-container flex flex-col items-center justify-center fixed w-[70%] w:md-[90%]'>
 					<h1 className='text-[18px] font-medium text-shadow-custom_01'>
 						Welcome to Chatter <span className='text-[16px]'>♡</span>
 					</h1>

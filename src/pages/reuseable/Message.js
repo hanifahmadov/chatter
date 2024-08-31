@@ -93,7 +93,7 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 							<div
 								key={index}
 								className={`w-full my-[8px]
-											flex gap-[2px] flex-col 
+											flex gap-[2px] flex-col
 											${owner ? "items-end" : "items-start"}
 											`}
 							>
@@ -102,8 +102,8 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 									<div
 										key={index}
 										className={`w-fit max-w-[25rem] 
-													flex flex-col
-													
+													flex flex-col 
+													${owner ? "items-end" : "items-start"}
 													`}
 									>
 										{msg.media && (
@@ -129,7 +129,13 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 															`}
 										>
 											<span className='leading-[18px]'>
-												{msg.message ? msg.message : "photo"}
+												{msg.message ? (
+													msg.message
+												) : (
+													<span className='text-[10px] italic text-gray-500 font-medium'>
+														attached photo
+													</span>
+												)}
 											</span>
 											<span className='text-[8px] text-shadow-custom_02 text-gray-500 text-end'>
 												{formatTime(msg.createdAt)}

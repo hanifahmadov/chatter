@@ -73,7 +73,7 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 				className={`rounded-full min-w-[34px] min-h-[34px] 
                                                 flex flex-row-1 justify-center items-center
                                                 bg-white border-[2px] border-blue-100 hover:ring-[1px]
-                                                ${text.length ? "cursor-pointer" : "pointer-events-none"}
+                                                ${text.length || image ? "cursor-pointer" : "pointer-events-none"}
                                                 `}
 			>
 				<span className={` ${text.length || image ? "text-blue-600" : "text-blue-200"}  text-[18px] pl-[3px]`}>

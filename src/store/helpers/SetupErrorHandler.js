@@ -11,7 +11,7 @@ export const SetupErrorHandler = ({ setBackdrop }) => {
 	};
 
 	return (
-		<div className='mx-auto  text-center p-4 text-shadow-custom_01'>
+		<div className='mx-auto text-center p-4 text-shadow-custom_01'>
 			<div className=''>Cookies have expired</div>
 			<div>Please re-sign in.</div>
 
