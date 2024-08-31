@@ -136,25 +136,29 @@ export const App = () => {
 			.then((response_messages) => {
 
 				/**
-				 *  based on createdAt date
-				 * 	already sorted messages received
+				 *
+				 * 	get the messages betweem
+				 * 	curr user and recipient
 				 */
-			
 
-				// const i_sent = messages.filter((msg) => {
+				// const i_sent = response_messages.filter((msg) => {
 				// 	return msg.sender == _id && msg.recipient._id == currRecipient._id;
 				// });
 
-				// const recipient_sent = messages.filter(
+				// const recipient_sent = response_messages.filter(
 				// 	(msg) => msg.sender == currRecipient._id && msg.recipient._id == _id
 				// );
 
-				// const already_sorted_messages = i_sent.concat(recipient_sent);
-
+				// const valid_messages = i_sent.concat(recipient_sent);
+				const valid_messages = response_messages.filter(
+					(mess, index) =>
+						(mess.sender == _id && mess.recipient._id == currRecipient._id) ||
+						(mess.sender == currRecipient._id && mess.recipient._id == _id)
+				);
 
 				let localdb = {};
 
-				for (const message of response_messages) {
+				for (const message of valid_messages) {
 					let tempdate = formatDate(message.createdAt);
 
 					if (!localdb[tempdate]) {
@@ -163,7 +167,6 @@ export const App = () => {
 						localdb[tempdate].push(message);
 					}
 				}
-
 
 				console.log(username, localdb);
 
@@ -216,7 +219,6 @@ export const App = () => {
 											border-slate-200 border-b-[1px]
 											bg-slate-200
 											'
-											
 							>
 								<div>
 									<img
