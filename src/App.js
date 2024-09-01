@@ -116,10 +116,10 @@ export const App = () => {
 	};
 
 	let [device, setDevice] = useRecoilState(deviceDefault);
-	let small = useMediaQuery({
+	let sm = useMediaQuery({
 		query: "(max-width: 640px)",
 	});
-	let medium = useMediaQuery({
+	let md = useMediaQuery({
 		query: "(max-width: 768px)",
 	});
 
@@ -127,10 +127,10 @@ export const App = () => {
 		device = JSON.parse(JSON.stringify(device));
 		setDevice({
 			...device,
-			small,
-			medium,
+			sm,
+			md,
 		});
-	}, [small, medium]);
+	}, [sm, md]);
 
 	/**
 	 *  use effects
@@ -161,14 +161,6 @@ export const App = () => {
 				 * 	get the messages betweem
 				 * 	curr user and recipient
 				 */
-
-				// const i_sent = response_messages.filter((msg) => {
-				// 	return msg.sender == _id && msg.recipient._id == currRecipient._id;
-				// });
-
-				// const recipient_sent = response_messages.filter(
-				// 	(msg) => msg.sender == currRecipient._id && msg.recipient._id == _id
-				// );
 
 				// const valid_messages = i_sent.concat(recipient_sent);
 				const valid_messages = response_messages.filter(
@@ -203,7 +195,7 @@ export const App = () => {
 		setCurrRecipient(user);
 
 		controlBodySlide.start({
-			x: small ? -500 : -800,
+			x: sm ? -800 : -800,
 			transition: { duration: 0.5 },
 		});
 
@@ -223,14 +215,14 @@ export const App = () => {
 		}
 	};
 
-	return (
+	const mobile = (
 		<div className='app h-screen w-screen'>
 			<div
 				className='header 
-							min-h-[4.5rem] bg-white
-							flex justify-between items-center
-							px-[15px] shadow-custom_01 fixed top-0 right-0 left-0 z-10
-							'
+					min-h-[4.5rem] bg-white
+					flex justify-between items-center
+					px-[15px] shadow-custom_01 fixed top-0 right-0 left-0 z-10
+					'
 			>
 				<motion.div whileTap={{ scale: 1.2 }} onClick={handleMenuClick} className='menu text-[20px] p-3'>
 					<Fontawesome type={"faBars"} />
@@ -252,7 +244,7 @@ export const App = () => {
 				>
 					<div
 						className='text-[20px] font-medium text-shadow-custom_01 
-									flex justify-center items-center'
+							flex justify-center items-center'
 					>
 						Messages
 					</div>
@@ -264,11 +256,11 @@ export const App = () => {
 								whileTap={{ scale: 1.05 }}
 								onClick={() => handleUserClick(user)}
 								className={`
-											flex gap-3 justify-start items-center 
-											bg-slate-200 px-2 py-2 rounded-lg 
-											
-											
-											`}
+									flex gap-3 justify-start items-center 
+									bg-slate-200 px-2 py-2 rounded-lg 
+									
+									
+									`}
 							>
 								<div className='avatar h-full w-[5rem]'>
 									<img
@@ -306,22 +298,22 @@ export const App = () => {
 				</motion.div>
 
 				<motion.div className=' h-[calc(100vh-4.5rem)] p-1 flex flex-col justify-between items-start'>
-					<div className="w-full">
+					<div className='w-full'>
 						<div
 							className='content_header curr_recipient flex min-h-[55px]   w-full
-											px-2 justify-center items-center 
-											border-slate-200 border-b-[1px]
-											bg-slate-200
-											'
+									px-2 justify-center items-center 
+									border-slate-200 border-b-[1px]
+									bg-slate-200
+									'
 						>
 							<div>
 								<img
 									src={currRecipient?.avatar}
 									className='h-[35px] w-[35px] 
-                        						rounded-lg border-[2px] border-solid 
-                        						border-white object-cover p-[1px]
-                        						text-shadow-custom_02 
-                        						'
+										rounded-lg border-[2px] border-solid 
+										border-white object-cover p-[1px]
+										text-shadow-custom_02 
+										'
 								/>
 							</div>
 							<div className='text-[16px] text-shadow-custom_01 ml-2 font-[500]'>
@@ -364,6 +356,132 @@ export const App = () => {
 						</div>
 					</div>
 				</motion.div>
+			</div>
+
+			<div className='footer'></div>
+		</div>
+	);
+
+	return sm ? (
+		mobile
+	) : (
+		<div className='app items-top flex h-full w-full max-w-[103rem] flex-col justify-center bg-white border-[1px]'>
+			<div className='header flex h-[4.5rem] w-full justify-between border-b-[1px] border-gray-200 bg-white'>
+				<Header />
+			</div>
+
+			<div className='content flex h-full w-full flex-row justify-between '>
+				{/* letf - recipients [users] */}
+				<div className='content_left h-full min-w-[22rem] border-r-[1px] border-slate-200'>
+					<div className='users_wrapper flex flex-col gap-3'>
+						<div className='users_title border-b-[1px] border-slate-200 min-h-[55px] text-[16px] text-shadow-custom_01 text-center items-center flex justify-center font-[500]'>
+							{/* Users */}
+						</div>
+						{users.length > 0 &&
+							users.map((user, index) => {
+								const { avatar, username, createdAt, _id } = user;
+
+								return (
+									<User
+										key={index}
+										currRecipient={currRecipient}
+										setCurrRecipient={setCurrRecipient}
+										user={user}
+									/>
+								);
+							})}
+					</div>
+				</div>
+
+				{/* center - messages */}
+				<div className='content_center flex flex-grow  min-w-[40rem] max-w-[65rem]'>
+					<div className='flex-grow flex flex-col justify-between pb-0 relative'>
+						{/* MESSAGE */}
+
+						<div className='just_a_wrapper'>
+							<div
+								className='content_header curr_recipient flex min-h-[55px]  w-full
+											px-2 justify-center items-center 
+											border-slate-200 border-b-[1px]
+											bg-slate-200
+											'
+							>
+								<div>
+									<img
+										src={currRecipient?.avatar}
+										className='h-[35px] w-[35px] 
+                        						rounded-lg border-[2px] border-solid 
+                        						border-white object-cover p-[1px]
+                        						text-shadow-custom_02 
+                        						'
+									/>
+								</div>
+								<div className='text-[16px] text-shadow-custom_01 ml-2 font-[500]'>
+									{currRecipient &&
+										currRecipient.username.charAt(0).toUpperCase() +
+											currRecipient.username.slice(1).toLowerCase()}
+								</div>
+							</div>
+							<div
+								className='message_guard 
+										scrollbar scrollbar-none  
+										overflow-y-auto
+										p-[5px]
+										h-[78vh]
+
+										'
+							>
+								<div className='message_parent flex gap-0 flex-col flex-grow py-0 px-1'>
+									{Object.keys(messages).length > 0 &&
+										Object.keys(messages).map((date, index) => {
+											/* msg can be [{}] or [{}, {}, {}, {}, ....] */
+											const talks = messages[date];
+
+											return (
+												<Message
+													key={index}
+													signedUserId={_id}
+													talks={talks}
+													date={date}
+													avatar={avatar}
+													animate={animate}
+													setAnimate={setAnimate}
+												/>
+											);
+										})}
+								</div>
+							</div>
+						</div>
+
+						{/* POST MESSAGE */}
+						<div className='send_message mb-0 relative bg-slate-900'>
+							<div className='send_wrapper flex flex-row justify-between items-end absolute inset-0'>
+								<Send
+									text={text}
+									setText={setText}
+									image={image}
+									setImage={setImage}
+									handleKeyDown={handleKeyDown}
+									handleSendMessage={handleSendMessage}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{/* right col - recipient details */}
+				<div className='content_right h-full w-[22rem] border-l-[1px] border-gray-200'>
+					<div className='user_details_wrapper flex flex-col gap-3'>
+						<div
+							className='user_details border-b-[1px] border-slate-200 min-h-[55px] t
+										ext-[16px] text-shadow-custom_01 text-center items-center 
+										flex justify-center font-[500]'
+						>
+							{/* User Details */}
+						</div>
+						{currRecipient && <RecipientDetails currRecipient={currRecipient} />}
+					</div>
+				</div>
 			</div>
 
 			<div className='footer'></div>

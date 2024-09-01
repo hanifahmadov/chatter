@@ -14,11 +14,11 @@ export const darkmodeDefault = atom({
 export const deviceDefault = atom({
 	key: "deviceDefault",
 	default: {
-		xsamll: null /* > 360 */,
-		small: null /* > 640 */,
-		medium: null /* > 768 */,
-		large: null /* > 1024 */,
-		xlarge: null /*  > 1440 */,
+		xsm: null /* > 360 */,
+		sm: null /* > 640 */,
+		md: null /* > 768 */,
+		lg: null /* > 1024 */,
+		xlg: null /*  > 1440 */,
 	},
 });
 
