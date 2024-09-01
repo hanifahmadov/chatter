@@ -39,4 +39,5 @@ export const animateState = atom({
 
 	/* "animate-in slide-in-from-bottom 1s ease-out forwards" */
 });
+/* revents the animation effect on unmout-remount of comps */
 

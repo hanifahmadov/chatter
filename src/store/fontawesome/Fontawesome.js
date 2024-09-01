@@ -43,6 +43,9 @@ import {
 	faWandMagicSparkles,
 	faRightFromBracket,
 	faInfo,
+	faBars,
+	faEllipsisVertical,
+	
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -83,7 +86,9 @@ library.add(
 	faImageRegular,
 	faWandMagicSparkles,
 	faRightFromBracket,
-	faInfo
+	faInfo,
+	faBars,
+	faEllipsisVertical
 );
 
 const defineType = (type) => {
@@ -150,6 +155,10 @@ const defineType = (type) => {
 			return faInfo;
 		case "faRightFromBracket":
 			return faRightFromBracket;
+		case "faBars":
+			return faBars;
+		case "faEllipsisVertical":
+			return faEllipsisVertical;
 		default:
 			return null;
 	}
