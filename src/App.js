@@ -31,6 +31,7 @@ import { Message } from "./pages/reuseable/Message";
 import { Send } from "./pages/reuseable/Send";
 import { RecipientDetails } from "./pages/reuseable/RecipientDetails";
 import { Users } from "./comps/users/Users";
+import { Settings } from "./comps/settings/Settings";
 
 export const App = () => {
 	/* app */
@@ -240,15 +241,31 @@ export const App = () => {
 								rounded-br-[5px] rounded-bl-[5px] text-white font-[600] text-shadow-custom_white_02
 								shadow-custom_01'
 					>
-						Users
+						{activelink == 1 && "Users"}
+						{activelink == 2 && "Messages"}
+						{activelink == 3 && "Send Message"}
+						{activelink == 4 && "Calls"}
+						{activelink == 5 && "Settings"}
 					</div>
 
-					<div className='body w-full h-[calc(100%-5rem-5.5rem-1rem)] bg-slate-100 flex flex-frow'>
-						{activelink == 1 && <Users users={users} />}
+					<div className='body w-full h-[calc(100%-5rem-5rem-1rem)] bg-slate-100 flex flex-frow'>
+						{activelink == 1 && (
+							<div className='users_wrapper'>
+								<Users users={users} />
+							</div>
+						)}
+						{/* {activelink == 2 && <Messages />} */}
+						{/* {activelink == 3 && <Messages />} */}
+						{/* {activelink == 4 && <Messages />} */}
+						{activelink == 5 && (
+							<div className='settings_wrapper h-full w-full'>
+								<Settings setActivelink={setActivelink} />
+							</div>
+						)}
 					</div>
 
 					<div
-						className='footer h-[5.5rem] w-full bg-slate-800 
+						className='footer h-[5rem] w-full bg-slate-800 
 								rounded-tr-[5px] rounded-tl-[5px]
 								shadow-custom_03
 								'
@@ -264,7 +281,7 @@ export const App = () => {
 										flex justify-center items-center	
 										text-[20px] text-white
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										hover:text-blue-800
 									`}
 							>
 								<span className='pointer-events-none'>
@@ -277,7 +294,7 @@ export const App = () => {
 										flex justify-center items-center	
 										text-[20px]  text-white
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										hover:text-blue-800
 									`}
 							>
 								<span className='pointer-events-none'>
@@ -288,7 +305,7 @@ export const App = () => {
 								onClick={() => setActivelink(3)}
 								className={` send w-[40px] h-[40px] 
 										flex justify-center items-center	
-										text-[20px] text-white bg-blue-500
+										text-[20px] text-white bg-blue-800
 										overflow-hidden rounded-full cursor-pointer
 										`}
 							>
@@ -302,7 +319,7 @@ export const App = () => {
 										flex justify-center items-center	
 										text-[20px]  text-white
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										hover:text-blue-800
 									`}
 							>
 								<span className='pointer-events-none'>
@@ -315,7 +332,7 @@ export const App = () => {
 										flex justify-center items-center	
 										text-[20px]  text-white
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										hover:text-blue-800
 									`}
 							>
 								<span className='pointer-events-none'>
