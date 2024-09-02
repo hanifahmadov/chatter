@@ -13,6 +13,9 @@ import {
 	faCircleCheck as faCircleCheckRegular,
 	faUser as faUserRegular,
 	faImage as faImageRegular,
+	faMessage as faMessageRegular,
+	faComments as faCommentsRegular,
+	
 } from "@fortawesome/free-regular-svg-icons";
 
 import {
@@ -45,7 +48,12 @@ import {
 	faInfo,
 	faBars,
 	faEllipsisVertical,
-	
+	faGlobe,
+	faMessage,
+	faPhone,
+	faComments,
+	faGears,
+	faGear,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -88,7 +96,14 @@ library.add(
 	faRightFromBracket,
 	faInfo,
 	faBars,
-	faEllipsisVertical
+	faEllipsisVertical,
+	faGlobe,
+	faMessage,
+	faMessageRegular,
+	faPhone,
+	faComments,
+	faGears,
+	faGear
 );
 
 const defineType = (type) => {
@@ -159,6 +174,22 @@ const defineType = (type) => {
 			return faBars;
 		case "faEllipsisVertical":
 			return faEllipsisVertical;
+		case "faGlobe":
+			return faGlobe;
+		case "faMessage":
+			return faMessage;
+		case "faMessageRegular":
+			return faMessageRegular;
+		case "faPhone":
+			return faPhone;
+		case "faComments":
+			return faComments;
+		case "faCommentsRegular":
+			return faCommentsRegular;
+		case "faGears":
+			return faGears;
+		case "faGear":
+			return faGear;
 		default:
 			return null;
 	}

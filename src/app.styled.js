@@ -1,17 +1,35 @@
 import styled from "styled-components";
 
-export const App_Container = styled.div(({}) => {
-	return {
-		height: "100%",
-		width: "100%",
-		padding: "0.01px",
+export const App_Container = styled.div(
+	({
+		theme: {
+			device: { sm, md },
+		},
+	}) => {
+		// sm 640
+		// md 768
+		console.log("sm sm md md", sm, md);
 
-		color: "rgba(0, 0, 0, 1)",
+		return {
+			...(md && {
+				background: "red",
+			}),
 
-		// background: "red",
-	};
+			...(sm && {
+				".display": {
+					width: "100%",
+					height: "100%",
+					borderRadius: "0px",
+				},
+			}),
+		};
+	}
+);
+
+export const User_Container = styled.div(({ theme: { device } }) => {
+	console.log(device);
+	return {};
 });
-
 
 // export const  = styled.div(({ theme: {} }) => {
 // 	return {};

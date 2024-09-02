@@ -17,6 +17,20 @@ module.exports = {
 				custom_08: "1px 1px 2px rgba(0, 0, 0, .8)",
 				custom_09: "1px 1px 2px rgba(0, 0, 0, .9)",
 				custom_1: "1px 1px 2px rgba(0, 0, 0, 1)",
+
+
+				custom_white_005: "1px 1px 2px rgba(255, 255, 255, 0.05)",
+				custom_white_01: "1px 1px 2px rgba(255, 255, 255, .1)",
+				custom_white_02: "1px 1px 2px rgba(255, 255, 255, .2)",
+				custom_white_03: "1px 1px 2px rgba(255, 255, 255, .3)",
+				custom_white_04: "1px 1px 2px rgba(255, 255, 255, .4)",
+				custom_white_05: "1px 1px 2px rgba(255, 255, 255, .5)",
+
+				custom_white_06: "1px 1px 2px rgba(255, 255, 255, .6)",
+				custom_white_07: "1px 1px 2px rgba(255, 255, 255, .7)",
+				custom_white_08: "1px 1px 2px rgba(255, 255, 255, .8)",
+				custom_white_09: "1px 1px 2px rgba(255, 255, 255, .9)",
+
 			},
 
 			boxShadow: {
@@ -27,8 +41,26 @@ module.exports = {
 				custom_05: "0 2px 4px 0 rgba(0, 0, 0, .13), 0 1px 1px 0 rgba(0, 0, 0, .11)",
 				custom_06:
 					"0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15)",
+				custom_07: "0 7px 30px -10px rgba(150,170,180,0.5)",
+				custom_08: "0px 0px 0px 1px rgba(0, 0, 0, 0.05), inset 0px 0px 0px 1px rgba(209, 213, 219,1)",
+				custom_09: "0 7px 30px -10px rgba(150,170,180,0.5)",
 			},
 		},
 	},
 	plugins: [textshadow, require("tailwind-scrollbar"), require("tailwindcss-animate")],
 };
+
+
+// <div className='root h-screen w-screen'>
+// 	<div className='header h-5rem w-full'>
+
+// 	</div>
+
+// 	<div>
+
+// 	</div>
+
+// 	<div className='footer h-5'>
+
+// 	</div>
+// </div>

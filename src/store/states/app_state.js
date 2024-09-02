@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { atom } from "recoil";
 
-export const activeLinkDefault = atom({
-	key: "activeLinkDefault",
-	default: 0,
+export const activelinkDefault = atom({
+	key: "activelinkDefault",
+	default: 1,
 });
 
 export const darkmodeDefault = atom({
@@ -39,5 +39,3 @@ export const animateState = atom({
 
 	/* "animate-in slide-in-from-bottom 1s ease-out forwards" */
 });
-/* revents the animation effect on unmout-remount of comps */
-

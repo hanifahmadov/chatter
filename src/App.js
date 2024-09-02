@@ -1,12 +1,15 @@
 /* npm packages */
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import OutsideClickHandler from "react-outside-click-handler";
 import { motion, useAnimation } from "framer-motion";
 import FormData from "form-data";
 const scrollIntoView = require("scroll-into-view");
 import { useMediaQuery } from "react-responsive";
+
+import { App_Container } from "./app.styled";
 
 /* apis */
 import { apiUrl } from "./apis/apiUrl";
@@ -16,7 +19,7 @@ import { all_messages, post_message } from "./apis/messageCalls";
 /* global states */
 import { currentRecipientState, userDefault } from "./store/states/user_state";
 import { on_messages_state, on_users_state } from "./store/states/socket_state";
-import { animateState, deviceDefault } from "./store/states/app_state";
+import { activelinkDefault, animateState, deviceDefault } from "./store/states/app_state";
 
 /* helpers */
 import { Header } from "./store/helpers/Header";
@@ -27,6 +30,7 @@ import { User } from "./pages/reuseable/User";
 import { Message } from "./pages/reuseable/Message";
 import { Send } from "./pages/reuseable/Send";
 import { RecipientDetails } from "./pages/reuseable/RecipientDetails";
+import { Users } from "./comps/users/Users";
 
 export const App = () => {
 	/* app */
@@ -48,6 +52,7 @@ export const App = () => {
 	/* user */
 	const [{ avatar, username, email, accessToken, _id }] = useRecoilState(userDefault);
 	const [currRecipient, setCurrRecipient] = useRecoilState(currentRecipientState);
+	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
 
 	/* mobile - body transition tracker */
 	const [isAtMinus400, setIsAtMinus400] = useState(false);
@@ -215,276 +220,112 @@ export const App = () => {
 		}
 	};
 
-	const mobile = (
-		<div className='app h-screen w-screen'>
-			<div
-				className='header 
-					min-h-[4.5rem] bg-white
-					flex justify-between items-center
-					px-[15px] shadow-custom_01 fixed top-0 right-0 left-0 z-10
-					'
+	return (
+		<ThemeProvider theme={{ device }}>
+			<App_Container
+				className='app h-[100svh] w-[100svw] bg-slate-200
+							flex justify-center items-center
+							fixed inset-0
+							'
 			>
-				<motion.div whileTap={{ scale: 1.2 }} onClick={handleMenuClick} className='menu text-[20px] p-3'>
-					<Fontawesome type={"faBars"} />
-				</motion.div>
-
-				<div className='title text-[20px] font-medium text-shadow-custom_01'>Chatter</div>
-
-				<motion.div whileTap={{ scale: 1.2 }} className='setting text-[20px] p-3'>
-					<Fontawesome type={"faEllipsisVertical"} />
-				</motion.div>
-			</div>
-
-			<div className='body mt-[4.5rem] fixed right-0 left-0'>
-				<motion.div
-					initial={{ x: 0, opacity: 1 }}
-					animate={controlBodySlide}
-					transition={{ delay: 1, duration: 0.75 }}
-					className='flex flex-col gap-2 p-2  bg-slate-300  shadow-custom_05 absolute inset-0 z-10 overflow-scroll'
+				<div
+					className='display h-[90svh] max-h-[926px] w-[27.5rem] bg-white 
+							flex flex-col justify-between overflow-hidden
+							shadow-custom_07  border-[3px] border-white
+							rounded-[30px]
+							'
 				>
 					<div
-						className='text-[20px] font-medium text-shadow-custom_01 
-							flex justify-center items-center'
+						className='header w-full h-[5rem] flex justify-center items-center text-[30px] bg-slate-800 
+								rounded-br-[5px] rounded-bl-[5px] text-white font-[600] text-shadow-custom_white_02
+								shadow-custom_01'
 					>
-						Messages
+						Users
 					</div>
-					{users.map((user, index) => {
-						const { avatar, username } = user;
-						return (
-							<motion.div
-								key={index}
-								whileTap={{ scale: 1.05 }}
-								onClick={() => handleUserClick(user)}
-								className={`
-									flex gap-3 justify-start items-center 
-									bg-slate-200 px-2 py-2 rounded-lg 
-									
-									
-									`}
-							>
-								<div className='avatar h-full w-[5rem]'>
-									<img
-										src={avatar}
-										className='h-[3.5rem] w-[3.5rem] rounded-full object-cover p-[1px] shadow-custom04 border-[2px] border-white'
-									/>
-								</div>
 
-								<div className='details flex flex-col leading-[18px]'>
-									<div className='top-row flex gap-3'>
-										<div className='username text-[16px] font-medium text-shadow-custom_01 '>
-											{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
-										</div>
+					<div className='body w-full h-[calc(100%-5rem-5.5rem-1rem)] bg-slate-100 flex flex-frow'>
+						{activelink == 1 && <Users users={users} />}
+					</div>
 
-										<div className='flex items-center justify-center leading-[0px]'>
-											<span className='text-[12px] italic text-gray-500 text-shadow-custom_01'>
-												seen
-											</span>
-											<span className='relative bottom-[3px] px-[1px] leading-[0px] text-gray-500'>
-												.
-											</span>
-											<span className='text-[12px] text-gray-500 text-shadow-custom_01'>3w</span>
-										</div>
-									</div>
-
-									<div className='bottom-row leading-[16px] text-gray-600'>
-										<div className='text-[12px]'>
-											Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, fuga?
-										</div>
-									</div>
-								</div>
-							</motion.div>
-						);
-					})}
-				</motion.div>
-
-				<motion.div className=' h-[calc(100vh-4.5rem)] p-1 flex flex-col justify-between items-start'>
-					<div className='w-full'>
+					<div
+						className='footer h-[5.5rem] w-full bg-slate-800 
+								rounded-tr-[5px] rounded-tl-[5px]
+								shadow-custom_03
+								'
+					>
 						<div
-							className='content_header curr_recipient flex min-h-[55px]   w-full
-									px-2 justify-center items-center 
-									border-slate-200 border-b-[1px]
-									bg-slate-200
+							className='navbar h-full w-full
+									flex justify-evenly items-center
 									'
 						>
-							<div>
-								<img
-									src={currRecipient?.avatar}
-									className='h-[35px] w-[35px] 
-										rounded-lg border-[2px] border-solid 
-										border-white object-cover p-[1px]
-										text-shadow-custom_02 
-										'
-								/>
-							</div>
-							<div className='text-[16px] text-shadow-custom_01 ml-2 font-[500]'>
-								{currRecipient &&
-									currRecipient.username.charAt(0).toUpperCase() +
-										currRecipient.username.slice(1).toLowerCase()}
-							</div>
-						</div>
-						<div className='overflow-scroll h-[78vh] w-full py-3 px-2'>
-							{Object.keys(messages).length > 0 &&
-								Object.keys(messages).map((date, index) => {
-									/* msg can be [{}] or [{}, {}, {}, {}, ....] */
-									const talks = messages[date];
-
-									return (
-										<Message
-											key={index}
-											signedUserId={_id}
-											talks={talks}
-											date={date}
-											avatar={avatar}
-											animate={animate}
-											setAnimate={setAnimate}
-										/>
-									);
-								})}
-						</div>
-					</div>
-
-					<div className='send_message mb-0 relative bg-slate-900 w-full'>
-						<div className='send_wrapper flex flex-row justify-between items-end absolute inset-0'>
-							<Send
-								text={text}
-								setText={setText}
-								image={image}
-								setImage={setImage}
-								handleKeyDown={handleKeyDown}
-								handleSendMessage={handleSendMessage}
-							/>
-						</div>
-					</div>
-				</motion.div>
-			</div>
-
-			<div className='footer'></div>
-		</div>
-	);
-
-	return sm ? (
-		mobile
-	) : (
-		<div className='app items-top flex h-full w-full max-w-[103rem] flex-col justify-center bg-white border-[1px]'>
-			<div className='header flex h-[4.5rem] w-full justify-between border-b-[1px] border-gray-200 bg-white'>
-				<Header />
-			</div>
-
-			<div className='content flex h-full w-full flex-row justify-between '>
-				{/* letf - recipients [users] */}
-				<div className='content_left h-full min-w-[22rem] border-r-[1px] border-slate-200'>
-					<div className='users_wrapper flex flex-col gap-3'>
-						<div className='users_title border-b-[1px] border-slate-200 min-h-[55px] text-[16px] text-shadow-custom_01 text-center items-center flex justify-center font-[500]'>
-							{/* Users */}
-						</div>
-						{users.length > 0 &&
-							users.map((user, index) => {
-								const { avatar, username, createdAt, _id } = user;
-
-								return (
-									<User
-										key={index}
-										currRecipient={currRecipient}
-										setCurrRecipient={setCurrRecipient}
-										user={user}
-									/>
-								);
-							})}
-					</div>
-				</div>
-
-				{/* center - messages */}
-				<div className='content_center flex flex-grow  min-w-[40rem] max-w-[65rem]'>
-					<div className='flex-grow flex flex-col justify-between pb-0 relative'>
-						{/* MESSAGE */}
-
-						<div className='just_a_wrapper'>
 							<div
-								className='content_header curr_recipient flex min-h-[55px]  w-full
-											px-2 justify-center items-center 
-											border-slate-200 border-b-[1px]
-											bg-slate-200
-											'
+								onClick={() => setActivelink(1)}
+								className={` users w-[40px] h-[40px] 
+										flex justify-center items-center	
+										text-[20px] text-white
+										overflow-hidden rounded-full cursor-pointer
+										hover:text-blue-500
+									`}
 							>
-								<div>
-									<img
-										src={currRecipient?.avatar}
-										className='h-[35px] w-[35px] 
-                        						rounded-lg border-[2px] border-solid 
-                        						border-white object-cover p-[1px]
-                        						text-shadow-custom_02 
-                        						'
-									/>
-								</div>
-								<div className='text-[16px] text-shadow-custom_01 ml-2 font-[500]'>
-									{currRecipient &&
-										currRecipient.username.charAt(0).toUpperCase() +
-											currRecipient.username.slice(1).toLowerCase()}
-								</div>
+								<span className='pointer-events-none'>
+									<Fontawesome type={"faGlobe"} />
+								</span>
 							</div>
 							<div
-								className='message_guard 
-										scrollbar scrollbar-none  
-										overflow-y-auto
-										p-[5px]
-										h-[78vh]
-
-										'
+								onClick={() => setActivelink(2)}
+								className={` comments w-[40px] h-[40px] 
+										flex justify-center items-center	
+										text-[20px]  text-white
+										overflow-hidden rounded-full cursor-pointer
+										hover:text-blue-500
+									`}
 							>
-								<div className='message_parent flex gap-0 flex-col flex-grow py-0 px-1'>
-									{Object.keys(messages).length > 0 &&
-										Object.keys(messages).map((date, index) => {
-											/* msg can be [{}] or [{}, {}, {}, {}, ....] */
-											const talks = messages[date];
-
-											return (
-												<Message
-													key={index}
-													signedUserId={_id}
-													talks={talks}
-													date={date}
-													avatar={avatar}
-													animate={animate}
-													setAnimate={setAnimate}
-												/>
-											);
-										})}
-								</div>
+								<span className='pointer-events-none'>
+									<Fontawesome type={"faComments"} />
+								</span>
 							</div>
-						</div>
-
-						{/* POST MESSAGE */}
-						<div className='send_message mb-0 relative bg-slate-900'>
-							<div className='send_wrapper flex flex-row justify-between items-end absolute inset-0'>
-								<Send
-									text={text}
-									setText={setText}
-									image={image}
-									setImage={setImage}
-									handleKeyDown={handleKeyDown}
-									handleSendMessage={handleSendMessage}
-								/>
+							<div
+								onClick={() => setActivelink(3)}
+								className={` send w-[40px] h-[40px] 
+										flex justify-center items-center	
+										text-[20px] text-white bg-blue-500
+										overflow-hidden rounded-full cursor-pointer
+										`}
+							>
+								<span className='pointer-events-none'>
+									<Fontawesome type={"faPlus"} />
+								</span>
+							</div>
+							<div
+								onClick={() => setActivelink(4)}
+								className={` phone w-[40px] h-[40px] 
+										flex justify-center items-center	
+										text-[20px]  text-white
+										overflow-hidden rounded-full cursor-pointer
+										hover:text-blue-500
+									`}
+							>
+								<span className='pointer-events-none'>
+									<Fontawesome type={"faPhone"} />
+								</span>
+							</div>
+							<div
+								onClick={() => setActivelink(5)}
+								className={` settings w-[40px] h-[40px] 
+										flex justify-center items-center	
+										text-[20px]  text-white
+										overflow-hidden rounded-full cursor-pointer
+										hover:text-blue-500
+									`}
+							>
+								<span className='pointer-events-none'>
+									<Fontawesome type={"faGear"} />
+								</span>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				{/* right col - recipient details */}
-				<div className='content_right h-full w-[22rem] border-l-[1px] border-gray-200'>
-					<div className='user_details_wrapper flex flex-col gap-3'>
-						<div
-							className='user_details border-b-[1px] border-slate-200 min-h-[55px] t
-										ext-[16px] text-shadow-custom_01 text-center items-center 
-										flex justify-center font-[500]'
-						>
-							{/* User Details */}
-						</div>
-						{currRecipient && <RecipientDetails currRecipient={currRecipient} />}
-					</div>
-				</div>
-			</div>
-
-			<div className='footer'></div>
-		</div>
+			</App_Container>
+		</ThemeProvider>
 	);
 };
