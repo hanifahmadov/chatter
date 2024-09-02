@@ -14,7 +14,7 @@ export const Users = ({ users }) => {
 
 	console.log(users);
 
-	// users = [...users, ...users, ...users, ...users, ...users];
+	users = [...users, ...users, ...users, ...users, ...users];
 	// users = [...users];
 
 	return (
