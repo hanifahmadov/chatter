@@ -1,9 +1,9 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { userDefault } from "../../store/states/user_state";
-import { formatDate } from "../../store/days/days";
+import { userDefault } from "../store/states/user_state";
+import { formatDate } from "../store/days/days";
 import { motion } from "framer-motion";
-import { signout_api } from "../../apis/registerCalls";
+import { signout_api } from "../apis/registerCalls";
 
 export const Settings = ({ setActivelink }) => {
 	const [{ accessToken, avatar, username, email, createdAt, _id }] = useRecoilState(userDefault);
@@ -29,7 +29,7 @@ export const Settings = ({ setActivelink }) => {
 				/>
 			</div>
 
-			<div className='flex flex-col justify-center items-center mt-2'>
+			<div className='flex flex-col justify-center items-center mt-4'>
 				<span className='text-[25px] text-gray-700  text-shadow-custom_02 font-[500]'>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 				</span>
@@ -63,7 +63,7 @@ export const Settings = ({ setActivelink }) => {
 				<span
 					className='text-shadow-custom_07 text-white text-[14px] text-center 
 								bg-blue-800 rounded-sm font-[500] inline-block
-								w-[130px] py-1 opacity-[0.4] cursor-not-allowed
+								w-[150px] py-2 opacity-[0.4] cursor-not-allowed
 								'
 				>
 					Edit
@@ -73,7 +73,7 @@ export const Settings = ({ setActivelink }) => {
 					onClick={handleSignOut}
 					className='text-shadow-custom_07 text-white text-[14px] text-center 
 			                    bg-blue-800 rounded-sm font-[500] inline-block
-			                    w-[130px] py-1 mt-1 cursor-pointer hover:bg-blue-900
+			                    w-[150px] py-2 mt-1 cursor-pointer hover:bg-blue-900
 			                    '
 				>
 					Sign out

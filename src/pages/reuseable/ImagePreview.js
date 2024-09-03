@@ -5,7 +5,7 @@ import { Fontawesome } from "../../store/fontawesome/Fontawesome";
 
 export const ImagePreview = ({ image, setImage }) => {
 	return (
-		<div className='image_preview flex w-full justify-start items-start py-1 px-2'>
+		<div className='image_preview flex w-full justify-start items-start py-1 px-2 relative bottom-[7px] right-[0px]'>
 			<img
 				src={URL.createObjectURL(image)}
 				className='selected_image h-[50px] w-[50px] 

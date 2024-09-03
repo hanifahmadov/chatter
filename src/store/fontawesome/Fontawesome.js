@@ -54,6 +54,7 @@ import {
 	faComments,
 	faGears,
 	faGear,
+	faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -103,7 +104,8 @@ library.add(
 	faPhone,
 	faComments,
 	faGears,
-	faGear
+	faGear,
+	faArrowLeft
 );
 
 const defineType = (type) => {
@@ -190,6 +192,8 @@ const defineType = (type) => {
 			return faGears;
 		case "faGear":
 			return faGear;
+		case "faArrowLeft":
+			return faArrowLeft;
 		default:
 			return null;
 	}

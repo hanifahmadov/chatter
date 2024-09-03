@@ -18,7 +18,7 @@ import { Signup } from "./pages/register/Signup";
 
 /* component */
 import { App } from "./App";
-import { Users } from "./comps/users/Users";
+import { Users } from "./comps/Users";
 
 // import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 // import { MainLayout } from "./comps/layouts/MainLayout";
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
 					<RequireAuth>
 						<App />
 					</RequireAuth>
-				), 
+				),
 				// Protected route
 				children: [
 					{

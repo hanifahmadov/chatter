@@ -38,48 +38,52 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 	}, [text]);
 
 	return (
-		<div className='bg-slate-200 flex flex-row w-full p-2 '>
-			<UploadImageButton setImage={setImage} />
+		<div className="bg-slate-200 min-h-[4rem] p-2 absolute bottom-0 left-0 right-0">
+			<div className='bg-slate-200 flex flex-row w-full  p-1 '>
+				<UploadImageButton setImage={setImage} />
 
-			<div
-				tabIndex='0'
-				className='textare_parent bg-white py-[0.45rem] px-2 mx-2
+				<div
+					tabIndex='0'
+					className='textare_parent bg-white py-[0.45rem] px-2 mx-2
                                                 flex flex-col flex-grow justify-center items-center 
                                                 rounded-[20px]  border-[2px] border-blue-100
                                                 '
-			>
-				{image && <ImagePreview image={image} setImage={setImage} />}
+				>
+					{image && <ImagePreview image={image} setImage={setImage} />}
 
-				<textarea
-					className={`textarea w-full h-[1rem] leading-[18px] max-h-[8rem] border-0 
+					<textarea
+						className={`textarea w-full h-[1rem] leading-[18px] max-h-[6rem] border-0 
                                                     overflow-auto outline-none shadow-none 
                                                     resize-none px-3 py-0 text-[.95rem] text-shadow-custom_01
                                                     bg-transparent text-black placeholder:px-1  placeholder:text-shadow-custom_005
                                                     `}
-					ref={textareaRef}
-					value={text}
-					onChange={handleTextChange}
-					placeholder='Whats up...'
-					rows={1}
-					onKeyDown={handleKeyDown}
-				/>
-			</div>
+						ref={textareaRef}
+						value={text}
+						onChange={handleTextChange}
+						placeholder='Whats up...'
+						rows={1}
+						onKeyDown={handleKeyDown}
+					/>
+				</div>
 
-			<motion.div
-				whileTap={{ scale: 1.075 }}
-				animate={controls}
-				ref={sendButtonRef}
-				onClick={handleSendMessage}
-				className={`rounded-full min-w-[34px] min-h-[34px] 
+				<motion.div
+					whileTap={{ scale: 1.075 }}
+					animate={controls}
+					ref={sendButtonRef}
+					onClick={handleSendMessage}
+					className={`rounded-full min-w-[34px] min-h-[34px] 
                                                 flex flex-row-1 justify-center items-center
                                                 bg-white border-[2px] border-blue-100 hover:ring-[1px]
                                                 ${text.length || image ? "cursor-pointer" : "pointer-events-none"}
                                                 `}
-			>
-				<span className={` ${text.length || image ? "text-blue-600" : "text-blue-200"}  text-[18px] pl-[3px]`}>
-					➤
-				</span>
-			</motion.div>
+				>
+					<span
+						className={` ${text.length || image ? "text-blue-600" : "text-blue-200"}  text-[18px] pl-[3px]`}
+					>
+						➤
+					</span>
+				</motion.div>
+			</div>
 		</div>
 	);
 };

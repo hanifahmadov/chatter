@@ -30,8 +30,10 @@ import { User } from "./pages/reuseable/User";
 import { Message } from "./pages/reuseable/Message";
 import { Send } from "./pages/reuseable/Send";
 import { RecipientDetails } from "./pages/reuseable/RecipientDetails";
-import { Users } from "./comps/users/Users";
-import { Settings } from "./comps/settings/Settings";
+import { Users } from "./comps/Users";
+import { Settings } from "./comps/Settings";
+import { Recipient } from "./comps/Recipient";
+import { Nav } from "./comps/Nav";
 
 export const App = () => {
 	/* app */
@@ -230,31 +232,55 @@ export const App = () => {
 							'
 			>
 				<div
-					className='display h-[90svh] max-h-[926px] w-[27.5rem] bg-white 
+					className='display h-[80svh] max-h-[926px] w-[23rem] bg-white 
 							flex flex-col justify-between overflow-hidden
 							shadow-custom_07  border-[3px] border-white
 							rounded-[30px]
 							'
 				>
 					<div
-						className='header w-full h-[5rem] flex justify-center items-center text-[30px] bg-slate-800 
-								rounded-br-[5px] rounded-bl-[5px] text-white font-[600] text-shadow-custom_white_02
-								shadow-custom_01'
+						className='header w-full h-[4rem] flex justify-center items-center text-[20px] bg-gray-100 
+								rounded-br-[5px] rounded-bl-[5px] text-gray-600 font-[500] text-shadow-custom_01
+								shadow-custom_04'
 					>
 						{activelink == 1 && "Users"}
-						{activelink == 2 && "Messages"}
+						{activelink == 2 && <Recipient setActivelink={setActivelink} currRecipient={currRecipient} />}
 						{activelink == 3 && "Send Message"}
 						{activelink == 4 && "Calls"}
 						{activelink == 5 && "Settings"}
 					</div>
 
-					<div className='body w-full h-[calc(100%-5rem-5rem-1rem)] bg-slate-100 flex flex-frow'>
+					<div className='body w-full h-[calc(100%-4rem-4rem-1rem)] bg-gray-100 flex flex-frow shadow-custom_04'>
 						{activelink == 1 && (
 							<div className='users_wrapper'>
-								<Users users={users} />
+								<Users
+									users={users}
+									setActivelink={setActivelink}
+									setCurrRecipient={setCurrRecipient}
+								/>
 							</div>
 						)}
-						{/* {activelink == 2 && <Messages />} */}
+						{activelink == 2 && (
+							<div className='message_parent h-full w-full overflow-scroll flex gap-0 flex-col flex-grow py-0 px-1'>
+								{Object.keys(messages).length > 0 &&
+									Object.keys(messages).map((date, index) => {
+										/* msg can be [{}] or [{}, {}, {}, {}, ....] */
+										const talks = messages[date];
+
+										return (
+											<Message
+												key={index}
+												signedUserId={_id}
+												talks={talks}
+												date={date}
+												avatar={avatar}
+												animate={animate}
+												setAnimate={setAnimate}
+											/>
+										);
+									})}
+							</div>
+						)}
 						{/* {activelink == 3 && <Messages />} */}
 						{/* {activelink == 4 && <Messages />} */}
 						{activelink == 5 && (
@@ -265,81 +291,23 @@ export const App = () => {
 					</div>
 
 					<div
-						className='footer h-[5rem] w-full bg-slate-800 
+						className='footer min-h-[4rem] w-full bg-gray-100
 								rounded-tr-[5px] rounded-tl-[5px]
-								shadow-custom_03
+								shadow-custom_04 relative
 								'
 					>
-						<div
-							className='navbar h-full w-full
-									flex justify-evenly items-center
-									'
-						>
-							<div
-								onClick={() => setActivelink(1)}
-								className={` users w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[20px] text-white
-										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-800
-									`}
-							>
-								<span className='pointer-events-none'>
-									<Fontawesome type={"faGlobe"} />
-								</span>
-							</div>
-							<div
-								onClick={() => setActivelink(2)}
-								className={` comments w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[20px]  text-white
-										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-800
-									`}
-							>
-								<span className='pointer-events-none'>
-									<Fontawesome type={"faComments"} />
-								</span>
-							</div>
-							<div
-								onClick={() => setActivelink(3)}
-								className={` send w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[20px] text-white bg-blue-800
-										overflow-hidden rounded-full cursor-pointer
-										`}
-							>
-								<span className='pointer-events-none'>
-									<Fontawesome type={"faPlus"} />
-								</span>
-							</div>
-							<div
-								onClick={() => setActivelink(4)}
-								className={` phone w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[20px]  text-white
-										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-800
-									`}
-							>
-								<span className='pointer-events-none'>
-									<Fontawesome type={"faPhone"} />
-								</span>
-							</div>
-							<div
-								onClick={() => setActivelink(5)}
-								className={` settings w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[20px]  text-white
-										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-800
-									`}
-							>
-								<span className='pointer-events-none'>
-									<Fontawesome type={"faGear"} />
-								</span>
-							</div>
-						</div>
+						{activelink == 2 ? (
+							<Send
+								text={text}
+								setText={setText}
+								image={image}
+								setImage={setImage}
+								handleKeyDown={handleKeyDown}
+								handleSendMessage={handleSendMessage}
+							/>
+						) : (
+							<Nav setActivelink={setActivelink} />
+						)}
 					</div>
 				</div>
 			</App_Container>

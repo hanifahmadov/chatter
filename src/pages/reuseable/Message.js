@@ -67,7 +67,7 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 
 	useEffect(() => {
 		scrollIntoView(lastMessageRef.current, {
-			time: 1000,
+			time: 0,
 		});
 	}, [updatedTallks]);
 
@@ -107,7 +107,7 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 													`}
 									>
 										{msg.media && (
-											<div className='msg media'>
+											<div className='msg media mb-[2px]'>
 												<span>
 													<img
 														src={msg.media}
@@ -120,24 +120,32 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 											</div>
 										)}
 										<div
-											className={`msg_content_and date bg-blue-100 w-fit px-5 py-[2px]
-															rounded-full text-shadow-custom_02 
+											className={`msg_content_and date w-fit px-5 py-[2px]
+															rounded-3xl text-shadow-custom_02 
 															text-[13px] text-gray-700 flex flex-col
-															${owner ? "items-end rounded-br-none" : "items-start rounded-bl-none"}
+															max-w-[18rem] break-words border-[0px] border-white 
+															whitespace-normal text-sm leading-tight text-sm
+															${owner ? " rounded-br-none" : "rounded-bl-none"}
+															${owner ? "bg-white" : "bg-blue-100"}
 															${index === msgs.length - 1 && "animate-in slide-in-from-bottom"}
 
 															`}
 										>
-											<span className='leading-[18px]'>
+											<div className='leading-[18px] text-sm'>
 												{msg.message ? (
 													msg.message
 												) : (
-													<span className='text-[10px] italic text-gray-500 font-medium'>
+													<span className='text-[10px] inline-block italic text-gray-500 font-medium'>
 														attached photo
 													</span>
 												)}
-											</span>
-											<span className='text-[8px] text-shadow-custom_02 text-gray-500 text-end'>
+											</div>
+											<span
+												className={`text-[8px] text-shadow-custom_02  
+															${owner ? "self-end" : "self-start"} 
+															text-gray-500 text-end
+															`}
+											>
 												{formatTime(msg.createdAt)}
 											</span>
 										</div>
