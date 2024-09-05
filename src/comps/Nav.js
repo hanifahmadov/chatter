@@ -1,7 +1,7 @@
 import React from "react";
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
-export const Nav = ({ setActivelink }) => {
+export const Nav = ({ activelink, setActivelink }) => {
 	return (
 		<div
 			className='navbar h-full w-full
@@ -12,9 +12,9 @@ export const Nav = ({ setActivelink }) => {
 				onClick={() => setActivelink(1)}
 				className={` users w-[40px] h-[40px] 
 										flex justify-center items-center	
-										text-[18px] text-gray-600
+										text-[18px] 
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										${activelink == 1 ? "text-blue-500" : "text-gray-600"}
 									`}
 			>
 				<span className='pointer-events-none'>
@@ -22,12 +22,12 @@ export const Nav = ({ setActivelink }) => {
 				</span>
 			</div>
 			<div
-				onClick={() => setActivelink(2)}
+				onClick={() => setActivelink(2.2)}
 				className={` comments w-[40px] h-[40px] 
 										flex justify-center items-center	
-										text-[18px]  text-gray-600
+										text-[18px]
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										${activelink == 2.2 ? "text-blue-500" : "text-gray-600"}
 									`}
 			>
 				<span className='pointer-events-none'>
@@ -37,10 +37,10 @@ export const Nav = ({ setActivelink }) => {
 			<div
 				onClick={() => setActivelink(3)}
 				className={` send w-[40px] h-[40px] 
-										flex justify-center items-center	
-										text-[18px] text-white bg-blue-500
-										overflow-hidden rounded-full cursor-pointer
-										`}
+							flex justify-center items-center	
+							text-[18px] text-white bg-blue-500
+							overflow-hidden rounded-full cursor-pointer
+							`}
 			>
 				<span className='pointer-events-none'>
 					<Fontawesome type={"faPlus"} />
@@ -50,9 +50,9 @@ export const Nav = ({ setActivelink }) => {
 				onClick={() => setActivelink(4)}
 				className={` phone w-[40px] h-[40px] 
 										flex justify-center items-center	
-										text-[18px]  text-gray-600
+										text-[18px]
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										${activelink == 4 ? "text-blue-500" : "text-gray-600"}
 									`}
 			>
 				<span className='pointer-events-none'>
@@ -63,9 +63,9 @@ export const Nav = ({ setActivelink }) => {
 				onClick={() => setActivelink(5)}
 				className={` settings w-[40px] h-[40px] 
 										flex justify-center items-center	
-										text-[18px]  text-gray-600
+										text-[18px] 
 										overflow-hidden rounded-full cursor-pointer
-										hover:text-blue-500
+										${activelink == 5 ? "text-blue-500" : "text-gray-600"}
 									`}
 			>
 				<span className='pointer-events-none'>

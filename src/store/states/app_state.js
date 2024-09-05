@@ -39,3 +39,8 @@ export const animateState = atom({
 
 	/* "animate-in slide-in-from-bottom 1s ease-out forwards" */
 });
+
+export const customnavDefault = atom({
+	key: "customnavDefault",
+	default: 0,
+});

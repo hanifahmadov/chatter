@@ -22,7 +22,6 @@ import { backdropDefault } from "../store/states/app_state";
 import { SetupErrorHandler } from "../store/helpers/SetupErrorHandler";
 
 export const PersistentLayout = () => {
-	console.log("Persistent_layout");
 	/* backdrop  */
 	const [backdrop, setBackdrop] = useRecoilState(backdropDefault);
 
@@ -30,14 +29,11 @@ export const PersistentLayout = () => {
 	const navigate = useNavigate();
 
 	/* location */
-	// console.log(location.state?.from);
-	const location = useLocation();
 
-	console.log(location.pathname);
+	const location = useLocation();
 
 	/** user */
 	const [signedUser, setSignedUser] = useRecoilState(userDefault);
-	console.log("signedUser right after fetching globally", signedUser);
 
 	const updateUserState = useRecoilCallback(({ set }) => async (user) => {
 		return new Promise((resolve) => {
@@ -65,7 +61,6 @@ export const PersistentLayout = () => {
 
 				socketconnect(user.accessToken, on_users, set_on_users, on_messages, set_on_messages)
 					.then((socket) => {
-						console.log("sockettt");
 						window.socket = socket;
 					})
 					.catch((err) => {
@@ -73,7 +68,6 @@ export const PersistentLayout = () => {
 					});
 
 				updateUserState(user).then((ress) => {
-					console.log(ress);
 					setIsLoading(false);
 				});
 			})

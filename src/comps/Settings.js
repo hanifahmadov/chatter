@@ -5,7 +5,7 @@ import { formatDate } from "../store/days/days";
 import { motion } from "framer-motion";
 import { signout_api } from "../apis/registerCalls";
 
-export const Settings = ({ setActivelink }) => {
+export const Settings = ({activelink,  setActivelink }) => {
 	const [{ accessToken, avatar, username, email, createdAt, _id }] = useRecoilState(userDefault);
 
 	const handleSignOut = () => {
@@ -62,8 +62,8 @@ export const Settings = ({ setActivelink }) => {
 			<div className='flex flex-col gap-2 mt-3'>
 				<span
 					className='text-shadow-custom_07 text-white text-[14px] text-center 
-								bg-blue-800 rounded-sm font-[500] inline-block
-								w-[150px] py-2 opacity-[0.4] cursor-not-allowed
+								bg-blue-500 rounded-sm font-[500] inline-block
+								w-[150px] py-1 opacity-[0.4] cursor-not-allowed
 								'
 				>
 					Edit
@@ -72,8 +72,8 @@ export const Settings = ({ setActivelink }) => {
 					whileTap={{ scale: 1.05 }}
 					onClick={handleSignOut}
 					className='text-shadow-custom_07 text-white text-[14px] text-center 
-			                    bg-blue-800 rounded-sm font-[500] inline-block
-			                    w-[150px] py-2 mt-1 cursor-pointer hover:bg-blue-900
+			                    bg-blue-500 rounded-sm font-[500] inline-block
+			                    w-[150px] py-1 mt-1 cursor-pointer hover:bg-blue-600
 			                    '
 				>
 					Sign out

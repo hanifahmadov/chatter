@@ -6,7 +6,7 @@ import isYesterday from "dayjs/plugin/isYesterday";
 dayjs.extend(isToday);
 dayjs.extend(isYesterday);
 
-export const formatDate = (dateString) => {
+export const formatDate = (dateString, type = false) => {
 	const date = dayjs(dateString);
 	const today = dayjs();
 
@@ -17,7 +17,7 @@ export const formatDate = (dateString) => {
 	} else if (date.isAfter(today.startOf("week")) && date.isBefore(today.endOf("week"))) {
 		return date.format("dddd"); // Returns the day of the week, e.g., "Monday"
 	} else {
-		return date.format("YYYY-MMM-DD"); // Returns full date, e.g., "22 January 2024"
+		return type ? date.format(type) : date.format("YYYY-MMM-DD"); // Returns full date, e.g., "22 January 2024"
 	}
 };
 

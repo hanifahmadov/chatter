@@ -33,10 +33,10 @@ export const UploadImageButton = ({ setImage }) => {
 			<motion.label
 				whileTap={{ scale: 1.05 }}
 				htmlFor='image'
-				className='rounded-full min-w-[34px] min-h-[34px] bg-white
+				className='rounded-full min-w-[34px] min-h-[34px] bg-transparent
                                                  flex flex-row-1 justify-center items-center
                                                  label_avatar cursor-pointer text-slate-600 text-[12px]
-                                                 hover:ring-[1px] border-[2px] border-blue-100
+                                                 hover:ring-[1px] border-[1px] border-blue-100
                                                 '
 			>
 				<Fontawesome type={"faImage"} />

@@ -38,15 +38,18 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 	}, [text]);
 
 	return (
-		<div className="bg-slate-200 min-h-[4rem] p-2 absolute bottom-0 left-0 right-0">
-			<div className='bg-slate-200 flex flex-row w-full  p-1 '>
+		<div className="bg-white min-h-[4rem] p-2 absolute bottom-0 left-0 right-0
+						rounded-br-[25px] rounded-bl-[25px] rounded-tr-[3px] rounded-tl-[3px]
+						
+						">
+			<div className='bg-white flex flex-row w-full  p-1 '>
 				<UploadImageButton setImage={setImage} />
 
 				<div
 					tabIndex='0'
 					className='textare_parent bg-white py-[0.45rem] px-2 mx-2
                                                 flex flex-col flex-grow justify-center items-center 
-                                                rounded-[20px]  border-[2px] border-blue-100
+                                                rounded-[20px]  border-[1px] border-blue-100
                                                 '
 				>
 					{image && <ImagePreview image={image} setImage={setImage} />}
@@ -73,7 +76,7 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 					onClick={handleSendMessage}
 					className={`rounded-full min-w-[34px] min-h-[34px] 
                                                 flex flex-row-1 justify-center items-center
-                                                bg-white border-[2px] border-blue-100 hover:ring-[1px]
+                                                bg-white border-[1px] border-blue-100 hover:ring-[1px]
                                                 ${text.length || image ? "cursor-pointer" : "pointer-events-none"}
                                                 `}
 				>

@@ -15,8 +15,16 @@ import { animateDefault } from "../../store/states/app_state";
 import { formatDate, formatTime, generateRandomDate } from "../../store/days/days";
 import { on_messages_state } from "../../store/states/socket_state";
 import { currentRecipientState } from "../../store/states/user_state";
+import { mark_messages_asread } from "../../apis/messageCalls";
 
-export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
+export const Message = ({
+	currRecipient: { _id: recipientId },
+	signedUser: { _id, accessToken },
+	avatar,
+	date,
+	talks,
+	talks: {},
+}) => {
 	/* basics */
 	const lastMessageRef = useRef();
 	const previousMessagesLength = useRef(talks.length);
@@ -55,6 +63,8 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 		// console.log("builder, builder", builder.length);
 		builder.push(temp);
 		setUpdatedTalks(builder);
+
+		mark_messages_asread(accessToken, recipientId);
 	}, [talks]);
 
 	// useLayoutEffect(() => {
@@ -67,13 +77,13 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 
 	useEffect(() => {
 		scrollIntoView(lastMessageRef.current, {
-			time: 0,
+			time: 300,
 		});
 	}, [updatedTallks]);
 
 	return (
 		<div className='message flex flex-col w-full'>
-			<div className='date flex flex-col justify-center items-center sticky top-0'>
+			<div className='date  flex flex-col justify-center items-center sticky top-0'>
 				<span
 					className='bg-blue-50 text-[10px] px-3 py-[2px] my-1
                         rounded-full text-shadow-custom_01
@@ -88,7 +98,7 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 			<div className='flex gap-[1.5px] flex-col w-full'>
 				{updatedTallks.length > 0 &&
 					updatedTallks.map((msgs, index) => {
-						const owner = msgs[0].sender == signedUserId;
+						const owner = msgs[0].sender == _id;
 						return (
 							<div
 								key={index}
@@ -125,7 +135,7 @@ export const Message = ({ signedUserId, avatar, date, talks, talks: {} }) => {
 															text-[13px] text-gray-700 flex flex-col
 															max-w-[18rem] break-words border-[0px] border-white 
 															whitespace-normal text-sm leading-tight text-sm
-															${owner ? " rounded-br-none" : "rounded-bl-none"}
+															${owner ? " rounded-br-none" : "rounded-tl-none"}
 															${owner ? "bg-white" : "bg-blue-100"}
 															${index === msgs.length - 1 && "animate-in slide-in-from-bottom"}
 

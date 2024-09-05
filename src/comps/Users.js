@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { formatDate } from "../store/days/days";
 import { useTheme } from "styled-components";
 import { motion } from "framer-motion";
 
+
 /* styled */
 import { User_Container } from "../app.styled";
 
-export const Users = ({ users, setActivelink, setCurrRecipient }) => {
+export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setCustomnav }) => {
 	const {
 		device: { sm, md },
 	} = useTheme();
 
-	console.log("sm sm ", sm);
-
-	console.log(users);
-
 	const handleUserClick = (user) => {
+		setLoading(true);
+
+		setTimeout(() => {
+			setLoading(false);
+		}, 1500);
 		setCurrRecipient(user);
 		setActivelink(2);
+		setCustomnav(1);
 	};
 
 	// users = [...users, ...users, ...users, ...users, ...users];

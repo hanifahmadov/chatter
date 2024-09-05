@@ -8,7 +8,7 @@ export const App_Container = styled.div(
 	}) => {
 		// sm 640
 		// md 768
-		console.log("sm sm md md", sm, md);
+
 
 		return {
 			...(md && {
@@ -41,7 +41,7 @@ export const App_Container = styled.div(
 );
 
 export const User_Container = styled.div(({ theme: { device } }) => {
-	console.log(device);
+
 	return {};
 });
 

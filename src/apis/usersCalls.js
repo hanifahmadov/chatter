@@ -15,7 +15,7 @@ export const all_users = async (accessToken) => {
 			withCredentials: true,
 		});
 
-		console.log("all users >> Request successful:", response);
+		// console.log("all users >> Request successful:", response);
 
 		// Return the response data containing the list of users
 		return response.data.allUsers;
