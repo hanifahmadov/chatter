@@ -1,16 +1,22 @@
 import React from "react";
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
-export const Recipient = ({ setMessages, customnav, setActivelink, currRecipient: { avatar, username, wasOnline } }) => {
-
+export const Recipient = ({
+	setMessages,
+	customnav,
+	setActivelink,
+	currRecipient: { avatar, username, wasOnline },
+}) => {
 	const handBackClick = () => {
 		// setMessages([])
 		setActivelink(customnav);
 	};
 	return (
 		<div className='w-full h-full flex gap-2 justify-start items-center px-6'>
-			<div className='text-[18px] text-blue-500 font-[800] cursor-pointer' onClick={handBackClick}>
-				<Fontawesome type={"faArrowLeft"} />
+			<div className='text-[20px] text-gray-600 font-[800] cursor-pointer' onClick={handBackClick}>
+				<span>
+					<Fontawesome type={"faAngleLeft"} />
+				</span>
 			</div>
 			<div className='avatar overflow-hidden ml-1'>
 				<img

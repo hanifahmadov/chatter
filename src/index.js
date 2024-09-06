@@ -69,10 +69,14 @@ const router = createBrowserRouter([
 					// 	path: "/404",
 					// 	element: <NotFound />,s
 					// },
-					// {
-					// 	path: "*", // wildcard route for handling unknown routes
-					// 	element: <Navigate to='/404' replace />,
-					// },
+					{
+						path: "*", // wildcard route for handling unknown routes
+						element: <Navigate to='/welcome' replace />,
+					},
+					{
+						path: "/welcome/", // wildcard route for handling unknown routes
+						element: <Navigate to='/welcome' replace />,
+					},
 				],
 			},
 			{

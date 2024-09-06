@@ -4,9 +4,12 @@ import { userDefault } from "../store/states/user_state";
 import { formatDate } from "../store/days/days";
 import { motion } from "framer-motion";
 import { signout_api } from "../apis/registerCalls";
+import { useNavigate } from "react-router-dom";
+
 
 export const Settings = ({activelink,  setActivelink }) => {
 	const [{ accessToken, avatar, username, email, createdAt, _id }] = useRecoilState(userDefault);
+	const navigate = useNavigate()
 
 	const handleSignOut = () => {
 		console.log("handle sign out");
@@ -14,6 +17,8 @@ export const Settings = ({activelink,  setActivelink }) => {
 			window.socket?.disconnect();
 			window.socket = null;
 			setActivelink(0);
+			navigate('/welcome')
+
 		});
 	};
 	return (

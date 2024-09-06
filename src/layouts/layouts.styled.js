@@ -40,21 +40,54 @@ export const Loading_Container = styled.div(({ theme: {} }) => {
 
 		color: "rgba(0, 0, 0, 1)",
 		fontSize: "1.1rem",
-		textShadow:'1px 1px 2px rgba(0, 0, 0, 0.1)',
-
+		textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
 	};
 });
 
-export const Backdrop_Container  = styled.div(({ theme: {} }) => {
-	return {
-		
-
-	};
+export const Backdrop_Container = styled.div(({ theme: {} }) => {
+	return {};
 });
 
-// export const  = styled.div(({ theme: {} }) => {
-// 	return {};
-// });
+export const PhoneContainer = styled.div(
+	({
+		theme: {
+			device: { sm, md },
+		},
+	}) => {
+		console.log(sm, md);
+		// sm 640
+		// md 768
+
+		return {
+			...(md && {}),
+
+			...(sm && {
+				// ".display": {
+				// 	width: "100svw",
+				// 	height: "100svh",
+				// 	borderRadius: "0px",
+				// },
+
+				// ".header": {
+				// 	height: "3.5rem",
+				// },
+
+				// ".body": {
+				// 	// h-[calc(100%-5rem-5.5rem-1rem)]
+				// 	// height: "calc(100%-3.5rem-4rem-1rem)",
+				// 	height: "calc(100% - 3.5rem - 4rem - 1rem)",
+				// },
+
+				// ".footer": {
+				// 	height: "4rem",
+				// },
+
+				width: "100%",
+				height: "100%",
+			}),
+		};
+	}
+);
 
 // export const  = styled.div(({ theme: {} }) => {
 // 	return {};

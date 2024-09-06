@@ -126,23 +126,6 @@ export const App = () => {
 		}
 	};
 
-	let [device, setDevice] = useRecoilState(deviceDefault);
-	let sm = useMediaQuery({
-		query: "(max-width: 640px)",
-	});
-	let md = useMediaQuery({
-		query: "(max-width: 768px)",
-	});
-
-	useEffect(() => {
-		device = JSON.parse(JSON.stringify(device));
-		setDevice({
-			...device,
-			sm,
-			md,
-		});
-	}, [sm, md]);
-
 	/**
 	 *  use effects
 	 * 	messages & users calls
@@ -227,158 +210,143 @@ export const App = () => {
 	};
 
 	return (
-		<ThemeProvider theme={{ device }}>
-			<App_Container
-				className='app h-[100svh] w-[100svw] bg-white
-							flex justify-center items-center
-							fixed inset-0
-							'
-			>
-				<div
-					className='display h-[80svh] max-h-[926px] w-[23rem] bg-slate-50
-							flex flex-col justify-between overflow-hidden
-							shadow-custom_07  border-[3px] border-white
-							rounded-[30px] p-[2px]
-							'
-				>
-					<div
-						className='header w-full h-[4rem] flex justify-center items-center text-[20px] bg-white
+		<>
+			<div
+				className='app header w-full h-[4rem] flex justify-center items-center text-[20px] bg-white
 								 rounded-[25px] rounded-br-[2px] rounded-bl-[2px] text-gray-600 font-[500] text-shadow-custom_01
 								shadow-custom_04'
-					>
-						{activelink == 1 && "Users"}
-						{activelink == 2 && (
-							<Recipient
-								setActivelink={setActivelink}
-								currRecipient={currRecipient}
-								customnav={customnav}
-								setMessages={setMessages}
-							/>
-						)}
-						{activelink == 2.2 && "Chats"}
-						{activelink == 3 && "Send Message"}
-						{activelink == 4 && "Calls"}
-						{activelink == 5 && "Settings"}
-					</div>
+			>
+				{activelink == 1 && "Users"}
+				{activelink == 2 && (
+					<Recipient
+						setActivelink={setActivelink}
+						currRecipient={currRecipient}
+						customnav={customnav}
+						setMessages={setMessages}
+					/>
+				)}
+				{activelink == 2.2 && "Chats"}
+				{activelink == 3 && "Send Message"}
+				{activelink == 4 && "Calls"}
+				{activelink == 5 && "Settings"}
+			</div>
 
-					<div className='body w-full h-[calc(100%-4rem-4rem-1rem)] flex flex-frow'>
-						{activelink == 1 && (
-							<div className='users_wrapper'>
-								<Users
-									users={users}
-									setActivelink={setActivelink}
-									setCurrRecipient={setCurrRecipient}
-									setCustomnav={setCustomnav}
-									setLoading={setLoading}
-								/>
-							</div>
-						)}
-						{activelink == 2 && (
-							<div className='message_parent relative h-full w-full flex flex-col py-0 px-1'>
-								{loading && (
-									<div
-										className={`bg-white flex justify-center items-center
+			<div className='app body w-full h-[calc(100%-4rem-4rem-1rem)] flex flex-frow'>
+				{activelink == 1 && (
+					<div className='users_wrapper'>
+						<Users
+							users={users}
+							setActivelink={setActivelink}
+							setCurrRecipient={setCurrRecipient}
+							setCustomnav={setCustomnav}
+							setLoading={setLoading}
+						/>
+					</div>
+				)}
+				{activelink == 2 && (
+					<div className='message_parent relative h-full w-full flex flex-col py-0 px-1'>
+						{loading && (
+							<div
+								className={`bg-white flex justify-center items-center
 												absolute top-0 left-0 w-full h-full z-10 
 												`}
+							>
+								<div className='bg-white text-white font-bold p-3 rounded inline-flex items-center'>
+									<svg
+										className='animate-spin h-6 w-6 text-blue-500'
+										xmlns='http://www.w3.org/2000/svg'
+										fill='none'
+										viewBox='0 0 24 24'
 									>
-										<div className='bg-white text-white font-bold p-3 rounded inline-flex items-center'>
-											<svg
-												className='animate-spin h-6 w-6 text-blue-500'
-												xmlns='http://www.w3.org/2000/svg'
-												fill='none'
-												viewBox='0 0 24 24'
-											>
-												<circle
-													className='opacity-25'
-													cx='12'
-													cy='12'
-													r='10'
-													stroke='currentColor'
-													strokeWidth='4'
-												></circle>
-												<path
-													className='opacity-75'
-													fill='currentColor'
-													d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z'
-												></path>
-											</svg>
-										</div>
-									</div>
-								)}
-								<div className='flex-1 mt-[height-of-the-red-div] overflow-scroll'>
-									{Object.keys(messages).length > 0 &&
-										Object.keys(messages).map((date, index) => {
-											const talks = messages[date];
-
-											return (
-												<Message
-													key={index}
-													signedUser={{ _id, accessToken, avatar }}
-													talks={talks}
-													date={date}
-													avatar={avatar}
-													animate={animate}
-													setAnimate={setAnimate}
-													currRecipient={currRecipient}
-												/>
-											);
-										})}
+										<circle
+											className='opacity-25'
+											cx='12'
+											cy='12'
+											r='10'
+											stroke='currentColor'
+											strokeWidth='4'
+										></circle>
+										<path
+											className='opacity-75'
+											fill='currentColor'
+											d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z'
+										></path>
+									</svg>
 								</div>
 							</div>
 						)}
+						<div className='flex-1 mt-[height-of-the-red-div] overflow-scroll'>
+							{Object.keys(messages).length > 0 &&
+								Object.keys(messages).map((date, index) => {
+									const talks = messages[date];
 
-						{activelink == 2.2 && (
-							<div className='chats_parent h-full w-full overflow-scroll flex gap-0 flex-col flex-grow py-0 px-1'>
-								<Chats
-									signedUser={{ _id, accessToken }}
-									users={users}
-									messages={messages}
-									setCurrRecipient={setCurrRecipient}
-									setActivelink={setActivelink}
-									setCustomnav={setCustomnav}
-									setLoading={setLoading}
-								/>
-							</div>
-						)}
-						{activelink == 3 && (
-							<div className='h-full w-full flex text-gray-700 justify-center items-center'>
-								Not Available, Yet.
-							</div>
-						)}
-						{activelink == 4 && (
-							<div className='h-full w-full flex text-gray-700 justify-center items-center'>
-								Not Available, Yet.
-							</div>
-						)}
-
-						{activelink == 5 && (
-							<div className='settings_wrapper h-full w-full'>
-								<Settings activelink={activelink} setActivelink={setActivelink} />
-							</div>
-						)}
+									return (
+										<Message
+											key={index}
+											signedUser={{ _id, accessToken, avatar }}
+											talks={talks}
+											date={date}
+											avatar={avatar}
+											animate={animate}
+											setAnimate={setAnimate}
+											currRecipient={currRecipient}
+										/>
+									);
+								})}
+						</div>
 					</div>
+				)}
 
-					<div
-						className='footer min-h-[4rem] w-full bg-white
+				{activelink == 2.2 && (
+					<div className='chats_parent h-full w-full overflow-scroll flex gap-0 flex-col flex-grow py-0 px-1'>
+						<Chats
+							signedUser={{ _id, accessToken }}
+							users={users}
+							messages={messages}
+							setCurrRecipient={setCurrRecipient}
+							setActivelink={setActivelink}
+							setCustomnav={setCustomnav}
+							setLoading={setLoading}
+						/>
+					</div>
+				)}
+				{activelink == 3 && (
+					<div className='h-full w-full flex text-gray-700 justify-center items-center'>
+						Not Available, Yet.
+					</div>
+				)}
+				{activelink == 4 && (
+					<div className='h-full w-full flex text-gray-700 justify-center items-center'>
+						Not Available, Yet.
+					</div>
+				)}
+
+				{activelink == 5 && (
+					<div className='settings_wrapper h-full w-full'>
+						<Settings activelink={activelink} setActivelink={setActivelink} />
+					</div>
+				)}
+			</div>
+
+			<div
+				className='app footer min-h-[4rem] w-full bg-white
 								 rounded-[25px] rounded-tr-[3px] rounded-tl-[3px]
 								shadow-custom_04 relative
 								'
-					>
-						{activelink == 2 ? (
-							<Send
-								text={text}
-								setText={setText}
-								image={image}
-								setImage={setImage}
-								handleKeyDown={handleKeyDown}
-								handleSendMessage={handleSendMessage}
-							/>
-						) : (
-							<Nav activelink={activelink} setActivelink={setActivelink} />
-						)}
-					</div>
-				</div>
-			</App_Container>
-		</ThemeProvider>
+			>
+				{activelink == 2 ? (
+					<Send
+						text={text}
+						setText={setText}
+						image={image}
+						setImage={setImage}
+						handleKeyDown={handleKeyDown}
+						handleSendMessage={handleSendMessage}
+					/>
+				) : (
+					<Nav activelink={activelink} setActivelink={setActivelink} />
+				)}
+			</div>
+		</>
 	);
 };

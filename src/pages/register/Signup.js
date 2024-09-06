@@ -66,7 +66,7 @@ export const Signup = () => {
 	};
 
 	return (
-		<div className='signup bg-white text-center w-[18rem] px-4'>
+		<div className='signup text-center w-[18rem] px-4 py-4 rounded-2xl'>
 			<div className='signup_avatart mb-0'>
 				<input
 					type='file'
@@ -182,7 +182,8 @@ export const Signup = () => {
 									cursor-pointer 
 									font-medium mt-1 
 									inline-block
-									px-2 py-1 rounded
+									px-2 py-1 mt-2
+									rounded
 									text-center
 									transition-colors duration-200 ease-in-out
 									'

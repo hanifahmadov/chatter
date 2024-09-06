@@ -71,7 +71,7 @@ export const Signin = () => {
 	};
 
 	return (
-		<div className='signin bg-white text-center w-[18rem] px-4'>
+		<div className='signin text-center w-[18rem] px-4 py-5 rounded-2xl'>
 			<div className='signin_header text-4xl text-shadow-custom_02'>Sign in.</div>
 
 			<div className='signin_content mt-8'>
@@ -130,7 +130,7 @@ export const Signin = () => {
 				</form>
 			</div>
 
-			<div className='signin_footer mt-5 text-sm'>
+			<div className='signin_footer mt-6 text-sm'>
 				<div className='text-shadow-custom_01'>Dont have an account?</div>
 
 				<div
@@ -142,7 +142,8 @@ export const Signin = () => {
 									cursor-pointer 
 									font-medium mt-1 
 									inline-block
-									px-2 py-1 rounded
+									px-2 py-1 mt-2
+									rounded
 									text-center
 									transition-colors duration-200 ease-in-out
 									'

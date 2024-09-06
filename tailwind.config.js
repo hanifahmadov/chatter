@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const textshadow = require("tailwindcss-textshadow");
+
 module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
 	theme: {
@@ -18,7 +19,6 @@ module.exports = {
 				custom_09: "1px 1px 2px rgba(0, 0, 0, .9)",
 				custom_1: "1px 1px 2px rgba(0, 0, 0, 1)",
 
-
 				custom_white_005: "1px 1px 2px rgba(255, 255, 255, 0.05)",
 				custom_white_01: "1px 1px 2px rgba(255, 255, 255, .1)",
 				custom_white_02: "1px 1px 2px rgba(255, 255, 255, .2)",
@@ -30,7 +30,6 @@ module.exports = {
 				custom_white_07: "1px 1px 2px rgba(255, 255, 255, .7)",
 				custom_white_08: "1px 1px 2px rgba(255, 255, 255, .8)",
 				custom_white_09: "1px 1px 2px rgba(255, 255, 255, .9)",
-
 			},
 
 			boxShadow: {
@@ -49,7 +48,6 @@ module.exports = {
 	},
 	plugins: [textshadow, require("tailwind-scrollbar"), require("tailwindcss-animate")],
 };
-
 
 // <div className='root h-screen w-screen'>
 // 	<div className='header h-5rem w-full'>
