@@ -10,7 +10,7 @@ export const Nav = ({ activelink, setActivelink }) => {
 		>
 			<div
 				onClick={() => setActivelink(1)}
-				className={` users w-[40px] h-[40px] 
+				className={` users w-[35px] h-[35px] 
 										flex justify-center items-center	
 										text-[18px] 
 										overflow-hidden rounded-full cursor-pointer
@@ -23,9 +23,9 @@ export const Nav = ({ activelink, setActivelink }) => {
 			</div>
 			<div
 				onClick={() => setActivelink(2.2)}
-				className={` comments w-[40px] h-[40px] 
+				className={` comments w-[35px] h-[35px] 
 										flex justify-center items-center	
-										text-[18px]
+										text-[18px] 
 										overflow-hidden rounded-full cursor-pointer
 										${activelink == 2.2 ? "text-blue-500" : "text-gray-600"}
 									`}
@@ -36,7 +36,7 @@ export const Nav = ({ activelink, setActivelink }) => {
 			</div>
 			<div
 				onClick={() => setActivelink(3)}
-				className={` send w-[40px] h-[40px] 
+				className={` send w-[35px] h-[35px] 
 							flex justify-center items-center	
 							text-[18px] text-white bg-blue-500
 							overflow-hidden rounded-full cursor-pointer
@@ -48,7 +48,7 @@ export const Nav = ({ activelink, setActivelink }) => {
 			</div>
 			<div
 				onClick={() => setActivelink(4)}
-				className={` phone w-[40px] h-[40px] 
+				className={` phone w-[35px] h-[35px] 
 										flex justify-center items-center	
 										text-[18px]
 										overflow-hidden rounded-full cursor-pointer
@@ -61,7 +61,7 @@ export const Nav = ({ activelink, setActivelink }) => {
 			</div>
 			<div
 				onClick={() => setActivelink(5)}
-				className={` settings w-[40px] h-[40px] 
+				className={` settings w-[35px] h-[35px] 
 										flex justify-center items-center	
 										text-[18px] 
 										overflow-hidden rounded-full cursor-pointer

@@ -120,7 +120,7 @@ export const all_messages = async (accessToken) => {
 export const lastunread_messages = async (accessToken, recipientId) => {
 	try {
 		const response = await axios({
-			url: `${apiUrl}/messages/${recipientId}/read`,
+			url: `${apiUrl}/messages/${recipientId}/last-message`,
 			method: "GET",
 			withCredentials: true,
 			credentials: "include",

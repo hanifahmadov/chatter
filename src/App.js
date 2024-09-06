@@ -313,7 +313,7 @@ export const App = () => {
 											return (
 												<Message
 													key={index}
-													signedUser={{ _id, accessToken }}
+													signedUser={{ _id, accessToken, avatar }}
 													talks={talks}
 													date={date}
 													avatar={avatar}

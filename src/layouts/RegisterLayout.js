@@ -29,8 +29,8 @@ export const RegisterLayout = () => {
 
 	return (
 		<div
-			className='register-layout h-screen w-screen 
-						flex flex-col items-center justify-center fixed 
+			className='register-layout w-full h-full bg-slate-900
+						flex flex-col items-center justify-center
 						'
 		>
 			{showWelcome ? (

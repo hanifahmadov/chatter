@@ -19,6 +19,7 @@ import { Signup } from "./pages/register/Signup";
 /* component */
 import { App } from "./App";
 import { Users } from "./comps/Users";
+import { PhoneLayout } from "./layouts/PhoneLayout";
 
 // import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
 // import { MainLayout } from "./comps/layouts/MainLayout";
@@ -49,56 +50,61 @@ import { Users } from "./comps/Users";
  */
 const router = createBrowserRouter([
 	{
-		// add welcome content to Register layout { advance context }
-		path: "/welcome",
-		element: <RegisterLayout />,
+		element: <PhoneLayout />,
 		children: [
 			{
-				path: "signin",
-				element: <Signin />,
+				// add welcome content to Register layout { advance context }
+				path: "/welcome",
+				element: <RegisterLayout />,
+				children: [
+					{
+						path: "signin",
+						element: <Signin />,
+					},
+					{
+						path: "signup",
+						element: <Signup />,
+					},
+					// {
+					// 	path: "/404",
+					// 	element: <NotFound />,s
+					// },
+					// {
+					// 	path: "*", // wildcard route for handling unknown routes
+					// 	element: <Navigate to='/404' replace />,
+					// },
+				],
 			},
 			{
-				path: "signup",
-				element: <Signup />,
-			},
-			// {
-			// 	path: "/404",
-			// 	element: <NotFound />,s
-			// },
-			// {
-			// 	path: "*", // wildcard route for handling unknown routes
-			// 	element: <Navigate to='/404' replace />,
-			// },
-		],
-	},
-	{
-		element: <PersistentLayout />,
-		children: [
-			{
-				path: "/",
-				element: (
-					<RequireAuth>
-						<App />
-					</RequireAuth>
-				),
-				// Protected route
+				element: <PersistentLayout />,
 				children: [
 					{
 						path: "/",
-						element: <Users />,
+						element: (
+							<RequireAuth>
+								<App />
+							</RequireAuth>
+						),
+						// Protected route
+						children: [
+							{
+								path: "/",
+								element: <Users />,
+							},
+							// {
+							// 	path: "notifications",
+							// 	element: <Notifications />,
+							// },
+							// {
+							// 	path: "messages",
+							// 	element: <Messages />,
+							// },
+							// {
+							// 	path: "bookmarks",
+							// 	element: <Bookmarks />,
+							// },
+						],
 					},
-					// {
-					// 	path: "notifications",
-					// 	element: <Notifications />,
-					// },
-					// {
-					// 	path: "messages",
-					// 	element: <Messages />,
-					// },
-					// {
-					// 	path: "bookmarks",
-					// 	element: <Bookmarks />,
-					// },
 				],
 			},
 		],
