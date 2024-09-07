@@ -108,7 +108,7 @@ export const Chats = ({
 						return (
 							<div
 								key={index}
-								className='pr-2 bg-white rounded-3xl shadow-custom_09  
+								className='p-0 bg-white rounded-3xl shadow-custom_09  
 														hover:bg-blue-50 overflow-hidden
 														ease-in duration-100
 														'
@@ -167,7 +167,7 @@ export const Chats = ({
 														</span>
 													)}
 												</span>
-												<span className='block max-h-[15px] w-full overflow-hidden italic flex justify-start items-center'>
+												<span className='block max-h-[15px]  text-[14px] sm:text-[12px] w-full overflow-hidden italic flex justify-start items-center'>
 													{`" ${presentMessage(message)} "`}
 												</span>
 											</div>
@@ -175,7 +175,7 @@ export const Chats = ({
 									</div>
 									<div
 										className=' flex flex-col justify-center items-center 
-													absolute right-0 px-1 h-full rounded-md
+													absolute right-0 px-1 h-full rounded-md min-w-[60px] pr-2
 													bg-white bg-opacity-70  text-gray-700 text-shadow-custom_02
 													'
 									>
@@ -188,7 +188,7 @@ export const Chats = ({
 											</span>
 										)}
 
-										<span className='text-[10px] font-[500] text-center font-medium text-gray-800'>
+										<span className='text-[12px] sm:text-[10px] font-[500] text-center font-medium text-gray-800'>
 											{formatDate(createdAt, "MMM-DD").toLocaleLowerCase()}
 										</span>
 									</div>

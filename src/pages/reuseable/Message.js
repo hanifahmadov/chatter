@@ -141,7 +141,7 @@ export const Message = ({
 
 															`}
 										>
-											<div className='leading-[18px] text-[14px] sm:text-[12px]'>
+											<div className='leading-[18px] text-[15px] sm:text-[12px]'>
 												{msg.message ? (
 													msg.message
 												) : (
@@ -151,7 +151,7 @@ export const Message = ({
 												)}
 											</div>
 											<span
-												className={`text-[8px] text-shadow-custom_02  
+												className={`text-[10px] sm:text-[8px] text-shadow-custom_02  
 															${owner ? "self-end" : "self-start"} 
 															text-gray-500 text-end
 															`}
