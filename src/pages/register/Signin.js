@@ -12,12 +12,16 @@ import { socketconnect } from "../../apis/socketCalls";
 /* states */
 import { userDefault } from "../../store/states/user_state";
 import { on_messages_state, on_users_state } from "../../store/states/socket_state";
-import { messageDataCallDefault } from "../../store/states/message_state";
+import { activelinkDefault } from "../../store/states/app_state";
+
 
 export const Signin = () => {
 	/* location & navigation */
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	/* active link */
+	const [activelink, setActivelink] = useRecoilState(activelinkDefault)
 
 	/* for socket */
 	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
@@ -62,6 +66,8 @@ export const Signin = () => {
 					};
 
 					navigate("/", { replace: true });
+					setActivelink(1)
+					
 				});
 			})
 
