@@ -108,9 +108,9 @@ export const Chats = ({
 						return (
 							<div
 								key={index}
-								className='p-0 bg-white rounded-3xl shadow-custom_09  
+								className='bg-white rounded-3xl shadow-custom_09  
 														hover:bg-blue-50 overflow-hidden
-														ease-in duration-100
+														ease-in duration-100 
 														'
 							>
 								<motion.div
