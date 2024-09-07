@@ -82,8 +82,10 @@ export const PhoneContainer = styled.div(
 				// 	height: "4rem",
 				// },
 
-				width: "100%",
+				width: "90%",
 				height: "100%",
+				border: "none",
+				boxShadow: "none",
 			}),
 		};
 	}
