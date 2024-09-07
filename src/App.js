@@ -212,8 +212,8 @@ export const App = () => {
 	return (
 		<>
 			<div
-				className='app header w-full h-[4rem] flex justify-center items-center text-[20px] bg-white
-								 rounded-[25px] rounded-br-[2px] rounded-bl-[2px] text-gray-600 font-[500] text-shadow-custom_01
+				className='app header w-full h-[4rem] flex justify-center items-center text-[25px] sm:text-[22px] bg-white
+								 rounded-[25px] rounded-br-[2px] rounded-bl-[2px] text-gray-700 font-[500] text-shadow-custom_01
 								shadow-custom_04'
 			>
 				{activelink == 1 && "Users"}

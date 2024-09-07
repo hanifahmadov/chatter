@@ -75,13 +75,13 @@ export const Chats = ({
 							<div key={index} className='flex rounded-md p-1 max-w-sm w-full mx-auto my-3'>
 								<div className='animate-pulse w-full px-3 flex space-x-4'>
 									<div className='rounded-full bg-slate-200 h-10 w-10'></div>
-									<div className='flex-1 space-y-6 py-1'>
+									<div className='flex-1 space-y-6 py-2'>
 										<div className='space-y-3'>
 											<div className='grid grid-cols-3 gap-4'>
-												<div className='h-2 bg-slate-200 rounded col-span-2'></div>
-												<div className='h-2 bg-slate-200 rounded col-span-1'></div>
+												<div className='h-3 bg-slate-200 rounded col-span-2'></div>
+												<div className='h-3 bg-slate-200 rounded col-span-1'></div>
 											</div>
-											<div className='h-2 bg-slate-200 rounded'></div>
+											<div className='h-3 bg-slate-200 rounded'></div>
 										</div>
 									</div>
 								</div>
@@ -110,8 +110,8 @@ export const Chats = ({
 								<motion.div
 									onClick={() => handleChatClick(user)}
 									className={`
-                                            user flex flex-row cursor-pointer rounded
-                                            px-1 py-1 hover:bg-blue-50 
+                                            user flex flex-row items-center cursor-pointer rounded
+                                            px-1 py-1 hover:bg-blue-50 relative
 
                                             `}
 								>
@@ -127,7 +127,7 @@ export const Chats = ({
 									</div>
 									<div className='user_content flex flex-grow flex-col items-start justify-center px-2'>
 										<div className='content_top flex w-full justify-between'>
-											<span className='text-[13px] text-shadow-custom_01'>
+											<span className='text-[14px] font-[500] text-shadow-custom_02'>
 												{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 											</span>
 
@@ -143,38 +143,40 @@ export const Chats = ({
 										</div>
 
 										<div className='content_bottom w-full'>
-											<div className='text-[10px] flex text-gray-500 text-shadow-custom_01  w-full'>
-												<span className='font-medium text-gray-800 mr-1'>
+											<div className='text-[12px] flex text-gray-500 text-shadow-custom_01  w-full'>
+												<span className='font-medium text-gray-800 mr-1 max-h-[15px] flex justify-start items-center'>
 													{sender == _id ? (
 														"you: "
 													) : (
-														<span className='flex '>
+														<span className='flex justify-center items-center'>
 															<img src={avatar} className='w-4 h-4 rounded-full' />
 
-															<span className='text-[18px] text-gray-400 mx-1 leading-[18px] '>
-																{" "}
-																ᐧ{" "}
-															</span>
+															<span className='text-[18px] text-gray-400 mx-[2px] leading-[18px] '></span>
 														</span>
 													)}
 												</span>
-												<span className='block max-h-[15px] w-full overflow-hidden italic'>
+												<span className='block max-h-[15px] w-full overflow-hidden italic flex justify-start items-center'>
 													{`" ${presentMessage(message)} "`}
 												</span>
 											</div>
 										</div>
 									</div>
-									<div className=' flex flex-col justify-center items-end mr-2'>
+									<div
+										className=' flex flex-col justify-center items-center 
+													absolute right-0 px-1 h-full rounded-md
+													bg-white bg-opacity-70  text-gray-700 text-shadow-custom_02
+													'
+									>
 										{unread > 0 && (
 											<span
 												className='relative block h-full text-[10px] text-white font-[700] inline-block
-													rounded-full w-[18px] h-[18px] px-2 py-2 leading-0 bg-green-400 flex items-center justify-center'
+													rounded-full min-w-[18px] max-h-[18px] leading-0 bg-green-400 flex items-center justify-center'
 											>
 												{unread}
 											</span>
 										)}
 
-										<span className='text-[9px] text-center font-medium text-gray-800 mt-1'>
+										<span className='text-[10px] font-[500] text-center font-medium text-gray-800'>
 											{formatDate(createdAt, "MMM-DD").toLocaleLowerCase()}
 										</span>
 									</div>
