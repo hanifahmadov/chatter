@@ -20,7 +20,13 @@ import { all_messages, post_message } from "./apis/messageCalls";
 /* global states */
 import { currentRecipientState, userDefault } from "./store/states/user_state";
 import { on_messages_state, on_users_state } from "./store/states/socket_state";
-import { activelinkDefault, animateState, customnavDefault, deviceDefault } from "./store/states/app_state";
+import {
+	activelinkDefault,
+	animateState,
+	customnavDefault,
+	deviceDefault,
+	unreadCountDefault,
+} from "./store/states/app_state";
 
 /* helpers */
 import { Header } from "./store/helpers/Header";
@@ -60,6 +66,7 @@ export const App = () => {
 	const [currRecipient, setCurrRecipient] = useRecoilState(currentRecipientState);
 	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
 	const [customnav, setCustomnav] = useRecoilState(customnavDefault);
+	const [unreadCount, setUnreadCount] = useRecoilState(unreadCountDefault);
 
 	/* mobile - body transition tracker */
 	const [isAtMinus400, setIsAtMinus400] = useState(false);
@@ -154,6 +161,19 @@ export const App = () => {
 				 * 	get the messages betweem
 				 * 	curr user and recipient
 				 */
+
+				let localUnreadCount = 0;
+
+				response_messages.forEach((mess) => {
+
+					if (!mess.isRead && mess.recipient._id == _id) {
+						localUnreadCount += 1;
+					}
+				});
+
+				console.log("localUnreadCount >>", localUnreadCount)
+
+				setUnreadCount(localUnreadCount);
 
 				// const valid_messages = i_sent.concat(recipient_sent);
 				const valid_messages = response_messages.filter(
@@ -311,13 +331,13 @@ export const App = () => {
 					</div>
 				)}
 				{activelink == 3 && (
-					<div className='h-full w-full flex text-gray-700 justify-center items-center'>
+					<div className='h-full w-full flex text-gray-700 font-[500] text-shadow-custom_01 justify-center items-center'>
 						Not Available, Yet.
 					</div>
 				)}
 				{activelink == 4 && (
-					<div className='h-full w-full flex text-gray-700 justify-center items-center'>
-						Not Available, Yet.
+					<div className='h-full w-full flex text-gray-700 font-[500] text-shadow-custom_01 justify-center items-center'>
+						Not Available.
 					</div>
 				)}
 

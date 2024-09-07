@@ -35,17 +35,27 @@ export const signin_api = async (data) => {
 		return response;
 	} catch (error) {
 		if (error.response) {
-			// Server-side error (e.g., wrong credentials, server error)
-			console.error("Error response from server:", error.response.data);
-			throw new Error(error.response.data.message || "Sign-in failed. Please check your credentials.");
+			// Server-side error
+			console.error("Sign-in failed. Please check your credentials");
+
+			// Return or throw a custom error object
+			throw {
+				status: 404,
+				message1: "Sign-in failed",
+				message2: "Please check your credentials.",
+			};
 		} else if (error.request) {
-			// No response from server (e.g., network issues)
+			// No response from server
 			console.error("No response received from server:", error.request);
-			throw new Error("No response from server. Please check your network connection.");
+			throw {
+				status: 503,
+				message1: "No response from server",
+				message2: "Please check your network connection.",
+			};
 		} else {
-			// Other errors (e.g., client-side issues)
+			// Client-side error
 			console.error("Error during sign-in:", error.message);
-			throw new Error("An unexpected error occurred during sign-in. Please try again.");
+			throw { status: 500, message: "An unexpected error occurred during sign-in. Please try again." };
 		}
 	}
 };

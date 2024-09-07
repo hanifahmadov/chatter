@@ -12,16 +12,19 @@ import { socketconnect } from "../../apis/socketCalls";
 /* states */
 import { userDefault } from "../../store/states/user_state";
 import { on_messages_state, on_users_state } from "../../store/states/socket_state";
-import { activelinkDefault } from "../../store/states/app_state";
-
+import { activelinkDefault, registerToasterContentDefault, registerToasterDefault } from "../../store/states/app_state";
 
 export const Signin = () => {
 	/* location & navigation */
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	/* error content global state */
+	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterDefault);
+	const [registerToasterContent, setRegisterToasterContent] = useRecoilState(registerToasterContentDefault);
+
 	/* active link */
-	const [activelink, setActivelink] = useRecoilState(activelinkDefault)
+	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
 
 	/* for socket */
 	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
@@ -66,13 +69,41 @@ export const Signin = () => {
 					};
 
 					navigate("/", { replace: true });
-					setActivelink(1)
-					
+					setActivelink(1);
 				});
 			})
 
 			.catch((err) => {
-				console.log(err);
+				if (err.status == 503) {
+					console.log("heyy this is not working");
+					setRegisterToasterContent({
+						text1: err.message1,
+						text2: err.message2,
+					});
+
+					if (registerToaster) {
+						return;
+					} else {
+						setRegisterToaster(true);
+						setTimeout(() => {
+							setRegisterToaster(false);
+						}, 5000);
+					}
+				} else if ((err.status = 404)) {
+					setRegisterToasterContent({
+						text1: err.message1,
+						text2: err.message2,
+					});
+
+					if (registerToaster) {
+						return;
+					} else {
+						setRegisterToaster(true);
+						setTimeout(() => {
+							setRegisterToaster(false);
+						}, 5000);
+					}
+				}
 			});
 	};
 

@@ -1,7 +1,14 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+
+/* global states */
+import { unreadCountDefault } from "../store/states/app_state";
+
+/* helpers */
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
 export const Nav = ({ activelink, setActivelink }) => {
+	const [unreadCount] = useRecoilState(unreadCountDefault);
 	return (
 		<div
 			className='navbar h-full w-full
@@ -26,11 +33,21 @@ export const Nav = ({ activelink, setActivelink }) => {
 				className={` comments w-[35px] h-[35px] 
 										flex justify-center items-center	
 										text-[18px] 
-										overflow-hidden rounded-full cursor-pointer
+										rounded-full cursor-pointer
 										${activelink == 2.2 ? "text-blue-500" : "text-gray-600"}
 									`}
 			>
-				<span className='pointer-events-none'>
+				<span className='pointer-events-none relative'>
+					<span
+						className={`${unreadCount > 0 ? "flex" : "hidden"} justify-center items-center
+									absolute z-50 right-[-8px] bottom-[18px] 
+									text-white font-[700] 
+									text-[10px] h-[16px] w-[16px] rounded-full
+									bg-green-500
+									`}
+					>
+						{unreadCount}
+					</span>
 					<Fontawesome type={"faComments"} />
 				</span>
 			</div>

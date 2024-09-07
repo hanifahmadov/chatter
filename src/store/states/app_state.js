@@ -44,3 +44,22 @@ export const customnavDefault = atom({
 	key: "customnavDefault",
 	default: 0,
 });
+
+export const unreadCountDefault = atom({
+	key: "unreadCountDefault",
+	default: 0,
+});
+
+/* toasters states & defaults */
+export const registerToasterDefault = atom({
+	key: "registerToasterDefault",
+	default: false,
+});
+
+export const registerToasterContentDefault = atom({
+	key: "registerToasterContentDefault",
+	default: {
+		text1: "",
+		text2: "",
+	},
+});

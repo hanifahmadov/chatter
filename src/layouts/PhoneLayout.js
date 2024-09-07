@@ -4,19 +4,25 @@ import { Outlet } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { useMediaQuery } from "react-responsive";
 import { ThemeProvider } from "styled-components";
+import { motion } from "framer-motion";
 
 /* apis & img */
 import img from "../store/image/chat01.png";
 
 /* state */
-import { deviceDefault } from "../store/states/app_state";
+import { deviceDefault, registerToasterContentDefault } from "../store/states/app_state";
 
 /* styled */
 import { PhoneContainer } from "./layouts.styled";
+import { Fontawesome } from "../store/fontawesome/Fontawesome";
+import { RegisterToaster } from "../store/toasters/RegisterToaster";
 
 /* helpers */
 
 export const PhoneLayout = () => {
+	/*  */
+	const [registerToasterContent ] = useRecoilState(registerToasterContentDefault);
+
 	/* device state */
 	let [device, setDevice] = useRecoilState(deviceDefault);
 
@@ -52,9 +58,11 @@ export const PhoneLayout = () => {
 					className={`display h-[80svh] max-h-[926px] w-[23rem]
 							flex flex-col justify-between overflow-hidden
 							shadow-custom_07  border-[3px] border-white
-							rounded-[30px] p-[2px] bg-slate-50
+							rounded-[30px] p-[2px] bg-slate-50 relative
 							`}
 				>
+					<RegisterToaster registerToasterContent={registerToasterContent} />
+
 					<Outlet />
 				</PhoneContainer>
 			</div>
