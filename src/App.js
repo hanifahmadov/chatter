@@ -214,7 +214,7 @@ export const App = () => {
 			<div
 				className='app header w-full h-[4rem] flex justify-center items-center text-[25px] sm:text-[22px] bg-white
 								 rounded-[25px] rounded-br-[2px] rounded-bl-[2px] text-gray-700 font-[500] text-shadow-custom_01
-								shadow-custom_04'
+								shadow-custom_09'
 			>
 				{activelink == 1 && "Users"}
 				{activelink == 2 && (
@@ -330,8 +330,8 @@ export const App = () => {
 
 			<div
 				className='app footer min-h-[4rem] w-full bg-white
-								 rounded-[25px] rounded-tr-[3px] rounded-tl-[3px]
-								shadow-custom_04 relative
+								rounded-[25px] rounded-tr-[3px] rounded-tl-[3px]
+								shadow-custom_09 relative
 								'
 			>
 				{activelink == 2 ? (

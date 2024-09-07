@@ -106,19 +106,26 @@ export const Chats = ({
 						} = tracker[userId];
 
 						return (
-							<div key={index} className='pr-2 bg-white rounded-3xl'>
+							<div
+								key={index}
+								className='pr-2 bg-white rounded-3xl shadow-custom_09  
+														hover:bg-blue-50 overflow-hidden
+														ease-in duration-100
+														'
+							>
 								<motion.div
 									onClick={() => handleChatClick(user)}
 									className={`
                                             user flex flex-row items-center cursor-pointer rounded
-                                            px-1 py-1 hover:bg-blue-50 relative
+                                            px-1 py-1 rounded-full relative
 
                                             `}
 								>
 									<div className='user_avatar_parent'>
 										<img
 											src={avatar}
-											className='max-h-[42px] min-h-[42px] max-w-[42px] min-w-[42px] 
+											className='max-h-[48px] min-h-[48px] max-w-[48px] min-w-[48px] 
+														sm:max-h-[42px] sm:max-w-[42px] sm:min-h-[42px] sm:min-w-[42px]
                                                     rounded-full border-[2px] border-solid 
                                                     border-white object-cover p-[1px]
                                                     text-shadow-custom_02
@@ -127,7 +134,7 @@ export const Chats = ({
 									</div>
 									<div className='user_content flex flex-grow flex-col items-start justify-center px-2'>
 										<div className='content_top flex w-full justify-between'>
-											<span className='text-[14px] font-[500] text-shadow-custom_02'>
+											<span className='text-[16px] sm:text-[14px] font-[500] text-shadow-custom_02'>
 												{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 											</span>
 
@@ -144,7 +151,12 @@ export const Chats = ({
 
 										<div className='content_bottom w-full'>
 											<div className='text-[12px] flex text-gray-500 text-shadow-custom_01  w-full'>
-												<span className='font-medium text-gray-800 mr-1 max-h-[15px] flex justify-start items-center'>
+												<span
+													className='font-medium text-gray-800 mr-1 max-h-[15px] 
+																flex justify-start items-center
+																 text-[14px] sm:text-[12px]
+																'
+												>
 													{sender == _id ? (
 														"you: "
 													) : (

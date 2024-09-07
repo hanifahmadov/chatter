@@ -141,7 +141,7 @@ export const Message = ({
 
 															`}
 										>
-											<div className='leading-[18px] text-sm'>
+											<div className='leading-[18px] text-[14px] sm:text-[12px]'>
 												{msg.message ? (
 													msg.message
 												) : (

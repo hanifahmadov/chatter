@@ -21,7 +21,8 @@ export const Recipient = ({
 			<div className='avatar overflow-hidden ml-1'>
 				<img
 					src={avatar}
-					className='h-[40px] w-[40px] 
+					className='h-[50px] w-[50px] 
+								sm:h-[40px] sm:w-[40px]
                                 border-[2px] border-solid 
                                 border-white object-cover p-[0px]
                                 text-shadow-custom_02  rounded-full
@@ -29,12 +30,14 @@ export const Recipient = ({
 				/>
 			</div>
 
-			<div className='username flex flex-col leading-[18px]'>
-				<span className='text-[16px] text-black  text-shadow-custom_02 font-[500]'>
+			<div className='username flex flex-col leading-[20px] sm:leading-[18px]'>
+				<span className='text-[18px] sm:text-[16px] text-black  text-shadow-custom_02 font-[500]'>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 				</span>
 
-				<span className='text-[11px] text-green-500  text-shadow-custom_005 font-[500]'>Online</span>
+				<span className='text-[13px] sm:text-[11px]  text-green-500  text-shadow-custom_005 font-[500]'>
+					Online
+				</span>
 			</div>
 		</div>
 	);

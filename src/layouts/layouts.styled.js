@@ -82,7 +82,7 @@ export const PhoneContainer = styled.div(
 				// 	height: "4rem",
 				// },
 
-				width: "90%",
+				width: "100%",
 				height: "100%",
 				border: "none",
 				boxShadow: "none",

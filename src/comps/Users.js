@@ -35,7 +35,8 @@ export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setC
 							className={`min-h-[50px] min-w-[300px] w-[90%]
 										border-[1px] bg-white border-white p-1 
 										flex gap-3 flex-row  justify-start items-center 
-										rounded-[10px] shadow-custom_04 overflow-hidden flex-nowrap
+										rounded-[10px]  overflow-hidden flex-nowrap
+										shadow-custom_09
 									`}
 						>
 							<div className='avatar overflow-hidden ml-2'>
