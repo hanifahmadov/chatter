@@ -8,6 +8,7 @@ import { StyleSheetManager } from "styled-components";
 import { RecoilRoot } from "recoil";
 
 /* layouts */
+import { PhoneLayout } from "./layouts/PhoneLayout";
 import { RegisterLayout } from "./layouts/RegisterLayout";
 import { PersistentLayout } from "./layouts/PersistentLayout";
 import { RequireAuth } from "./layouts/RequireAuth";
@@ -19,35 +20,7 @@ import { Signup } from "./pages/register/Signup";
 /* component */
 import { App } from "./App";
 import { Users } from "./comps/Users";
-import { PhoneLayout } from "./layouts/PhoneLayout";
 
-// import { RequireAuthLayout } from "./comps/layouts/RequireAuthLayout";
-// import { MainLayout } from "./comps/layouts/MainLayout";
-
-/* components */
-// import RegisterLayout from "./layouts/RegisterLayout";
-// import PersistentLayout from "./layouts/PersistentLayout";
-// import Signin from "./pages/Signin";
-// import Signup from "./pages/Signup";
-// import App from "./App";
-// import Home from "./pages/Home";
-// import Notifications from "./pages/Notifications";
-// import Messages from "./pages/Messages";
-// import Bookmarks from "./pages/Bookmarks";
-// import NotFound from "./pages/NotFound";
-// import RequireAuth from "./components/RequireAuth";
-// import AdminLayout from "./layouts/AdminLayout";
-
-/**
- *  App is the main root element
- * 	all check-ups there
- */
-
-/**  what is going on here!
- *
- * 	will get explained soon :)
- *
- */
 const router = createBrowserRouter([
 	{
 		element: <PhoneLayout />,
@@ -70,11 +43,11 @@ const router = createBrowserRouter([
 					// 	element: <NotFound />,s
 					// },
 					{
-						path: "*", // wildcard route for handling unknown routes
+						path: "*",
 						element: <Navigate to='/welcome' replace />,
 					},
 					{
-						path: "/welcome/", // wildcard route for handling unknown routes
+						path: "/welcome/",
 						element: <Navigate to='/welcome' replace />,
 					},
 				],
@@ -95,18 +68,6 @@ const router = createBrowserRouter([
 								path: "/",
 								element: <Users />,
 							},
-							// {
-							// 	path: "notifications",
-							// 	element: <Notifications />,
-							// },
-							// {
-							// 	path: "messages",
-							// 	element: <Messages />,
-							// },
-							// {
-							// 	path: "bookmarks",
-							// 	element: <Bookmarks />,
-							// },
 						],
 					},
 				],
