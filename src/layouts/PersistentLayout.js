@@ -10,8 +10,14 @@ import { useRefreshAccessApi } from "../apis/authCalls";
 import { socketconnect } from "../apis/socketCalls";
 
 /* global states */
-import { userDefault } from "../store/states/user_state";
-import { on_messages_state, on_users_state } from "../store/states/socket_state";
+import { onlineUsersDefault, userDefault } from "../store/states/user_state";
+import {
+	newConnectionState,
+	newSigninState,
+	on_messages_state,
+	on_singin_state,
+	on_users_state,
+} from "../store/states/socket_state";
 
 /* styled */
 import { Loading_Container } from "./layouts.styled";
@@ -51,17 +57,27 @@ export const PersistentLayout = () => {
 	 */
 
 	/* for socket */
+	const [newSignin, setNewSignin] = useRecoilState(newSigninState);
+	const [on_signin, set_on_signin] = useRecoilState(on_singin_state);
 	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
 	const [on_users, set_on_users] = useRecoilState(on_users_state);
+
+	const [newConnection, setNewConnection] = useRecoilState(newConnectionState);
+	// const [onlineUsers, setOnlineUsers] = useRecoilState(onlineUsersDefault);
 
 	const setup = async () => {
 		useRefreshAccessApi()
 			.then(async (response) => {
 				const { user } = await response.data;
 
-				socketconnect(user.accessToken, on_users, set_on_users, on_messages, set_on_messages)
+				socketconnect(user.accessToken, set_on_users, set_on_messages, set_on_signin)
 					.then((socket) => {
 						window.socket = socket;
+
+						socket.on("new_connection", (data) => {
+							setNewConnection(data);
+							// setOnlineUsers(onlineUsers);
+						});
 					})
 					.catch((err) => {
 						console.log(err);

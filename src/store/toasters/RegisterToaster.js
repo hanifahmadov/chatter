@@ -3,15 +3,18 @@ import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 
 /* states */
-import { registerToasterDefault } from "../states/app_state";
+import { registerToasterState } from "../states/app_state";
 
 /* helpers */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
 export const RegisterToaster = ({ registerToasterContent: { text1, text2 } }) => {
 	/* toaster state */
-	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterDefault);
+	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterState);
 
+	const handleToasterCancel = (e) => {
+		setRegisterToaster(false);
+	};
 	return (
 		<motion.div
 			initial={{ y: -100, display: "none" }}
@@ -31,7 +34,7 @@ export const RegisterToaster = ({ registerToasterContent: { text1, text2 } }) =>
 			</div>
 
 			<div
-				onClick={() => setRegisterToaster(false)}
+				onClick={handleToasterCancel}
 				className='absolute right-[1px] top-[1px] 
 							bg-white  border-[1px] border-red-300 text-black text-[14px] p-1 rounded-md
 							h-[20px] w-[20px] cursor-pointer

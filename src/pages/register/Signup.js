@@ -14,10 +14,19 @@ import { signup_api } from "../../apis/registerCalls";
 /* helpers */
 import { Fontawesome } from "../../store/fontawesome/Fontawesome";
 
+/* states */
+import { registerToasterContentState, registerToasterState, successState } from "../../store/states/app_state";
+
 export const Signup = () => {
 	/* location & navigation */
 	const location = useLocation();
 	const navigate = useNavigate();
+	const timeout = useRef(0);
+
+	/* error content global state */
+	const [success, setSuccess] = useRecoilState(successState);
+	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterState);
+	const [registerToasterContent, setRegisterToasterContent] = useRecoilState(registerToasterContentState);
 
 	/* sign up setup */
 	const avatarRef = useRef();
@@ -53,20 +62,38 @@ export const Signup = () => {
 		signup_api(data)
 			.then((response) => {
 				console.log(response.data);
+
+				setSuccess(true);
 				setEmail("");
 				setPwd("");
 				setRepwd("");
 				setAvatar(undefined);
 
-				navigate("/welcome/signin", { replace: true });
+				// navigate("/welcome/signin", { replace: true });
 			})
 			.catch((err) => {
-				console.log(err);
+				/* clear the current set-timeouts */
+				clearTimeout(timeout.current);
+
+				/* error contents */
+				setRegisterToasterContent({
+					text1: err.message1,
+					text2: err.message2,
+				});
+
+				/* display error */
+				setRegisterToaster(true);
+				/* remove error after 5s automatically */
+				timeout.current = setTimeout(() => {
+					setRegisterToaster(false);
+				}, 5000);
+
+
 			});
 	};
 
 	return (
-		<div className='signup text-center w-[18rem] px-4 py-4 rounded-2xl'>
+		<motion.div className='signup text-center w-[18rem] px-4 py-4 rounded-2xl'>
 			<div className='signup_avatart mb-0'>
 				<input
 					type='file'
@@ -191,6 +218,6 @@ export const Signup = () => {
 					Sign in
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };

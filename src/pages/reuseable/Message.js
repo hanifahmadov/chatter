@@ -67,13 +67,6 @@ export const Message = ({
 		mark_messages_asread(accessToken, recipientId);
 	}, [talks]);
 
-	// useLayoutEffect(() => {
-	// 	if (!initiateScroll) {
-	// 		scrollIntoView(lastMessageRef.current, {
-	// 			time: 1,
-	// 		});
-	// 	}
-	// }, [updatedTallks]);
 
 	useEffect(() => {
 		scrollIntoView(lastMessageRef.current, {

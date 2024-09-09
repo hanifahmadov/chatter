@@ -1,11 +1,12 @@
 import React from "react";
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
+import { formatDate, formatTime } from "../store/days/days";
 
 export const Recipient = ({
 	setMessages,
 	customnav,
 	setActivelink,
-	currRecipient: { avatar, username, wasOnline },
+	currRecipient: { avatar, username, lastseen, online },
 }) => {
 	const handBackClick = () => {
 		// setMessages([])
@@ -30,14 +31,29 @@ export const Recipient = ({
 				/>
 			</div>
 
-			<div className='username flex flex-col leading-[20px] sm:leading-[18px]'>
-				<span className='text-[18px] sm:text-[16px] text-black  text-shadow-custom_02 font-[500]'>
+			<div className='username flex flex-col justify-start
+
+							'>
+				<span className='text-[18px] sm:text-[16px] block w-full
+								text-black  text-shadow-custom_02 font-[500]
+								'>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 				</span>
 
-				<span className='text-[13px] sm:text-[11px]  text-green-500  text-shadow-custom_005 font-[500]'>
-					Online
-				</span>
+				{online ? (
+					<span className=' w-full text-[11px] sm:text-[10px]  text-green-500  text-shadow-custom_005 font-[500]'>
+						Online
+					</span>
+				) : (
+					<div
+						className='block text-gray-400 text-shadow-none
+								  flex gap-1 pt-[1px]'
+					>
+						<span className='today text-[11px] sm:text-[10px]'>{formatDate(lastseen)}</span>
+
+						<span className='clock text-[11px] sm:text-[10px]'>{formatTime(lastseen, "HH:mm")}</span>
+					</div>
+				)}
 			</div>
 		</div>
 	);

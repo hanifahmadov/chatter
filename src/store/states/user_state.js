@@ -16,5 +16,7 @@ export const currentRecipientState = atom({
 	default: null,
 });
 
-
-
+export const onlineUsersDefault = atom({
+	key: "onlineUsersDefault",
+	default: [],
+});

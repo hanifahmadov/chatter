@@ -30,7 +30,7 @@ export const Settings = ({activelink,  setActivelink }) => {
 								sm:h-[130px] sm:w-[130px]
                                 border-[5px] border-solid 
                                 border-white object-cover p-[0px]
-                                text-shadow-custom_02  rounded-lg
+                                text-shadow-custom_02  rounded-lg bg-white
                                 '
 				/>
 			</div>

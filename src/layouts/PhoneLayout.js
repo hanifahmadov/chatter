@@ -10,18 +10,19 @@ import { motion } from "framer-motion";
 import img from "../store/image/chat01.png";
 
 /* state */
-import { deviceDefault, registerToasterContentDefault } from "../store/states/app_state";
+import { deviceDefault, registerToasterContentState } from "../store/states/app_state";
 
 /* styled */
 import { PhoneContainer } from "./layouts.styled";
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 import { RegisterToaster } from "../store/toasters/RegisterToaster";
+import { SuccessToaster } from "../store/toasters/SuccessToaster";
 
 /* helpers */
 
 export const PhoneLayout = () => {
 	/*  */
-	const [registerToasterContent ] = useRecoilState(registerToasterContentDefault);
+	const [registerToasterContent ] = useRecoilState(registerToasterContentState);
 
 	/* device state */
 	let [device, setDevice] = useRecoilState(deviceDefault);
@@ -51,7 +52,7 @@ export const PhoneLayout = () => {
 			<div
 				className='app h-[100svh] w-[100svw] 
                         flex justify-center items-center
-                        fixed inset-0
+                        fixed inset-0 bg-white
                     '
 			>
 				<PhoneContainer
@@ -62,6 +63,8 @@ export const PhoneLayout = () => {
 							`}
 				>
 					<RegisterToaster registerToasterContent={registerToasterContent} />
+					<SuccessToaster/>
+
 
 					<Outlet />
 				</PhoneContainer>

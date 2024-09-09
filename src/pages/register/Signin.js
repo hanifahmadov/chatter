@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState, useRecoilCallback } from "recoil";
@@ -10,23 +10,26 @@ import { signin_api } from "../../apis/registerCalls";
 import { socketconnect } from "../../apis/socketCalls";
 
 /* states */
-import { userDefault } from "../../store/states/user_state";
-import { on_messages_state, on_users_state } from "../../store/states/socket_state";
-import { activelinkDefault, registerToasterContentDefault, registerToasterDefault } from "../../store/states/app_state";
+import { onlineUsersDefault, userDefault } from "../../store/states/user_state";
+import { newConnectionState, newSigninState, on_messages_state, on_singin_state, on_users_state } from "../../store/states/socket_state";
+import { activelinkDefault, registerToasterContentState, registerToasterState } from "../../store/states/app_state";
 
 export const Signin = () => {
 	/* location & navigation */
 	const location = useLocation();
 	const navigate = useNavigate();
+	const timeout = useRef(0);
 
 	/* error content global state */
-	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterDefault);
-	const [registerToasterContent, setRegisterToasterContent] = useRecoilState(registerToasterContentDefault);
+
+	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterState);
+	const [registerToasterContent, setRegisterToasterContent] = useRecoilState(registerToasterContentState);
 
 	/* active link */
 	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
 
 	/* for socket */
+	const [on_signin, set_on_signin] = useRecoilState(on_singin_state);
 	const [on_messages, set_on_messages] = useRecoilState(on_messages_state);
 	const [on_users, set_on_users] = useRecoilState(on_users_state);
 
@@ -43,6 +46,9 @@ export const Signin = () => {
 	const [pwd, setPwd] = useState("");
 	const requiredFileds = email.length > 0 && pwd.length > 0;
 
+	const [newSignin, setNewSignin] = useRecoilState(newSigninState)
+	const [newConnection, setNewConnection] = useRecoilState(newConnectionState)
+
 	/* handle sign in  */
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
@@ -52,10 +58,18 @@ export const Signin = () => {
 			.then(async (response) => {
 				const { user } = response.data;
 
-				socketconnect(user.accessToken, on_users, set_on_users, on_messages, set_on_messages)
+				socketconnect(user.accessToken, set_on_users, set_on_messages, set_on_signin)
 					.then((socket) => {
 						console.log("socket connected and listeners setted up");
 						window.socket = socket;
+
+						socket.on("new_signin", (data) => {
+							setNewSignin(data);
+						});
+
+						socket.on("new_connection", (data) => {
+							setNewConnection(data);
+						});
 					})
 					.catch((err) => {
 						console.log("socket connection error >>", err);
@@ -74,41 +88,31 @@ export const Signin = () => {
 			})
 
 			.catch((err) => {
-				if (err.status == 503) {
-					console.log("heyy this is not working");
-					setRegisterToasterContent({
-						text1: err.message1,
-						text2: err.message2,
-					});
+				/* clear the current set-timeouts */
+				clearTimeout(timeout.current);
 
-					if (registerToaster) {
-						return;
-					} else {
-						setRegisterToaster(true);
-						setTimeout(() => {
-							setRegisterToaster(false);
-						}, 5000);
-					}
-				} else if ((err.status = 404)) {
-					setRegisterToasterContent({
-						text1: err.message1,
-						text2: err.message2,
-					});
+				/* error contents */
+				setRegisterToasterContent({
+					text1: err.message1,
+					text2: err.message2,
+				});
 
-					if (registerToaster) {
-						return;
-					} else {
-						setRegisterToaster(true);
-						setTimeout(() => {
-							setRegisterToaster(false);
-						}, 5000);
-					}
-				}
+				/* display error */
+				setRegisterToaster(true);
+				/* remove error after 5s automatically */
+				timeout.current = setTimeout(() => {
+					setRegisterToaster(false);
+				}, 5000);
 			});
 	};
 
 	return (
-		<div className='signin text-center w-[18rem] px-4 py-5 rounded-2xl'>
+		<motion.div
+			initial={{ opacity: 0, display: "none" }}
+			animate={{ opacity: 1, display: "block" }}
+			transition={{ delay: 0.25 }}
+			className='signin text-center w-[18rem] px-4 py-5 rounded-2xl'
+		>
 			<div className='signin_header text-4xl text-shadow-custom_02'>Sign in.</div>
 
 			<div className='signin_content mt-8'>
@@ -188,6 +192,6 @@ export const Signin = () => {
 					Sign up
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };

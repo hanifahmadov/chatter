@@ -51,15 +51,22 @@ export const unreadCountDefault = atom({
 });
 
 /* toasters states & defaults */
-export const registerToasterDefault = atom({
-	key: "registerToasterDefault",
+export const registerToasterState = atom({
+	key: "registerToasterState",
 	default: false,
 });
 
-export const registerToasterContentDefault = atom({
-	key: "registerToasterContentDefault",
+export const registerToasterContentState = atom({
+	key: "registerToasterContentState",
 	default: {
 		text1: "",
 		text2: "",
 	},
+});
+
+
+/* success  */
+export const successState = atom({
+	key: "successState",
+	default: false,
 });

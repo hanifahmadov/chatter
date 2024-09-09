@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { formatDate } from "../store/days/days";
+import { formatDate, formatTime } from "../store/days/days";
 import { useTheme } from "styled-components";
 import { motion } from "framer-motion";
 
 /* styled */
 import { User_Container } from "../app.styled";
+import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
 export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setCustomnav }) => {
 	const {
@@ -39,14 +40,15 @@ export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setC
 										shadow-custom_09
 									`}
 						>
-							<div className='avatar overflow-hidden ml-2'>
+							<div className='avatar overflow-hidden ml-2 relative '>
 								<img
 									src={user.avatar}
-									className='h-[60px] w-[60px] 
-                                                border-[3px] border-solid 
-                                                border-white object-cover p-[0px]
+									className={`h-[50px] w-[50px] 
+                                       			object-cover p-[2px]
                                                 text-shadow-custom_02  rounded-full
-                                                '
+												border-[2px] 
+												${user.online ? "border-solid border-green-400" : " border-solid border-gray-100"}
+                                                `}
 								/>
 							</div>
 
@@ -58,8 +60,32 @@ export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setC
                                             '
 							>
 								<div className='flex flex-col'>
-									<span className='text-[16px] sm:text-[14px] text-black  text-shadow-custom_02 font-[500]'>
+									<span
+										className='text-[16px] sm:text-[14px] text-black text-shadow-custom_02 font-[500]
+													flex justify-start items-center
+													'
+									>
 										{user.username.charAt(0).toUpperCase() + user.username.slice(1).toLowerCase()}
+
+										{user.online ? (
+											<span
+												className='text-[11px] block text-green-500 text-shadow-none
+														flex justify-center items-end ml-2 pt-[1px]'
+											>
+												Online
+											</span>
+										) : (
+											<span
+												className='text-[11px] block text-gray-400 text-shadow-none
+														flex gap-1 justify-center items-end ml-2 pt-[1px]'
+											>
+												<span className='today text-[10px]'>{formatDate(user.lastseen)}</span>
+
+												<span className='clock text-[10px]'>
+													{formatTime(user.lastseen, "HH:mm")}
+												</span>
+											</span>
+										)}
 									</span>
 
 									<span
@@ -71,10 +97,12 @@ export const Users = ({ setLoading, users, setActivelink, setCurrRecipient, setC
 										{user.email}
 									</span>
 
-									<span className='relative bottom-[3px]'>
+									<span className='relative bottom-[3px] self-start'>
 										<div className='flex gap-2 flex-row text-center justify-center items-center'>
 											<div className='flex flex-row gap-1 justify-center items-center text-gray-500'>
-												<span className='text-[12px] sm:text-[11px] text-shadow-custom_02'>Member since</span>
+												<span className='text-[12px] sm:text-[11px] text-shadow-custom_02'>
+													Member since
+												</span>
 												<span className='text-[12px] sm:text-[11px] text-shadow-custom_02 leading-[0px] pt-5px'>
 													✩
 												</span>

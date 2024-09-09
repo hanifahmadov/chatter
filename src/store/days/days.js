@@ -32,6 +32,6 @@ export const generateRandomDate = () => {
 	return dayjs(randomTimestamp).format();
 };
 
-export const formatTime = (dateString) => {
-	return dayjs(dateString).format("h:mm A");
+export const formatTime = (dateString, format = null) => {
+	return dayjs(dateString).format(format ? format : "h:mm A");
 };

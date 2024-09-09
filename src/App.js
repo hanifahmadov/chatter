@@ -19,14 +19,14 @@ import { all_messages, post_message } from "./apis/messageCalls";
 
 /* global states */
 import { currentRecipientState, userDefault } from "./store/states/user_state";
-import { on_messages_state, on_users_state } from "./store/states/socket_state";
 import {
-	activelinkDefault,
-	animateState,
-	customnavDefault,
-	deviceDefault,
-	unreadCountDefault,
-} from "./store/states/app_state";
+	newConnectionState,
+	newSigninState,
+	on_messages_state,
+	on_singin_state,
+	on_users_state,
+} from "./store/states/socket_state";
+import { activelinkDefault, animateState, customnavDefault, unreadCountDefault } from "./store/states/app_state";
 
 /* helpers */
 import { Header } from "./store/helpers/Header";
@@ -56,7 +56,7 @@ export const App = () => {
 	const timeAgo = new TimeAgo("en-US");
 
 	/* triggers */
-	const [isInitialRender, setIsInitialRender] = useState(false);
+	const [on_signin] = useRecoilState(on_singin_state);
 	const [on_messages] = useRecoilState(on_messages_state);
 	const [on_users] = useRecoilState(on_users_state);
 	const [animate, setAnimate] = useRecoilState(animateState);
@@ -139,23 +139,40 @@ export const App = () => {
 	 */
 
 	/* call all-users */
+
+	const [newSignin] = useRecoilState(newSigninState);
+	const [newConnection] = useRecoilState(newConnectionState);
+
 	useEffect(() => {
 		all_users(accessToken)
 			.then((res) => {
-				setUsers(res);
+				console.log("res rese", res);
+
+				console.log("newConnection", newConnection);
+				const temp = res.map((user) => {
+					if (newConnection.includes(user._id)) {
+						user.online = true;
+						return user;
+					} else {
+						return user;
+					}
+				});
+
+				setUsers(temp);
 				setCurrRecipient(res[0]);
 			})
 			.catch((err) => {
 				console.log("all users errors");
 				console.log(err);
 			});
-	}, [on_users]);
+	}, [newConnection]);
 
 	/* call all-messages*/
 	useEffect(() => {
 		if (!currRecipient) return;
 		all_messages(accessToken)
 			.then((response_messages) => {
+				// console.log("response_messages", response_messages);
 				/**
 				 *
 				 * 	get the messages betweem
@@ -165,13 +182,12 @@ export const App = () => {
 				let localUnreadCount = 0;
 
 				response_messages.forEach((mess) => {
-
 					if (!mess.isRead && mess.recipient._id == _id) {
 						localUnreadCount += 1;
 					}
 				});
 
-				console.log("localUnreadCount >>", localUnreadCount)
+				console.log("localUnreadCount >>", localUnreadCount);
 
 				setUnreadCount(localUnreadCount);
 
@@ -204,30 +220,6 @@ export const App = () => {
 				setLoading(false);
 			});
 	}, [on_messages, currRecipient]);
-
-	const handleUserClick = (user) => {
-		setCurrRecipient(user);
-
-		controlBodySlide.start({
-			x: sm ? -800 : -800,
-			transition: { duration: 0.5 },
-		});
-
-		setIsAtMinus400(true); // Update state to indicate the position is now at -400
-	};
-
-	const handleMenuClick = () => {
-		if (isAtMinus400) {
-			// Only run the animation if the position is currently -400
-			controlBodySlide.start({
-				x: 0,
-
-				transition: { duration: 0.5 },
-			});
-
-			setIsAtMinus400(false); // Update state to indicate the position is now at 0
-		}
-	};
 
 	return (
 		<>
@@ -296,7 +288,7 @@ export const App = () => {
 							</div>
 						)}
 						<div className='flex-1 mt-[height-of-the-red-div] overflow-scroll'>
-							{Object.keys(messages).length > 0 &&
+							{Object.keys(messages).length > 0 ? (
 								Object.keys(messages).map((date, index) => {
 									const talks = messages[date];
 
@@ -312,32 +304,67 @@ export const App = () => {
 											currRecipient={currRecipient}
 										/>
 									);
-								})}
+								})
+							) : (
+								<div
+									className='h-full w-full 
+												flex justify-center items-center 
+												text-gray-600 text-shadow-custom_01
+												'
+								>
+									No Messages, Yet.
+								</div>
+							)}
 						</div>
 					</div>
 				)}
 
 				{activelink == 2.2 && (
 					<div className='chats_parent h-full w-full overflow-scroll flex gap-0 flex-col flex-grow py-0 px-1'>
-						<Chats
-							signedUser={{ _id, accessToken }}
-							users={users}
-							messages={messages}
-							setCurrRecipient={setCurrRecipient}
-							setActivelink={setActivelink}
-							setCustomnav={setCustomnav}
-							setLoading={setLoading}
-						/>
+						{Object.keys(messages).length > 0 ? (
+							<Chats
+								signedUser={{ _id, accessToken }}
+								users={users}
+								messages={messages}
+								setCurrRecipient={setCurrRecipient}
+								setActivelink={setActivelink}
+								setCustomnav={setCustomnav}
+								setLoading={setLoading}
+							/>
+						) : (
+							<div
+								className='h-full w-full 
+										flex flex-col justify-center items-center 
+										text-gray-600 text-shadow-custom_01
+										'
+							>
+								<span>No chat history yet</span>
+								<span>Send a message first</span>
+
+							</div>
+						)}
 					</div>
 				)}
 				{activelink == 3 && (
-					<div className='h-full w-full flex text-gray-700 font-[500] text-shadow-custom_01 justify-center items-center'>
-						Not Available, Yet.
+					<div
+						className='h-full w-full 
+									flex flex-col  justify-center items-center
+									text-gray-600 text-shadow-custom_01 
+									'
+					>
+						<span>Not available currently</span>
+						<span>A feature will be added soon</span>
 					</div>
 				)}
 				{activelink == 4 && (
-					<div className='h-full w-full flex text-gray-700 font-[500] text-shadow-custom_01 justify-center items-center'>
-						Not Available.
+					<div
+						className='h-full w-full 
+								flex flex-col justify-center items-center
+								text-gray-600 text-shadow-custom_01 
+								'
+					>
+						<span>Web call is not available</span>
+						<span>Another feature will be added soon</span>
 					</div>
 				)}
 

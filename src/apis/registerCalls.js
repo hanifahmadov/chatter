@@ -3,20 +3,76 @@ import axios from "axios";
 import { apiUrl } from "./apiUrl";
 
 /* sign up */
-export const signup_api = (data) => {
-	return axios({
-		url: apiUrl + "/signup/",
-		method: "POST",
-		withCredentials: true,
-		credentials: "include", // this is important to get image file in the backend
-		data,
+// export const signup_api = (data) => {
+// 	return axios({
+// 		url: apiUrl + "/signup/",
+// 		method: "POST",
+// 		withCredentials: true,
+// 		credentials: "include", // this is important to get image file in the backend
+// 		data,
 
-		headers: {
-			accept: "application/json",
-			"Accept-Language": "en-US,en;q=0.8",
-			"Content-Type": `multipart/form-data; boundary=${data._boundary}`,
-		},
-	});
+// 		headers: {
+// 			accept: "application/json",
+// 			"Accept-Language": "en-US,en;q=0.8",
+// 			"Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+// 		},
+// 	});
+// };
+
+/* sign in */
+export const signup_api = async (data) => {
+	try {
+		const response = await axios({
+			url: apiUrl + "/signup/",
+			method: "POST",
+			withCredentials: true,
+			credentials: "include", // this is important to get image file in the backend
+			data,
+
+			headers: {
+				accept: "application/json",
+				"Accept-Language": "en-US,en;q=0.8",
+				"Content-Type": `multipart/form-data; boundary=${data._boundary}`,
+			},
+		});
+
+		return response;
+	} catch (error) {
+		if (error.response) {
+			// Server-side error
+			console.error("Sign-up failed. Please check your credentials", error);
+
+			console.log(error.status)
+
+			if (error.status == 400) {
+				// Return or throw a custom error object
+				throw {
+					status: error.status,
+					message1: "Email must have a valid domain.",
+					message2: "like → .com  .ru .net  ",
+				};
+			} else if (error.status == 422) {
+				// Return or throw a custom error object
+				throw {
+					status: error.status,
+					message1: "Passwords don`t match.",
+					message2: "Please make sure passwords are the exact.  ",
+				};
+			}
+		} else if (error.request) {
+			// No response from server
+			console.error("No response received from server:", error.request);
+			throw {
+				status: 503,
+				message1: "No response from server",
+				message2: "Please check your network connection.",
+			};
+		} else {
+			// Client-side error
+			console.error("Error during sign-un:", error.message);
+			throw { status: 500, message: "An unexpected error occurred during sign-un. Please try again." };
+		}
+	}
 };
 
 /* sign in */
