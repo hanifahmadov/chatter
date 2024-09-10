@@ -8,7 +8,7 @@ import { registerToasterState } from "../states/app_state";
 /* helpers */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
-export const RegisterToaster = ({ registerToasterContent: { text1, text2 } }) => {
+export const SignsError = ({ registerToasterContent: { text1, text2 } }) => {
 	/* toaster state */
 	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterState);
 

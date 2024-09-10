@@ -10,23 +10,15 @@ import { RecoilRoot } from "recoil";
 /* layouts */
 import { PhoneLayout } from "./layouts/PhoneLayout";
 import { RegisterLayout } from "./layouts/RegisterLayout";
-import { PersistentLayout } from "./layouts/PersistentLayout";
-import { RequireAuth } from "./layouts/RequireAuth";
-
-/* pages */
-import { Signin } from "./pages/register/Signin";
-import { Signup } from "./pages/register/Signup";
-
-/* component */
-import { App } from "./App";
-import { Users } from "./comps/Users";
+import { Signin } from "./signs/Signin";
+import { Signup } from "./signs/Signup";
 
 const router = createBrowserRouter([
 	{
+		path: "/",
 		element: <PhoneLayout />,
 		children: [
 			{
-				// add welcome content to Register layout { advance context }
 				path: "/welcome",
 				element: <RegisterLayout />,
 				children: [
@@ -37,38 +29,6 @@ const router = createBrowserRouter([
 					{
 						path: "signup",
 						element: <Signup />,
-					},
-					// {
-					// 	path: "/404",
-					// 	element: <NotFound />,s
-					// },
-					{
-						path: "*",
-						element: <Navigate to='/welcome' replace />,
-					},
-					{
-						path: "/welcome/",
-						element: <Navigate to='/welcome' replace />,
-					},
-				],
-			},
-			{
-				element: <PersistentLayout />,
-				children: [
-					{
-						path: "/",
-						element: (
-							<RequireAuth>
-								<App />
-							</RequireAuth>
-						),
-						// Protected route
-						children: [
-							{
-								path: "/",
-								element: <Users />,
-							},
-						],
 					},
 				],
 			},

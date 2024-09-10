@@ -1,31 +1,23 @@
 /* NPM packages */
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import { useMediaQuery } from "react-responsive";
 import { ThemeProvider } from "styled-components";
-import { motion } from "framer-motion";
+import { useRecoilState } from "recoil";
 
-/* apis & img */
-import img from "../store/image/chat01.png";
+/* styles */
+import { PhoneContainer } from "./layout.styled";
 
-/* state */
-import { deviceDefault, registerToasterContentState } from "../store/states/app_state";
-
-/* styled */
-import { PhoneContainer } from "./layouts.styled";
-import { Fontawesome } from "../store/fontawesome/Fontawesome";
-import { RegisterToaster } from "../store/toasters/RegisterToaster";
-import { SuccessToaster } from "../store/toasters/SuccessToaster";
-
-/* helpers */
+/* global states */
+import { deviceDefault } from "../store/states/app_state";
 
 export const PhoneLayout = () => {
-	/*  */
-	const [registerToasterContent ] = useRecoilState(registerToasterContentState);
-
-	/* device state */
+	/**
+	 *  device state and
+	 *  parse into regular to me modified
+	 */
 	let [device, setDevice] = useRecoilState(deviceDefault);
+	device = JSON.parse(JSON.stringify(device));
 
 	/* small screen */
 	let sm = useMediaQuery({
@@ -37,9 +29,12 @@ export const PhoneLayout = () => {
 		query: "(max-width: 768px)",
 	});
 
-	/* adjust screen size */
+	/**
+	 *  adjust the sizing
+	 *  sm 576
+	 *  md 768
+	 */
 	useEffect(() => {
-		device = JSON.parse(JSON.stringify(device));
 		setDevice({
 			...device,
 			sm,
@@ -51,20 +46,19 @@ export const PhoneLayout = () => {
 		<ThemeProvider theme={{ device }}>
 			<div
 				className='app h-[100svh] w-[100svw] 
-                        flex justify-center items-center
-                        fixed inset-0 bg-white
-                    '
+                            flex justify-center items-center
+                            fixed inset-0 bg-white
+                        '
 			>
 				<PhoneContainer
 					className={`display h-[80svh] max-h-[926px] w-[23rem]
-							flex flex-col justify-between overflow-hidden
-							shadow-custom_07  border-[3px] border-white
-							rounded-[30px] p-[2px] bg-slate-50 relative
+							    flex flex-col justify-between overflow-hidden
+							    shadow-custom_07  border-[3px] border-white
+							    rounded-[30px] p-[2px] bg-slate-100 relative
 							`}
 				>
-					<RegisterToaster registerToasterContent={registerToasterContent} />
-					<SuccessToaster/>
-
+					<SignsError/>
+					{/* <SuccessToaster /> */}
 
 					<Outlet />
 				</PhoneContainer>

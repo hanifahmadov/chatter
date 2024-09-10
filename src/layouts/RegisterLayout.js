@@ -1,34 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useRecoilState } from "recoil";
 
-/* img */
+/* img file */
 import chat_img from "../store/image/nobg-chat.png";
-
-/* states */
-import { userDefault } from "../store/states/user_state";
 
 export const RegisterLayout = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	console.log(location.pathname);
-
-	// Determine whether to show welcome content based on the current pathname
+	/* if path is welcome */
 	const showWelcome = location.pathname === "/welcome";
 
+    /* navigate sign in */
 	const handleSignIn = () => {
 		navigate("signin");
 	};
 
+    /* navigate signup */
 	const handleSignUp = () => {
 		navigate("signup");
 	};
-
-	console.log("RegisterLayout rendered");
-
-	const [user] = useRecoilState(userDefault);
 
 	return (
 		<div
@@ -42,15 +33,15 @@ export const RegisterLayout = () => {
 						<img src={chat_img} />
 					</div>
 
-					<div className="flex flex-col items-center justify-around px-0 relative bottom-[40px]">
+					<div className='flex flex-col items-center justify-around px-0 relative bottom-[40px]'>
 						<h1 className='text-[18px] font-medium text-shadow-custom_01'>
 							Welcome to Chatter <span className='text-[16px]'>♡</span>
 						</h1>
 
-						<div className='content mt-2 text-center text-shadow-custom_01'>
+						<div className='content mt-3 text-center text-shadow-custom_01'>
 							<p>Chatter is a simple full-stack chat app</p>
 							<p> with core features.</p>
-							<p className='mt-5'>Please sign in or sign up to continue.</p>
+							<p className='mt-0'>Please sign in or sign up to continue.</p>
 						</div>
 						<div className='auth-buttons mt-3 flex gap-6'>
 							<button

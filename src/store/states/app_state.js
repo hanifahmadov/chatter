@@ -1,63 +1,38 @@
-/* eslint-disable */
 import { atom } from "recoil";
 
-export const activelinkDefault = atom({
-	key: "activelinkDefault",
-	default: 1,
-});
-
-export const darkmodeDefault = atom({
-	key: "darkmodeDefault",
-	default: false,
-});
-
+/**
+ *  device default states
+ */
 export const deviceDefault = atom({
 	key: "deviceDefault",
 	default: {
 		xsm: null /* > 360 */,
-		sm: null /* > 640 */,
+		sm: null /* > 576*/,
 		md: null /* > 768 */,
 		lg: null /* > 1024 */,
 		xlg: null /*  > 1440 */,
 	},
 });
 
-export const modalDefault = atom({
-	key: "modalStatusDefault",
+/**
+ * signed user
+ */
+export const signedUserDefault = atom({
+	key: "signedUserDefault",
+	default: null,
+});
+
+/**
+ *	toaster defaults
+ *	signsToaster triggers the popup th
+ */
+export const signsErrorDefault = atom({
+	key: "signsErrorDefault",
 	default: false,
 });
 
-export const backdropDefault = atom({
-	key: "backdropDefault",
-	default: false,
-});
-
-/* revents the animation effect on unmout-remount of comps */
-export const animateState = atom({
-	key: "animateState",
-	default: "",
-
-	/* "animate-in slide-in-from-bottom 1s ease-out forwards" */
-});
-
-export const customnavDefault = atom({
-	key: "customnavDefault",
-	default: 0,
-});
-
-export const unreadCountDefault = atom({
-	key: "unreadCountDefault",
-	default: 0,
-});
-
-/* toasters states & defaults */
-export const registerToasterState = atom({
-	key: "registerToasterState",
-	default: false,
-});
-
-export const registerToasterContentState = atom({
-	key: "registerToasterContentState",
+export const errorContentDefault = atom({
+	key: "errorContentDefault",
 	default: {
 		text1: "",
 		text2: "",
@@ -65,8 +40,4 @@ export const registerToasterContentState = atom({
 });
 
 
-/* success  */
-export const successState = atom({
-	key: "successState",
-	default: false,
-});
+
