@@ -5,6 +5,24 @@ module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
 	theme: {
 		extend: {
+			keyframes: {
+				dotPulse: {
+					"0%": { opacity: 0.2, color: "red" }, // Dimmed at the start
+					"20%": { opacity: 1 }, // Bright at 20%
+					"80%": { opacity: 1 }, // Stay bright
+					"100%": { opacity: 0.2 }, // Dimmed again at the end
+				},
+			},
+			animation: {
+				"dot-1": "dotPulse 1s linear 0s infinite",
+				"dot-2": "dotPulse 1s linear 0.1s infinite",
+				"dot-3": "dotPulse 1s linear 0.2s infinite",
+				"dot-4": "dotPulse 1s linear 0.3s infinite",
+				"dot-5": "dotPulse 1s linear 0.4s infinite",
+				"dot-6": "dotPulse 1s linear 0.5s infinite",
+				"dot-7": "dotPulse 1s linear 0.6s infinite",
+			},
+
 			textShadow: {
 				custom_000: "1px 1px 2px rgba(0, 0, 0, 0)",
 				custom_005: "1px 1px 2px rgba(0, 0, 0, 0.05)",

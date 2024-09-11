@@ -11,6 +11,11 @@ import { PhoneContainer } from "./layout.styled";
 /* global states */
 import { deviceDefault } from "../store/states/app_state";
 
+/* helpers */
+import { SignsError } from "../store/errors/SignsError";
+import { SignupSuccess } from "../store/errors/SignupSuccess";
+import { RefreshError } from "../store/errors/RefreshError";
+
 export const PhoneLayout = () => {
 	/**
 	 *  device state and
@@ -54,11 +59,12 @@ export const PhoneLayout = () => {
 					className={`display h-[80svh] max-h-[926px] w-[23rem]
 							    flex flex-col justify-between overflow-hidden
 							    shadow-custom_07  border-[3px] border-white
-							    rounded-[30px] p-[2px] bg-slate-100 relative
+							    rounded-[30px] p-[2px] bg-slate-50 relative
 							`}
 				>
-					<SignsError/>
-					{/* <SuccessToaster /> */}
+					<SignsError />
+					<SignupSuccess />
+					<RefreshError />
 
 					<Outlet />
 				</PhoneContainer>

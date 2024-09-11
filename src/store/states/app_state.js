@@ -15,10 +15,32 @@ export const deviceDefault = atom({
 });
 
 /**
+ * active link &
+ * its prev value
+ */
+export const activelinkDefault = atom({
+	key: "activelinkDefault",
+	default: 1,
+});
+
+/** prev active-link value */
+export const prevActivelinkDefault = atom({
+	key: "prevActivelinkDefault",
+	default: 1,
+});
+
+/**
  * signed user
  */
 export const signedUserDefault = atom({
 	key: "signedUserDefault",
+	default: null,
+});
+
+/** current recipient
+ */
+export const currRecipientDefault = atom({
+	key: "currRecipientDefault",
 	default: null,
 });
 
@@ -31,13 +53,45 @@ export const signsErrorDefault = atom({
 	default: false,
 });
 
+/**
+ *  errors
+ * 	defaults
+ */
+
 export const errorContentDefault = atom({
 	key: "errorContentDefault",
 	default: {
+		status: null,
 		text1: "",
 		text2: "",
+		text3: "",
 	},
 });
 
+/**
+ * 	when signup is success
+ * 	sign up modal
+ */
+export const signupSuccessDefault = atom({
+	key: "signupSuccessDefault",
+	default: false,
+});
 
+/**
+ * 	when page refresh
+ * 	trigger the error page
+ */
+export const refreshErrorDefault = atom({
+	key: "refreshErrorDefault",
+	default: false,
+});
 
+/**
+ *	unread message counts
+	will pops the unread message count
+	on navbar
+ */
+export const unreadMessageCountDefault = atom({
+	key: "unreadMessageCountDefault",
+	default: 0,
+});

@@ -8,7 +8,7 @@ import { atom } from "recoil";
  * returns from the server
  * on connection and disconnection
  */
-export const newConnectionDefault = atom({
+const newConnectionDefault = atom({
 	key: "newConnectionDefault",
 	default: [],
 });
@@ -16,7 +16,9 @@ export const newConnectionDefault = atom({
 /**
  * emitter when new messaae recivied
  */
-export const newMessageDefault = atom({
+const newMessageDefault = atom({
 	key: "newMessageDefault",
 	default: false,
 });
+
+export { newConnectionDefault, newMessageDefault };

@@ -3,22 +3,23 @@ import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 
 /* states */
-import { registerToasterState } from "../states/app_state";
+import { errorContentDefault, signsErrorDefault } from "../states/app_state";
 
 /* helpers */
 import { Fontawesome } from "../fontawesome/Fontawesome";
 
-export const SignsError = ({ registerToasterContent: { text1, text2 } }) => {
+export const SignsError = () => {
 	/* toaster state */
-	const [registerToaster, setRegisterToaster] = useRecoilState(registerToasterState);
+	const [signsError, setSignsError] = useRecoilState(signsErrorDefault);
+	const [{text1, text2}] = useRecoilState(errorContentDefault)
 
 	const handleToasterCancel = (e) => {
-		setRegisterToaster(false);
+		setSignsError(false);
 	};
 	return (
 		<motion.div
 			initial={{ y: -100, display: "none" }}
-			animate={registerToaster ? { y: 0, display: "flex" } : { y: -100, transitionEnd: { display: "none" } }}
+			animate={signsError ? { y: 0, display: "flex" } : { y: -100, transitionEnd: { display: "none" } }}
 			transition={{ type: "spring", bounce: 0.3, duration: 0.75 }}
 			className={`min-h-[4rem] sm:min-h-[3rem] max-h-[5rem]  rounded-xl 
 									bg-red-100 border-[1px] border-red-200

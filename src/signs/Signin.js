@@ -9,7 +9,12 @@ import { socketconnect } from "../apis/socketCall";
 
 /*  global states */
 import { newConnectionDefault, newMessageDefault } from "../store/states/socket_states";
-import { errorContentDefault, signedUserDefault, signsErrorDefault } from "../store/states/app_state";
+import {
+	activelinkDefault,
+	errorContentDefault,
+	signedUserDefault,
+	signsErrorDefault,
+} from "../store/states/app_state";
 
 export const Signin = () => {
 	/* location & navigation */
@@ -17,11 +22,14 @@ export const Signin = () => {
 	/* tracking the setTimeout Ids on signin_api error catch */
 	const timeout = useRef(0);
 
+	/** active-link */
+	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
+
 	/* socket defaults */
 	const [newConnection, setNewConnection] = useRecoilState(newConnectionDefault);
 	const [newMessage, setNewMessage] = useRecoilState(newMessageDefault);
 
-	/** toaster
+	/** error
 	 *  states and
 	 *  content
 	 */
@@ -82,7 +90,7 @@ export const Signin = () => {
 
 						/**  emit on new message  */
 						socket.on("new_message", (data) => {
-							setNewMessage((prev) => prev);
+							setNewMessage((prev) => !prev);
 						});
 					})
 					.catch((err) => {
@@ -94,11 +102,6 @@ export const Signin = () => {
 				 */
 				updateUserState(user).then(() => {
 					// Preventing back navigation
-					history.pushState(null, null, window.location.href);
-					window.onpopstate = function () {
-						history.go(1);
-					};
-
 					navigate("/", { replace: true });
 					setActivelink(1);
 				});
@@ -122,6 +125,7 @@ export const Signin = () => {
 				/* remove error after 5s automatically */
 				timeout.current = setTimeout(() => {
 					setSignsError(false);
+					setErrorContent({ text1: "", text2: "" });
 				}, 5000);
 			});
 	};
@@ -137,15 +141,15 @@ export const Signin = () => {
 		>
 			<div className='signin_header text-[30px] text-shadow-custom_03 font-[400]'>Sign in.</div>
 
-			<div className='signin_content mt-6'>
-				<form className='' onSubmit={handleFormSubmit}>
+			<div className='signin_content mt-4'>
+				<form className='flex gap-3 flex-col' onSubmit={handleFormSubmit}>
 					<input
 						type='email'
 						className='border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_01
+								text-shadow-custom_02
 								text-[12px]
 								placeholder:px-1 
 								placeholder:text-gray-300
@@ -159,11 +163,11 @@ export const Signin = () => {
 
 					<input
 						type='password'
-						className='border border-gray-300 px-3 py-2 mt-5
+						className='border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-[12px] text-shadow-custom_01
+								text-[12px] text-shadow-custom_02
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -182,11 +186,11 @@ export const Signin = () => {
 								? "bg-blue-600 text-white opacity-50 cursor-not-allowed"
 								: "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
 						} 
-						        py-[5px] px-3 mt-3 
-						        rounded font-bold 
-						        text-shadow-custom_1 
-						        w-full mt-5  text-[13px]
-						        transition-colors duration-200 ease-in-out
+						    font-bold py-[5px] px-3 
+						  	rounded font-bold 
+						  	text-shadow-custom_1 
+						 	w-full text-[14px]
+						  	transition-colors duration-200 ease-in-out
                                
                             `}
 					>
@@ -195,27 +199,27 @@ export const Signin = () => {
 				</form>
 			</div>
 
-			<div className='signin_footer mt-6 text-sm'>
-				<div className='text-shadow-custom_02'>Dont have an account?</div>
+			<div className='signin_footer mt-5 text-sm'>
+				<div className='text-shadow-custom_02 text-[13px]'>Dont have an account?</div>
 
 				<div
 					onClick={() => navigate("/welcome/signup")}
 					className='text-shadow-custom_02 
                                     font-[600]
-									text-blue-900 
+									text-blue-700 
 									bg-gray-100 
 									hover:bg-gray-50
 									cursor-pointer 
-									mt-1 
 									inline-block
-									px-3 py-[2px] mt-2
+									px-4 py-[3px] mt-2
 									rounded
 									text-center
                                     bg-white
+									border-[1px]
 									transition-colors duration-200 ease-in-out
 									'
 				>
-					Sign up
+					Sign up.
 				</div>
 			</div>
 		</motion.div>
