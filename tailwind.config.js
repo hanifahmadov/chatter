@@ -13,6 +13,19 @@ module.exports = {
 					"100%": { opacity: 0.2 }, // Dimmed again at the end
 				},
 			},
+
+			fontFamily: {
+				sans: [
+					"-apple-system",
+					"BlinkMacSystemFont",
+					'"Segoe UI"',
+					"Roboto",
+					'"Helvetica Neue"',
+					"Arial",
+					"sans-serif",
+				],
+			},
+
 			animation: {
 				"dot-1": "dotPulse 1s linear 0s infinite",
 				"dot-2": "dotPulse 1s linear 0.1s infinite",
@@ -51,7 +64,7 @@ module.exports = {
 			},
 
 			boxShadow: {
-				custom_01: "0 1px 1px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.12)",
+				custom_01: "0px 3px 5px rgba(0, 0, 0, 0.04);",
 				custom_02: "0px 0px 0px 1px rgba(0, 0, 0, 0.05), inset 0px 0px 0px 1px rgba(209, 213, 219,1)",
 				custom_03: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
 				custom_04: "0px 1px 0px 0px rgba(27, 31, 36, 0.04)",

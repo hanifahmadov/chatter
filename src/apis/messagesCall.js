@@ -25,7 +25,7 @@ export const all_messages = async (accessToken) => {
 
 		/* sort the messages based on created date */
 		return messages.sort((a, b) => {
-			new Date(a.createdAt) - new Date(b.createdAt);
+			return new Date(a.createdAt) - new Date(b.createdAt);
 		});
 	} catch (error) {
 		// Optionally, you can re-throw the error to handle it at a higher level
@@ -58,6 +58,25 @@ export const send_message = async (accessToken, data) => {
 	} catch (error) {
 		// Optionally, you can re-throw the error to handle it at a higher level
 		console.error("send message >>  Error received:", error);
+		throw error;
+	}
+};
+
+/* mark messages as read */
+export const mark_asRead = async (accessToken, recipientId) => {
+	try {
+		const response = await axios({
+			url: `${apiUrl}/messages/${recipientId}/mark-read`,
+			method: "POST",
+			withCredentials: true,
+			headers: {
+				Authorization: `Bearer ${accessToken}`,
+			},
+		});
+
+		return response.data.modifiedCount ? response.data.modifiedCount : 0;
+	} catch (error) {
+		console.error("Error marking messages as read:", error);
 		throw error;
 	}
 };

@@ -95,3 +95,17 @@ export const unreadMessageCountDefault = atom({
 	key: "unreadMessageCountDefault",
 	default: 0,
 });
+
+/** grouped by id UMC
+ * 	UMC - unread message count
+ */
+export const groupedByIdUMCDefault = atom({
+	key: "groupedByIdUMCDefault",
+	default: {},
+});
+
+
+
+
+
+

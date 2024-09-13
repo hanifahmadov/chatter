@@ -43,7 +43,7 @@ export const Recipient = ({
 			>
 				<span
 					className='text-[18px] sm:text-[16px] block w-full
-								text-black  text-shadow-custom_02 font-[500]
+								text-black  text-shadow-custom_01 font-[500]
 								'
 				>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}

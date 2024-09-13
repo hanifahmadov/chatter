@@ -1,12 +1,9 @@
 /* npm packages */
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { ThemeProvider } from "styled-components";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import OutsideClickHandler from "react-outside-click-handler";
-import { motion, useAnimation } from "framer-motion";
+import { useAnimation } from "framer-motion";
 import FormData from "form-data";
-const scrollIntoView = require("scroll-into-view");
+
 
 /* apis */
 import { apiUrl } from "./apis/apiUrl";
@@ -28,7 +25,7 @@ import { Nav } from "./comps/Nav";
 import { Settings } from "./comps/Settings";
 import { Users } from "./comps/Users";
 import { Loading } from "./comps/Loading";
-import { formatDate } from "./store/days/days";
+import { formatDate, generateRandomDate } from "./store/days/days";
 import { Message } from "./comps/Message";
 import { Send } from "./comps/Send";
 import { Recipient } from "./comps/Recipient";
@@ -44,6 +41,7 @@ export const App = () => {
 	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
 	const [prevActivelink, setPrevActivelink] = useRecoilState(prevActivelinkDefault);
 	const [unreadMessageCount, setUnreadMessageCount] = useRecoilState(unreadMessageCountDefault);
+	const [unreadCountUpdated, setUnreadCountUpdated] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	/* socket listeners */
@@ -162,32 +160,20 @@ export const App = () => {
 
 				setUnreadMessageCount(tempCount);
 
+				/* set messages */
+				setMessages(response);
+
 				/**
 				 * 	now get the valid messages between user and currRecipient
 				 * 	when user clicks on message button on User.js
 				 * 	currect recipient will get selected so, get messages between user and that recipient
 				 */
-
-				let localdb = {};
-
-				for (const message of response) {
-					let tempdate = formatDate(message.createdAt);
-
-					if (!localdb[tempdate]) {
-						localdb[tempdate] = [message];
-					} else {
-						localdb[tempdate].push(message);
-					}
-				}
-
-				/* set messages */
-				setMessages(localdb);
 			})
 			.catch((error) => {
 				console.log("all message error >> ", error);
 				setLoading(false);
 			});
-	}, [currRecipient, newMessage]);
+	}, [newMessage, unreadCountUpdated]);
 
 	return (
 		<div
@@ -239,64 +225,26 @@ export const App = () => {
 				)}
 
 				{activelink == 2 && (
-					<div className='message_parent relative h-full w-full flex flex-col py-0 px-1'>
+					<div className='message_parent relative h-full w-full flex flex-col py-0 px-0'>
 						<Loading loading={loading} />
-
-						<div className='flex-1 mt-[height-of-the-red-div] overflow-scroll scrollbar-none'>
-							{Object.keys(messages).length > 0 ? (
-								Object.keys(messages).map((date, index) => {
-									const talks = messages[date];
-
-									return (
-										<Message
-											key={index}
-											signedUser={{ _id, accessToken, avatar }}
-											currRecipient={currRecipient}
-											date={date}
-											talks={talks}
-											avatar={avatar}
-										/>
-									);
-								})
-							) : (
-								<div
-									className='h-full w-full 
-												flex justify-center items-center 
-												text-gray-600 text-shadow-custom_01
-												'
-								>
-									No Messages, Yet.
-								</div>
-							)}
-						</div>
+						<Message
+							signedUser={{ _id, accessToken, avatar }}
+							messages={messages}
+							currRecipient={currRecipient}
+							setUnreadCountUpdated={setUnreadCountUpdated}
+						/>
 					</div>
 				)}
 
 				{activelink == 2.2 && (
-					<div className='chats_parent h-full w-full overflow-scroll flex gap-0 flex-col flex-grow py-0 px-1'>
-						{console.log("Object.keys(messages)", messages)}
-						{Object.keys(messages).length > 0 ? (
-							<Chats
-								signedUser={{ accessToken, _id }}
-								users={users}
-								messages={messages}
-								setCurrRecipient={setCurrRecipient}
-								setActivelink={setActivelink}
-								setPrevActivelink={setPrevActivelink}
-								setLoading={setLoading}
-							/>
-						) : (
-							<div
-								className='h-full w-full 
-										flex flex-col justify-center items-center 
-										text-gray-600 text-shadow-custom_01
-										'
-							>
-								<span>No chat history yet</span>
-								<span>Send a message first</span>
-							</div>
-						)}
-					</div>
+					<Chats
+						signedUser={{ accessToken, _id }}
+						messages={messages}
+						setCurrRecipient={setCurrRecipient}
+						setActivelink={setActivelink}
+						setPrevActivelink={setPrevActivelink}
+						setLoading={setLoading}
+					/>
 				)}
 				{activelink == 3 && (
 					<div

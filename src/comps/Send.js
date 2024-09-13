@@ -51,9 +51,10 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 
 				<div
 					tabIndex='0'
+					onClick={() => textareaRef.current.focus()}
 					className='textare_parent bg-white py-[0.45rem] px-2 mx-2
                                 flex flex-col flex-grow justify-center items-center 
-                                rounded-[20px] border-[1px] border-blue-100
+                                rounded-[20px] border-[0.5px] border-black
 
                                 '
 				>
@@ -62,8 +63,10 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 					<textarea
 						className={`textarea w-full h-[1rem] leading-[16px] max-h-[6rem] border-0 
                                     overflow-auto outline-none shadow-none 
-                                    resize-none px-1 py-0 text-[.9rem] text-shadow-custom_01
-                                    bg-transparent text-black placeholder:px-1  placeholder:text-shadow-custom_005
+                                    resize-none px-1 py-0 
+									text-[14px] font-sans font-[300] text-black
+                                    bg-transparent 
+									placeholder:px-1 placeholder:font-[300] placeholder:font-sans placeholder:text-gray-300
 
                                     `}
 						ref={textareaRef}
@@ -82,13 +85,19 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 					onClick={handleSendMessage}
 					className={`rounded-full min-w-[34px] min-h-[34px] 
                                 flex flex-row-1 justify-center items-center
-                                bg-white border-[1px] border-blue-100 hover:ring-[1px]
-                                ${text.length || image ? "cursor-pointer" : "pointer-events-none"}
+                                bg-white border-[0.5px]  hover:ring-[1px]
+                                ${
+									text.length || image
+										? "cursor-pointer border-black"
+										: "pointer-events-none border-gray-300"
+								}
 
                                 `}
 				>
 					<span
-						className={` ${text.length || image ? "text-blue-600" : "text-blue-200"}  text-[18px] pl-[3px]`}
+						className={` ${
+							text.length || image ? "text-black" : "text-gray-300"
+						}  	text-[18px] pl-[3px] hover:text-blue-600`}
 					>
 						➤
 					</span>

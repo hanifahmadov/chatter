@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 /* helper */
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
-
 export const UploadImageButton = ({ setImage }) => {
 	/* refs */
 	const imageRef = useRef(null);
@@ -35,10 +34,10 @@ export const UploadImageButton = ({ setImage }) => {
 				whileTap={{ scale: 1.05 }}
 				htmlFor='image'
 				className='rounded-full min-w-[34px] min-h-[34px] bg-transparent
-                                                 flex flex-row-1 justify-center items-center
-                                                 label_avatar cursor-pointer text-slate-600 text-[12px]
-                                                 hover:ring-[1px] border-[1px] border-blue-100
-                                                '
+                            flex flex-row-1 justify-center items-center
+                            label_avatar cursor-pointer text-[12px]
+                            hover:ring-[1px] border-[0.5px] border-black
+                        '
 			>
 				<Fontawesome type={"faImage"} />
 			</motion.label>
