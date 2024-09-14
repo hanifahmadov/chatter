@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { produce } from "immer";
 
 /* apis */
-import { formatDate } from "../store/days/days";
+import { formatDate, formatTime } from "../store/days/days";
 
 /* states */
 import { newConnectionDefault } from "../store/states/socket_states";
@@ -97,8 +97,8 @@ export const Chats = ({
 	const presentMessage = (message) => {
 		if (message.length == 0) return " image & media attached ";
 
-		if (message.length > 70) {
-			return message.slice(0, 70) + " ... ";
+		if (message.length >= 69) {
+			return message.slice(0, 69) + " ... ";
 		} else {
 			return message;
 		}
@@ -110,17 +110,17 @@ export const Chats = ({
 
 		const timeoutId = setTimeout(() => {
 			setChatsLoading(false);
-		}, 2000);
+		}, 2200);
 
-		/**	
-		 *  make this id global 
+		/**
+		 *  make this id global
 		 * 	deactivate this on every other link visit
 		 * 	clearTimeout(timeoutId);
-		 *  
+		 *
 		 */
 		setCurrTimeoutId(timeoutId);
 	}, [messages]);
-	
+
 	return (
 		<div className={`flex flex-col gap-2 pt-2 px-3 h-full w-full rounded relative bg-white`}>
 			{console.log("last message", latestMessages)}
@@ -139,7 +139,7 @@ export const Chats = ({
 					<div
 						key={index}
 						onClick={() => handleChatClick(recipient)}
-						className='bg-white rounded-lg font-sans py-[2px] px-[3px]
+						className='bg-white rounded-lg font-sans py-[4px] px-[3px]
 									group hover:bg-blue-50
 									ease-in duration-100 border-[0.5px]
 									'
@@ -153,7 +153,7 @@ export const Chats = ({
 							<div className='user_avatar_parent '>
 								<img
 									src={recipient.avatar}
-									className={`max-h-[40px] min-h-[40px] max-w-[40px] min-w-[40px] 
+									className={`max-h-[45px] min-h-[45px] max-w-[45px] min-w-[45px] 
                                                 rounded-full border-[1.5px] ${
 													recipient.online ? "border-green-500 " : "border-gray-300 "
 												}
@@ -163,33 +163,37 @@ export const Chats = ({
 								/>
 							</div>
 							<div className='user_content flex flex-grow flex-col items-start justify-center px-2'>
-								<div className='content_top flex w-full justify-start'>
-									<span className='text-[14px] font-[400] font-sans'>
+								<div className='content_top flex w-full justify-start items-center'>
+									<span className='text-[16px] font-[400]'>
 										{recipient.username.charAt(0).toUpperCase() +
 											recipient.username.slice(1).toLowerCase()}
 									</span>
 
 									<div
-										className='ml-2
-													flex items-center justify-center
-													text-[12px] font-[400] 
-													font-sans
+										className='	ml-2
+													flex items-center justify-start
 													'
 									>
 										{recipient.online ? (
-											<span className='text-green-500 '>online</span>
+											<span className='text-green-500'>online</span>
 										) : (
-											<span className='text-gray-500'>hassiktir</span>
+											<div className='text-gray-500 text-[12px]'>
+												<div className='flex gap-1 justify-end pt-[2px]'>
+													<span>{formatTime(recipient.lastseen, "hh:mm a")}</span>
+													<span>＠</span>
+													<span>{formatDate(recipient.lastseen)}</span>
+												</div>
+											</div>
 										)}
 									</div>
 								</div>
 
 								<div className='content_bottom w-full'>
-									<div className='text-[12px] flex w-full'>
+									<div className='flex w-full'>
 										<span
 											className='font-[400] text-gray-800 mr-1
 														flex justify-start items-start
-														text-[10px]
+														text-[12px]
 																'
 										>
 											{mess.sender._id == _id ? (
@@ -202,7 +206,7 @@ export const Chats = ({
 											)}
 										</span>
 										<span
-											className='block text-[11px] w-full 
+											className='block text-[12px] w-full 
 														italic flex justify-start items-center
 														font-sans font-[300px] text-shadow-none
 														text-gray-500 leading-[15px]
@@ -214,8 +218,8 @@ export const Chats = ({
 								</div>
 							</div>
 							<div
-								className=' flex flex-col justify-center items-center 
-											absolute right-0 px-1 h-full rounded-md min-w-[60px] pr-2
+								className=' flex flex-col justify-start items-end 
+											absolute right-[-5px] top-[2px] px-1 h-full rounded-md min-w-[60px] pr-2
 											bg-transparent bg-opacity-70  text-gray-700 text-shadow-custom_02
 
 											'

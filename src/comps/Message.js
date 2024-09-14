@@ -186,7 +186,7 @@ export const Message = ({
 										key={index}
 										className={`message-content-parent 
 													w-full 
-													flex gap-[2px] flex-col ${owner ? "items-end" : "items-start"}
+													flex gap-[3px] flex-col ${owner ? "items-end" : "items-start"}
 													
 													`}
 									>
@@ -210,7 +210,7 @@ export const Message = ({
 													key={index}
 													className={`msg_content_and_date w-fit max-w-[18rem] break-words
 															flex flex-col
-															px-4 pt-[3px]
+															px-4 pt-[3px] pb-[2px]
 															rounded-3xl 
 															text-gray-700 
 															border-[0.5px] border-gray-200
@@ -220,29 +220,19 @@ export const Message = ({
 
 															`}
 												>
-													<div
-														className='text-[13px] text-black 
-																font-sans font-[300] 
-																leading-[18px] 
-																'
-													>
+													<div className='text-[14px] leading-[18px]'>
 														{m.message ? (
 															m.message
 														) : (
-															<span
-																className='text-[13px] inline-block 
-																		italic text-gray-500 
-																		font-[300] font-sans
-																		'
-															>
+															<span className='text-[12px] inline-block italic text-gray-500 '>
 																attached photo ⬆
 															</span>
 														)}
 													</div>
 													<span
-														className={`text-[9px] font-sans font-[300] 
+														className={`text-[9px] font-sans
 															${owner ? "self-end" : "self-start"} 
-															text-gray-500 text-end
+															text-gray-500 text-end mt-[2px]
 															`}
 													>
 														{formatTime(m.createdAt)}

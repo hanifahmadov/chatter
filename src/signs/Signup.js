@@ -138,7 +138,7 @@ export const Signup = () => {
 					</div>
 				</label>
 			</div>
-			<div className='signin_header text-[30px] text-shadow-custom_03 font-[400]'>Sign up.</div>
+			<div className='signin_header text-[30px] text-shadow-custom_02 font-[400]'>Sign up.</div>
 
 			<div className='signup_content mt-4'>
 				<form className='flex gap-3 flex-col' onSubmit={handleFormSubmit}>
@@ -148,8 +148,8 @@ export const Signup = () => {
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_02
-								text-[12px]
+								text-shadow-custom_01
+								text-[14px] 
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -166,8 +166,8 @@ export const Signup = () => {
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_02
-								text-[12px] 
+								text-shadow-custom_01
+								text-[14px] 
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -184,8 +184,8 @@ export const Signup = () => {
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_02
-								text-[12px]
+								text-shadow-custom_01
+								text-[14px]
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -204,10 +204,10 @@ export const Signup = () => {
 								? "bg-blue-600 text-white opacity-50 cursor-not-allowed"
 								: "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
 						} 
-						  font-bold py-[5px] px-3 
+						  py-[7px] px-3 
 						  rounded font-bold 
-						  text-shadow-custom_1 
-						  w-full text-[14px]
+						  text-shadow-custom_02
+						  w-full text-[14px] font-[400] 
 						  transition-colors duration-200 ease-in-out`}
 					>
 						sign up
@@ -216,14 +216,12 @@ export const Signup = () => {
 			</div>
 
 			<div className='signup_footer mt-5 text-sm'>
-				<div className='text-shadow-custom_02 text-[13px]'>Already have an account?</div>
+				<div className='text-shadow-custom_01 text-[14px]'>Already have an account?</div>
 
 				<div
 					onClick={() => navigate("/welcome/signin")}
-					className='text-shadow-custom_02 
-                                    font-[600]
-									text-blue-700 
-									bg-gray-100 
+					className='text-shadow-custom_01 
+                                    font-[400] text-[14px] text-blue-700 
 									hover:bg-gray-50
 									cursor-pointer 
 									inline-block
@@ -235,7 +233,7 @@ export const Signup = () => {
 									transition-colors duration-200 ease-in-out
 									'
 				>
-					Sign in.
+					Sign in
 				</div>
 			</div>
 		</motion.div>

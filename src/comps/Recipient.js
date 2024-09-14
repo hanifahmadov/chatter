@@ -25,7 +25,8 @@ export const Recipient = ({
 							font-[100] cursor-pointer 
 							rounded-full p-[1px]
 							
-							'>
+							'
+			>
 				<span className=''>
 					{/* <Fontawesome type={"faAngleLeft"} /> */}
 					<img src={backArrow} className='w-[20px] h-[20px]' />
@@ -34,40 +35,32 @@ export const Recipient = ({
 			<div className='avatar overflow-hidden ml-1'>
 				<img
 					src={avatar}
-					className='h-[50px] w-[50px] 
-								sm:h-[40px] sm:w-[40px]
+					className='h-[45px] w-[45px] 
                                 border-[2px] border-solid 
                                 border-white object-cover p-[0px]
-                                text-shadow-custom_02  rounded-full
+                                rounded-full
                                 '
 				/>
 			</div>
 
 			<div
-				className='username flex flex-col justify-start
+				className='username flex flex-col justify-start leading-[18px]
 
 							'
 			>
-				<span
-					className='text-[18px] sm:text-[16px] block w-full
-								text-black  text-shadow-custom_01 font-[500]
-								'
-				>
+				<span className='w-full text-[18px]'>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 				</span>
 
 				{online ? (
-					<span className=' w-full text-[11px] sm:text-[10px]  text-green-500  text-shadow-custom_005 font-[500]'>
-						Online
-					</span>
+					<span className=' w-full text-[12px] text-green-500'>Online</span>
 				) : (
 					<div
 						className='block text-gray-400 text-shadow-none
 								  flex gap-1 pt-[1px]'
 					>
-						<span className='today text-[11px] sm:text-[10px]'>{formatDate(lastseen)}</span>
-
-						<span className='clock text-[11px] sm:text-[10px]'>{formatTime(lastseen, "HH:mm")}</span>
+						<span className='today text-[12px]'>{formatDate(lastseen)}</span>
+						<span className='clock text-[12px]'>{formatTime(lastseen, "hh:mm a")}</span>
 					</div>
 				)}
 			</div>

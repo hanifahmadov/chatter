@@ -31,12 +31,14 @@ export const Loading = ({ chatsLoading, messageLoading }) => {
 							animationData={chatsLoading ? users : search}
 							loop={true}
 							autoplay={true}
-							className={chatsLoading ? "w-[80%] h-[100%]" : "w-[70%] h-[100%]"}
+							className={chatsLoading ? "w-[20rem] h-[17rem]" : "w-[10rem] h-[15rem]"}
 						/>
-						<div className='flex gap-[1.5px] 
-										text-[14px] text-gray-400 font-[400] font-sans
-										absolute bottom-[4rem]
-										'>
+						<div
+							className='flex gap-[1px]
+										text-[16px] text-gray-400
+										absolute bottom-[3rem]
+										'
+						>
 							{["L", "o", "a", "d", "i", "n", "g", ".", ".", "."].map((char, index) => (
 								<span key={index}>{char}</span>
 							))}

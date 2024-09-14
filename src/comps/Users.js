@@ -76,22 +76,22 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 								>
 									{user.online ? (
 										<span
-											className='text-[10px] font-sans text-green-500 block font-[300]
+											className='text-[10px] font-sans text-green-500 block
 															flex flex-col justify-center items-center mt-[3px]'
 										>
 											Online
 										</span>
 									) : (
 										<span
-											className='text-[10px] block text-black font-sans font-[300]
-														flex flex-col justify-center items-center  mt-[3px]'
+											className='text-[10px] block text-black font-sans
+														flex flex-col justify-center items-center mt-[3px]'
 										>
-											<span className='today text-[10px] text-black font-sans font-[300]'>
+											<span className='today text-[10px] text-black font-sans text-shadow-custom_01'>
 												{formatDate(user.lastseen)}
 											</span>
 
-											<span className='clock text-[10px] text-black font-sans font-[300]'>
-												{formatTime(user.lastseen, "HH:mm")}
+											<span className='clock text-[10px] text-black font-sans text-shadow-custom_01'>
+												{formatTime(user.lastseen, "hh:mm a")}
 											</span>
 										</span>
 									)}
@@ -117,8 +117,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									</div>
 
 									<span
-										className='text-[12px] text-gray-600
-													font-[300] font-sans 
+										className='text-[12px]
 													relative bottom-[3px]
 													text-shadow-custom_01
 													'
@@ -130,14 +129,14 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 										<div className='flex gap-2 flex-row text-center justify-center items-center'>
 											<div
 												className='flex flex-row gap-1 justify-center items-center
-															text-[12px] text-black font-[300] font-sans text-shadow-custom_01
+															text-[12px] text-black ext-shadow-custom_01
 															'
 											>
 												<span className=''>Member since</span>
 												<span className=''>✩</span>
 											</div>
 
-											<span className='text-[12px] text-black font-[300] font-sans text-shadow-custom_01'>
+											<span className='text-[12px] text-shadow-custom_01'>
 												{formatDate(user.createdAt)}
 											</span>
 										</div>
@@ -148,18 +147,23 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									<motion.span
 										whileTap={{ scale: 1.025 }}
 										onClick={() => handleSendMessage(user)}
-										className='text-shadow-custom_01 text-white text-[12px] text-center 
-													bg-blue-500 rounded-sm font-[600] inline-block
-													w-[100px] sm:w-[90px] py-0 font-sans
+										className=' w-[100px] sm:w-[90px] 
+													flex justify-center items-center
+													text-white text-[14px] text-center 
+													font-[500] text-shadow-custom_02
+													bg-blue-600 rounded-sm 
 													cursor-pointer hover:bg-blue-600
 													'
 									>
 										message
 									</motion.span>
 									<span
-										className='text-shadow-custom_01 text-white text-[12px] text-center 
-													bg-blue-500 rounded-sm font-[600] inline-block font-sans
-													w-[100px] sm:w-[90px] py-0 opacity-50 cursor-not-allowed
+										className='	w-[100px] sm:w-[90px] 
+													flex justify-center items-center
+													text-white text-[14px] text-center 
+													font-[500] text-shadow-custom_02
+													bg-blue-600 rounded-sm opacity-40
+													cursor-not-allowed
 													'
 									>
 										info
