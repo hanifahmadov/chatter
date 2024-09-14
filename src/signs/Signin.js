@@ -139,7 +139,7 @@ export const Signin = () => {
                         px-4 py-5 rounded-2xl 
                         '
 		>
-			<div className='signin_header text-[30px] text-shadow-custom_03 font-[400]'>Sign in.</div>
+			<div className='signin_header text-[30px] text-shadow-custom_02 font-[400]'>Sign in.</div>
 
 			<div className='signin_content mt-4'>
 				<form className='flex gap-3 flex-col' onSubmit={handleFormSubmit}>
@@ -149,8 +149,8 @@ export const Signin = () => {
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_02
-								text-[12px]
+								text-shadow-custom_01
+								text-black text-[14px] font-sans
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -167,7 +167,8 @@ export const Signin = () => {
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-[12px] text-shadow-custom_02
+								text-[14px] text-black font-sans
+								text-shadow-custom_01
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
@@ -186,9 +187,9 @@ export const Signin = () => {
 								? "bg-blue-600 text-white opacity-50 cursor-not-allowed"
 								: "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
 						} 
-						    font-bold py-[5px] px-3 
-						  	rounded font-bold 
-						  	text-shadow-custom_1 
+						    font-bold py-[7px] px-3 
+						  	rounded font-[400] 
+						  	text-shadow-custom_02 
 						 	w-full text-[14px]
 						  	transition-colors duration-200 ease-in-out
                                
@@ -200,26 +201,23 @@ export const Signin = () => {
 			</div>
 
 			<div className='signin_footer mt-5 text-sm'>
-				<div className='text-shadow-custom_02 text-[13px]'>Dont have an account?</div>
+				<div className='text-shadow-custom_01 text-[14px]'>Dont have an account?</div>
 
 				<div
 					onClick={() => navigate("/welcome/signup")}
-					className='text-shadow-custom_02 
-                                    font-[600]
-									text-blue-700 
-									bg-gray-100 
-									hover:bg-gray-50
+					className='text-shadow-custom_01
+                                    font-[400] text-[14px] text-blue-700 
+									bg-white hover:bg-gray-50
 									cursor-pointer 
 									inline-block
 									px-4 py-[3px] mt-2
 									rounded
 									text-center
-                                    bg-white
 									border-[1px]
 									transition-colors duration-200 ease-in-out
 									'
 				>
-					Sign up.
+					Sign up
 				</div>
 			</div>
 		</motion.div>

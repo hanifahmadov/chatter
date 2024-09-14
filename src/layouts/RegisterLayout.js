@@ -1,25 +1,39 @@
-import React from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
+import { useRecoilState } from "recoil";
+import { Outlet, useLocation, useNavigate, Navigate } from "react-router-dom";
 
 /* img file */
 import chat_img from "../store/image/nobg-chat.png";
+
+/* states */
+import { signedUserDefault } from "../store/states/app_state";
 
 export const RegisterLayout = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	/** signed user  */
+	const [signedUser] = useRecoilState(signedUserDefault);
+
 	/* if path is welcome */
 	const showWelcome = location.pathname === "/welcome";
 
-    /* navigate sign in */
+	/* navigate sign in */
 	const handleSignIn = () => {
 		navigate("signin");
 	};
 
-    /* navigate signup */
+	/* navigate signup */
 	const handleSignUp = () => {
 		navigate("signup");
 	};
+
+	useLayoutEffect(() => {
+		if (signedUser) {
+			navigate("/");
+			return;
+		}
+	});
 
 	return (
 		<div
@@ -38,7 +52,7 @@ export const RegisterLayout = () => {
 							Welcome to Chatter <span className='text-[16px]'>♡</span>
 						</h1>
 
-						<div className='content mt-3 text-center text-shadow-custom_01'>
+						<div className='content mt-3 text-center text-[14px] text-shadow-custom_01'>
 							<p>Chatter is a simple full-stack chat app</p>
 							<p> with core features.</p>
 							<p className='mt-0'>Please sign in or sign up to continue.</p>

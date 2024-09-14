@@ -18,7 +18,8 @@ export const Settings = ({ activelink, setActivelink }) => {
 	const navigate = useNavigate();
 
 	/* signed user  */
-	const [{ accessToken, avatar, username, email, createdAt, _id }] = useRecoilState(signedUserDefault);
+	const [{ accessToken, avatar, username, email, createdAt, _id }, setSignedinUser] =
+		useRecoilState(signedUserDefault);
 
 	/** handle sign out
 	 *  disconnect and clear socket
@@ -31,6 +32,7 @@ export const Settings = ({ activelink, setActivelink }) => {
 			window.socket = null;
 
 			setActivelink(0);
+			setSignedinUser(null);
 			navigate("/welcome", { replace: true });
 		});
 	};

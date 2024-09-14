@@ -56,7 +56,7 @@ export const PhoneLayout = () => {
                         '
 			>
 				<PhoneContainer
-					className={`display h-[100svh] sm:h-[45rem] w-[100svw] sm:w-[23rem]
+					className={`display h-[100svh] sm:h-[45rem] w-[100svw] sm:w-[26rem]
 							    flex flex-col justify-between overflow-hidden
 							    shadow-custom_07  border-[3px] border-white
 							    rounded-[30px] p-[2px] bg-slate-50 relative
