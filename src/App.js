@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import { useAnimation } from "framer-motion";
 import FormData from "form-data";
 
-
 /* apis */
 import { apiUrl } from "./apis/apiUrl";
 import { all_users } from "./apis/usersCall";
@@ -42,7 +41,10 @@ export const App = () => {
 	const [prevActivelink, setPrevActivelink] = useRecoilState(prevActivelinkDefault);
 	const [unreadMessageCount, setUnreadMessageCount] = useRecoilState(unreadMessageCountDefault);
 	const [unreadCountUpdated, setUnreadCountUpdated] = useState(false);
-	const [loading, setLoading] = useState(false);
+
+	/* loading states */
+	const [chatsLoading, setChatsLoading] = useState(false);
+	const [messageLoading, setMessageLoading] = useState(false);
 
 	/* socket listeners */
 	const [newConnection] = useRecoilState(newConnectionDefault);
@@ -171,7 +173,6 @@ export const App = () => {
 			})
 			.catch((error) => {
 				console.log("all message error >> ", error);
-				setLoading(false);
 			});
 	}, [newMessage, unreadCountUpdated]);
 
@@ -185,7 +186,7 @@ export const App = () => {
 			<div
 				className='app-header 
                             w-full h-[4rem] flex justify-center items-center 
-                            text-[25px] sm:text-[22px] text-gray-700 font-[500] text-shadow-custom_01 
+                            text-[22px] text-black font-[400] font-sans text-shadow-custom_01
 							rounded-[25px] rounded-br-[2px] rounded-bl-[2px] 
 							shadow-custom_04 bg-white
                             '
@@ -197,6 +198,7 @@ export const App = () => {
 						currRecipient={currRecipient}
 						prevActivelink={prevActivelink}
 						setMessages={setMessages}
+						setChatsLoading={setChatsLoading}
 					/>
 				)}
 				{activelink == 2.2 && "Chats"}
@@ -219,32 +221,44 @@ export const App = () => {
 							setActivelink={setActivelink}
 							setCurrRecipient={setCurrRecipient}
 							setPrevActivelink={setPrevActivelink}
-							setLoading={setLoading}
+							setMessageLoading={setMessageLoading}
 						/>
 					</div>
 				)}
 
 				{activelink == 2 && (
-					<div className='message_parent relative h-full w-full flex flex-col py-0 px-0'>
-						<Loading loading={loading} />
+					<div
+						className='message_parent relative 
+									h-full w-full flex flex-col 
+									py-0 px-0
+									
+									'
+					>
+						<Loading messageLoading={messageLoading} />
 						<Message
 							signedUser={{ _id, accessToken, avatar }}
 							messages={messages}
 							currRecipient={currRecipient}
 							setUnreadCountUpdated={setUnreadCountUpdated}
+							setMessageLoading={setMessageLoading}
 						/>
 					</div>
 				)}
 
 				{activelink == 2.2 && (
-					<Chats
-						signedUser={{ accessToken, _id }}
-						messages={messages}
-						setCurrRecipient={setCurrRecipient}
-						setActivelink={setActivelink}
-						setPrevActivelink={setPrevActivelink}
-						setLoading={setLoading}
-					/>
+					<div className='h-full w-full relative'>
+						<Loading chatsLoading={chatsLoading} />
+						<Chats
+							signedUser={{ accessToken, _id }}
+							messages={messages}
+							users={users}
+							setCurrRecipient={setCurrRecipient}
+							setActivelink={setActivelink}
+							setPrevActivelink={setPrevActivelink}
+							setChatsLoading={setChatsLoading}
+							setMessageLoading={setMessageLoading}
+						/>
+					</div>
 				)}
 				{activelink == 3 && (
 					<div
@@ -293,7 +307,12 @@ export const App = () => {
 						controls={controls}
 					/>
 				) : (
-					<Nav activelink={activelink} setActivelink={setActivelink} />
+					<Nav
+						activelink={activelink}
+						setActivelink={setActivelink}
+						setChatsLoading={setChatsLoading}
+						prevActivelink={prevActivelink}
+					/>
 				)}
 			</div>
 		</div>

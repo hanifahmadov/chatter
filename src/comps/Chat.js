@@ -8,15 +8,17 @@ import { formatDate } from "../store/days/days";
 
 /* states */
 import { newConnectionDefault } from "../store/states/socket_states";
-import { groupedByIdUMCDefault } from "../store/states/app_state";
+import { currTimeoutIdDefault, groupedByIdUMCDefault } from "../store/states/app_state";
 
 export const Chats = ({
 	signedUser: { accessToken, _id },
 	messages,
+	users,
 	setCurrRecipient,
 	setActivelink,
 	setPrevActivelink,
-	setLoading,
+	setChatsLoading,
+	setMessageLoading,
 }) => {
 	/**
 	 * 	socket newConnection global state
@@ -26,15 +28,13 @@ export const Chats = ({
 	const [newConnection] = useRecoilState(newConnectionDefault);
 	const [groupedByIdUMC, setGroupedByIdUMC] = useRecoilState(groupedByIdUMCDefault);
 
+	/* track timeout id */
+	const [currTimeoutId, setCurrTimeoutId] = useRecoilState(currTimeoutIdDefault);
+
 	/** handle click on user */
 	const handleChatClick = (user) => {
 		/* activate laoding */
-		setLoading(true);
-
-		/* deaactivate loading */
-		setTimeout(() => {
-			setLoading(false);
-		}, 2200);
+		setMessageLoading(true);
 
 		/* set currRecipient  */
 		setCurrRecipient(user);
@@ -67,6 +67,7 @@ export const Chats = ({
 		return Object.values(latestMessages);
 	};
 
+	/* get the counts of unread messages */
 	const getUnreadMessageCounts = (messages, myId) => {
 		const unreadMessages = {};
 
@@ -85,12 +86,10 @@ export const Chats = ({
 		});
 
 		// Return the object with user IDs and their respective unread message counts
-		setGroupedByIdUMC(unreadMessages);
 		return unreadMessages;
 	};
 
 	const latestMessages = getLatestMessages(messages, _id);
-
 	const unreadMessageCounts = getUnreadMessageCounts(messages, _id);
 
 	console.log("unreadMessageCounts", unreadMessageCounts);
@@ -98,39 +97,55 @@ export const Chats = ({
 	const presentMessage = (message) => {
 		if (message.length == 0) return " image & media attached ";
 
-		if (message.length > 30) {
-			return message.slice(0, 30) + " ... ";
+		if (message.length > 70) {
+			return message.slice(0, 70) + " ... ";
 		} else {
 			return message;
 		}
 	};
 
+	useEffect(() => {
+		const unreadMessages = getUnreadMessageCounts(messages, _id);
+		setGroupedByIdUMC(unreadMessages);
+
+		const timeoutId = setTimeout(() => {
+			setChatsLoading(false);
+		}, 2000);
+
+		/**	
+		 *  make this id global 
+		 * 	deactivate this on every other link visit
+		 * 	clearTimeout(timeoutId);
+		 *  
+		 */
+		setCurrTimeoutId(timeoutId);
+	}, [messages]);
+	
 	return (
-		<div className={`flex flex-col gap-2 pt-2 px-3 h-full w-full rounded relative bg-slate-50`}>
+		<div className={`flex flex-col gap-2 pt-2 px-3 h-full w-full rounded relative bg-white`}>
+			{console.log("last message", latestMessages)}
 			{latestMessages.map((mess, index) => {
-				const recipient = mess.sender._id !== _id ? mess.sender : mess.recipient;
+				const recipientId = mess.sender._id !== _id ? mess.sender._id : mess.recipient._id;
+				const recipient = users.find((user) => user._id == recipientId);
 
-				console.log("recipient >> recipient >>", recipient);
-
-				if (newConnection.includes(recipient._id)) {
-					setCurrRecipient((prev) =>
-						produce(prev, (draft) => {
-							draft.online = true;
-						})
-					);
-				}
+				// if (newConnection.includes(recipient._id)) {
+				// 	/* update 'online' status */
+				// 	recipient = produce(recipient, (draft) => {
+				// 		draft.online = true;
+				// 	});
+				// }
 
 				return (
 					<div
 						key={index}
 						onClick={() => handleChatClick(recipient)}
-						className='bg-white rounded-3xl shadow-custom_01  
-									group hover:bg-blue-50 overflow-hidden
-									ease-in duration-100 
+						className='bg-white rounded-lg font-sans py-[2px] px-[3px]
+									group hover:bg-blue-50
+									ease-in duration-100 border-[0.5px]
 									'
 					>
 						<motion.div
-							className={` user flex flex-row items-center cursor-pointer rounded
+							className={` user flex flex-row items-start cursor-pointer rounded
                                          px-1 py-1 rounded-full relative pointer-events-none
 
                                         `}
@@ -138,58 +153,62 @@ export const Chats = ({
 							<div className='user_avatar_parent '>
 								<img
 									src={recipient.avatar}
-									className={`max-h-[45px] min-h-[45px] max-w-[45px] min-w-[45px] 
-												sm:max-h-[40px] sm:max-w-[40px] sm:min-h-[40px] sm:min-w-[40px]
+									className={`max-h-[40px] min-h-[40px] max-w-[40px] min-w-[40px] 
                                                 rounded-full border-[1.5px] ${
 													recipient.online ? "border-green-500 " : "border-gray-300 "
 												}
-                                                object-cover p-[1px]
+                                                object-cover p-[2px]
                                                 text-shadow-custom_02
                                                 `}
 								/>
 							</div>
 							<div className='user_content flex flex-grow flex-col items-start justify-center px-2'>
 								<div className='content_top flex w-full justify-start'>
-									<span className='text-[16px] font-[400] text-shadow-custom_01 font-sans'>
+									<span className='text-[14px] font-[400] font-sans'>
 										{recipient.username.charAt(0).toUpperCase() +
 											recipient.username.slice(1).toLowerCase()}
 									</span>
 
 									<div
-										className='ml-2 
+										className='ml-2
 													flex items-center justify-center
-													text-[11px] font-[400] 
-													text-shadow-custom_01 font-sans
+													text-[12px] font-[400] 
+													font-sans
 													'
 									>
 										{recipient.online ? (
-											<span className='text-green-500'>online now</span>
+											<span className='text-green-500 '>online</span>
 										) : (
-											<span>hassiktir</span>
+											<span className='text-gray-500'>hassiktir</span>
 										)}
 									</div>
 								</div>
 
 								<div className='content_bottom w-full'>
-									<div className='text-[12px] flex text-gray-500 text-shadow-custom_01  w-full'>
+									<div className='text-[12px] flex w-full'>
 										<span
-											className='font-medium text-gray-800 mr-1 max-h-[15px] 
-														flex justify-start items-center
-														 text-[14px] sm:text-[11px]
+											className='font-[400] text-gray-800 mr-1
+														flex justify-start items-start
+														text-[10px]
 																'
 										>
 											{mess.sender._id == _id ? (
 												"you: "
 											) : (
 												<span className='flex justify-center items-center'>
-													<img src={recipient.avatar} className='w-3 h-3 rounded-full' />
-
-													<span className='text-[18px] text-gray-400 mx-[2px] leading-[18px] '></span>
+													{/* <img src={recipient.avatar} className='w-3 h-3 rounded-full' /> */}
+													{recipient.username}:
 												</span>
 											)}
 										</span>
-										<span className='block max-h-[15px]  text-[14px] sm:text-[11px] w-full overflow-hidden italic flex justify-start items-center'>
-											{`" ${presentMessage(mess.message)} "`}
+										<span
+											className='block text-[11px] w-full 
+														italic flex justify-start items-center
+														font-sans font-[300px] text-shadow-none
+														text-gray-500 leading-[15px]
+														'
+										>
+											{`${presentMessage(mess.message)}`}
 										</span>
 									</div>
 								</div>

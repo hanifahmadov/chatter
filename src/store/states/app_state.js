@@ -104,8 +104,10 @@ export const groupedByIdUMCDefault = atom({
 	default: {},
 });
 
-
-
-
-
-
+/** grouped by id UMC
+ * 	UMC - unread message count
+ */
+export const currTimeoutIdDefault = atom({
+	key: "currTimeoutIdDefault",
+	default: 0,
+});

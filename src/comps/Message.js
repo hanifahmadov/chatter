@@ -11,7 +11,13 @@ import { formatDate, formatTime } from "../store/days/days";
 import { mark_asRead } from "../apis/messagesCall";
 import { groupedByIdUMCDefault } from "../store/states/app_state";
 
-export const Message = ({ signedUser: { _id, accessToken }, messages, currRecipient, setUnreadCountUpdated }) => {
+export const Message = ({
+	signedUser: { _id, accessToken },
+	messages,
+	currRecipient,
+	setUnreadCountUpdated,
+	setMessageLoading,
+}) => {
 	/* last div element ref */
 	const lastMessageRef = useRef();
 
@@ -103,11 +109,14 @@ export const Message = ({ signedUser: { _id, accessToken }, messages, currRecipi
 
 		/* mark messages as read */
 		mark_asRead(accessToken, currRecipient._id).then((result) => {
-			// setUnreadCountUpdated((prev) => !prev);
 			if (result == 0) return;
-
 			setUnreadCountUpdated((prev) => !prev);
 		});
+
+		/* deactivate loading anime */
+		setTimeout(() => {
+			setMessageLoading(false);
+		}, 2200);
 	}, [messages]);
 
 	/** auto scrool to the last element */
@@ -121,7 +130,7 @@ export const Message = ({ signedUser: { _id, accessToken }, messages, currRecipi
 		<div
 			className='message_container w-full h-full 
 						flex flex-col justify-start overflow-scroll scrollbar-none 
-						px-1 bg-slate-100
+						px-1 bg-white
 						
 						'
 		>
@@ -177,52 +186,68 @@ export const Message = ({ signedUser: { _id, accessToken }, messages, currRecipi
 										key={index}
 										className={`message-content-parent 
 													w-full 
-													flex gap-[1px] flex-col ${owner ? "items-end" : "items-start"}
+													flex gap-[2px] flex-col ${owner ? "items-end" : "items-start"}
 													
 													`}
 									>
 										{msg.map((m, index) => (
-											<div
-												key={index}
-												className={`msg_content_and_date w-fit max-w-[18rem] break-words
+											<div className={`flex flex-col ${owner ? "items-end" : "items-start"}`}>
+												{m.media && (
+													<div className='m_media mb-[2px]'>
+														<span>
+															<img
+																src={m.media}
+																className='selected_image h-[150px] w-[150px] 
+																		rounded-lg border-[1px] border-solid 
+																		border-blue-100 object-cover p-[1px]
+																		'
+															/>
+														</span>
+													</div>
+												)}
+
+												<div
+													key={index}
+													className={`msg_content_and_date w-fit max-w-[18rem] break-words
 															flex flex-col
-															px-4 py-[3px]
+															px-4 pt-[3px]
 															rounded-3xl 
 															text-gray-700 
 															border-[0.5px] border-gray-200
 															${owner ? " rounded-br-none" : "rounded-tl-none"}
-															${owner ? "bg-blue-100" : "bg-white"}
+															${owner ? "bg-blue-50" : "bg-slate-50"}
 															${index == msg.length - 1 && "animate-in slide-in-from-bottom"}
 
 															`}
-											>
-												<div
-													className='text-[14px] text-black 
+												>
+													<div
+														className='text-[13px] text-black 
 																font-sans font-[300] 
 																leading-[18px] 
 																'
-												>
-													{m.message ? (
-														m.message
-													) : (
-														<span
-															className='text-[10px] inline-block 
+													>
+														{m.message ? (
+															m.message
+														) : (
+															<span
+																className='text-[13px] inline-block 
 																		italic text-gray-500 
 																		font-[300] font-sans
 																		'
-														>
-															attached photo
-														</span>
-													)}
-												</div>
-												<span
-													className={`text-[9px] font-sans font-[300] 
+															>
+																attached photo ⬆
+															</span>
+														)}
+													</div>
+													<span
+														className={`text-[9px] font-sans font-[300] 
 															${owner ? "self-end" : "self-start"} 
 															text-gray-500 text-end
 															`}
-												>
-													{formatTime(m.createdAt)}
-												</span>
+													>
+														{formatTime(m.createdAt)}
+													</span>
+												</div>
 											</div>
 										))}
 									</div>

@@ -7,8 +7,22 @@ import { unreadMessageCountDefault } from "../store/states/app_state";
 /* helpers */
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
-export const Nav = ({ activelink, setActivelink }) => {
+export const Nav = ({ activelink, setActivelink, setChatsLoading }) => {
 	const [unreadMessageCount] = useRecoilState(unreadMessageCountDefault);
+
+	const handleChatsClick = (e) => {
+		const id = Number(e.target.id);
+
+		/* prevent re-activating chats loading effect */
+		if (activelink == id) return;
+
+		if (id == 2.2) {
+			setActivelink(id);
+			setChatsLoading(true);
+		} else {
+			setActivelink(id);
+		}
+	};
 	return (
 		<div
 			className='navbar h-full w-full
@@ -16,26 +30,28 @@ export const Nav = ({ activelink, setActivelink }) => {
 						'
 		>
 			<div
-				onClick={() => setActivelink(1)}
+				id='1'
+				onClick={handleChatsClick}
 				className={` users w-[30px] h-[30px] 
-										flex justify-center items-center	
-										text-[18px] 
-										overflow-hidden rounded-full cursor-pointer
-										${activelink == 1 ? "text-blue-500" : "text-gray-600"}
-									`}
+							flex justify-center items-center	
+							text-[18px] 
+							overflow-hidden rounded-full cursor-pointer
+							${activelink == 1 ? "text-blue-500" : "text-gray-600"}
+						`}
 			>
 				<span className='pointer-events-none'>
 					<Fontawesome type={"faGlobe"} />
 				</span>
 			</div>
 			<div
-				onClick={() => setActivelink(2.2)}
+				id='2.2'
+				onClick={handleChatsClick}
 				className={` comments w-[30px] h-[30px] 
-										flex justify-center items-center	
-										text-[18px] 
-										rounded-full cursor-pointer
-										${activelink == 2.2 ? "text-blue-500" : "text-gray-600"}
-									`}
+							flex justify-center items-center	
+							text-[18px] 
+							rounded-full cursor-pointer
+							${activelink == 2.2 ? "text-blue-500" : "text-gray-600"}
+						`}
 			>
 				<span className='pointer-events-none relative'>
 					<span
@@ -52,7 +68,8 @@ export const Nav = ({ activelink, setActivelink }) => {
 				</span>
 			</div>
 			<div
-				onClick={() => setActivelink(3)}
+				id='3'
+				onClick={handleChatsClick}
 				className={` send w-[30px] h-[30px] 
 							flex justify-center items-center	
 							text-[18px] text-white bg-blue-500
@@ -64,26 +81,28 @@ export const Nav = ({ activelink, setActivelink }) => {
 				</span>
 			</div>
 			<div
-				onClick={() => setActivelink(4)}
+				id='4'
+				onClick={handleChatsClick}
 				className={` phone w-[30px] h-[30px] 
-										flex justify-center items-center	
-										text-[18px]
-										overflow-hidden rounded-full cursor-pointer
-										${activelink == 4 ? "text-blue-500" : "text-gray-600"}
-									`}
+							flex justify-center items-center	
+							text-[18px]
+							overflow-hidden rounded-full cursor-pointer
+							${activelink == 4 ? "text-blue-500" : "text-gray-600"}
+						`}
 			>
 				<span className='pointer-events-none'>
 					<Fontawesome type={"faPhone"} />
 				</span>
 			</div>
 			<div
-				onClick={() => setActivelink(5)}
+				id='5'
+				onClick={handleChatsClick}
 				className={` settings w-[30px] h-[30px] 
-										flex justify-center items-center	
-										text-[18px] 
-										overflow-hidden rounded-full cursor-pointer
-										${activelink == 5 ? "text-blue-500" : "text-gray-600"}
-									`}
+							flex justify-center items-center	
+							text-[18px] 
+							overflow-hidden rounded-full cursor-pointer
+							${activelink == 5 ? "text-blue-500" : "text-gray-600"}
+						`}
 			>
 				<span className='pointer-events-none'>
 					<Fontawesome type={"faGear"} />

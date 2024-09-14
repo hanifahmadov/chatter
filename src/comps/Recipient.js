@@ -1,5 +1,7 @@
 import React from "react";
 
+/* img */
+import backArrow from "../store/image/back-arrow.png";
 
 /* helpers */
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
@@ -10,8 +12,6 @@ export const Recipient = ({
 	setActivelink,
 	prevActivelink,
 	setMessages,
-	
-	
 }) => {
 	const handBackClick = () => {
 		// setMessages([])
@@ -19,9 +19,16 @@ export const Recipient = ({
 	};
 	return (
 		<div className='w-full h-full flex gap-2 justify-start items-center px-6'>
-			<div className='text-[20px] text-gray-600 font-[800] cursor-pointer' onClick={handBackClick}>
-				<span>
-					<Fontawesome type={"faAngleLeft"} />
+			<div
+				onClick={handBackClick}
+				className='text-[20px] text-gray-600 
+							font-[100] cursor-pointer 
+							rounded-full p-[1px]
+							
+							'>
+				<span className=''>
+					{/* <Fontawesome type={"faAngleLeft"} /> */}
+					<img src={backArrow} className='w-[20px] h-[20px]' />
 				</span>
 			</div>
 			<div className='avatar overflow-hidden ml-1'>

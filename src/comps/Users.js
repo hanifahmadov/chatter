@@ -3,18 +3,20 @@ import { motion } from "framer-motion";
 /* helpers */
 import { formatDate, formatTime } from "../store/days/days";
 
-export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelink, setLoading }) => {
+export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelink, setMessageLoading }) => {
 	/* handle user send message */
 	const handleSendMessage = (user) => {
 		/** display loading
 		 *  to gain time
 		 * to scroll to bottom  */
-		setLoading(true);
+		// setLoading(true);
 
 		/** loading done */
-		setTimeout(() => {
-			setLoading(false);
-		}, 2000);
+		// setTimeout(() => {
+		// 	setLoading(false);
+		// }, 2000);
+
+		setMessageLoading(true);
 
 		/**
 		 *  set curr Recipient
@@ -45,10 +47,9 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 					return (
 						<div
 							key={index}
-							className={`min-h-[50px] min-w-[300px] w-[90%]
-										border-[0.5px] bg-white border-gray-200 p-1 
-										flex gap-3 flex-row  justify-start items-center 
-										rounded-[10px]  overflow-hidden flex-nowrap
+							className={`min-h-[50px] min-w-[300px] w-[90%] bg-white p-1 
+										border-[0.5px] border-gray-200 rounded-[10px] overflow-hidden
+										flex gap-3 flex-row justify-start items-center flex-nowrap
 
 									`}
 						>
@@ -127,15 +128,13 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 
 									<div className='relative bottom-[3px] self-start'>
 										<div className='flex gap-2 flex-row text-center justify-center items-center'>
-											<div className='flex flex-row gap-1 justify-center items-center
+											<div
+												className='flex flex-row gap-1 justify-center items-center
 															text-[12px] text-black font-[300] font-sans text-shadow-custom_01
-															'>
-												<span className=''>
-													Member since
-												</span>
-												<span className=''>
-													✩
-												</span>
+															'
+											>
+												<span className=''>Member since</span>
+												<span className=''>✩</span>
 											</div>
 
 											<span className='text-[12px] text-black font-[300] font-sans text-shadow-custom_01'>
