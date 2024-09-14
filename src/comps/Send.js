@@ -64,7 +64,7 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 						className={`textarea w-full h-[1rem] leading-[16px] max-h-[6rem] border-0 
                                     overflow-auto outline-none shadow-none 
                                     resize-none px-1 py-0 
-									text-[13px] font-sans font-[300] text-black
+									text-[14px] font-sans text-black
                                     bg-transparent 
 									placeholder:px-1 placeholder:font-[300] placeholder:font-sans placeholder:text-gray-300
 

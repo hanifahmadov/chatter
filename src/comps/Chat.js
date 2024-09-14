@@ -108,6 +108,9 @@ export const Chats = ({
 		const unreadMessages = getUnreadMessageCounts(messages, _id);
 		setGroupedByIdUMC(unreadMessages);
 
+
+		/* clear time out id then set it again */
+		clearTimeout(currTimeoutId)
 		const timeoutId = setTimeout(() => {
 			setChatsLoading(false);
 		}, 2200);

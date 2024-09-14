@@ -9,7 +9,7 @@ const scrollIntoView = require("scroll-into-view");
 /* helpers */
 import { formatDate, formatTime } from "../store/days/days";
 import { mark_asRead } from "../apis/messagesCall";
-import { groupedByIdUMCDefault } from "../store/states/app_state";
+import { currTimeoutIdDefault, groupedByIdUMCDefault } from "../store/states/app_state";
 
 export const Message = ({
 	signedUser: { _id, accessToken },
@@ -24,6 +24,9 @@ export const Message = ({
 	/* prev messages length */
 
 	/*  curr recipient */
+
+	/* track timeout id */
+	const [currTimeoutId, setCurrTimeoutId] = useRecoilState(currTimeoutIdDefault);
 
 	/* local states */
 	const [groupedByDate, setGroupedByDate] = useState({});
@@ -114,9 +117,12 @@ export const Message = ({
 		});
 
 		/* deactivate loading anime */
-		setTimeout(() => {
+		clearTimeout(currTimeoutId);
+		const timeoutId = setTimeout(() => {
 			setMessageLoading(false);
 		}, 2200);
+
+		setCurrTimeoutId(timeoutId);
 	}, [messages]);
 
 	/** auto scrool to the last element */
