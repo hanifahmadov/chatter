@@ -97,8 +97,8 @@ export const Chats = ({
 	const presentMessage = (message) => {
 		if (message.length == 0) return " image & media attached ";
 
-		if (message.length >= 69) {
-			return message.slice(0, 69) + " ... ";
+		if (message.length > 55) {
+			return message.slice(0, 55) + " ... ";
 		} else {
 			return message;
 		}

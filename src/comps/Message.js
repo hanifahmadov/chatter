@@ -162,7 +162,7 @@ export const Message = ({
 							<span
 								className='text-[10px] px-3 py-[2px]
 	                            			rounded-full 
-											text-black font-sans  bg-white 
+											text-black font-sans bg-white 
 											border-[0.5px] border-gray-100
 
 	                            '
