@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilCallback } from "recoil";
-import { useMediaQuery } from "react-responsive";
-import { ThemeProvider } from "styled-components";
+import { useTheme } from "styled-components";
 
 /** import images */
 import dino from "../store/image/dino.png";
@@ -25,6 +24,10 @@ export const PersistentLayout = () => {
 	/* navigate */
 	const navigate = useNavigate();
 	const location = useLocation();
+
+	/* mobile viewport */
+	const theme = useTheme();
+	const { sm, md } = theme.device;
 
 	/* activelink */
 	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
@@ -123,7 +126,7 @@ export const PersistentLayout = () => {
 	// }, []);
 
 	useEffect(() => {
-		!signedUser && setup() 
+		!signedUser && setup();
 	}, []);
 
 	return signedUser ? (
@@ -132,7 +135,12 @@ export const PersistentLayout = () => {
 		<div className='h-full w-full flex items-center justify-center text-[15px] text-shadow-custom_01 font-medium'>
 			{isLoading ? (
 				<div className='flex items-center justify-center'>
-					<div className='flex  ml-1 text-[18px] text-shadow-custom_01 font-[400]'>
+					<div
+						className={`flex  ml-1 ${sm ? "text-[27px]" : "text-[18px]"} 
+									text-shadow-custom_01 font-[400]
+									
+									`}
+					>
 						<span className='animate-dot-1'>L</span>
 						<span className='animate-dot-2'>o</span>
 						<span className='animate-dot-3'>a</span>

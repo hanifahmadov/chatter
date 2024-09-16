@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useAnimation } from "framer-motion";
 import FormData from "form-data";
+import { useTheme } from "styled-components";
 
 /* apis */
 import { apiUrl } from "./apis/apiUrl";
@@ -35,6 +36,10 @@ import { Chats } from "./comps/Chat";
  * 	main comp.
  */
 export const App = () => {
+	/* mobile */
+	const theme = useTheme();
+	const { sm, md } = theme.device;
+
 	/* apps states */
 	const controls = useAnimation();
 	const [activelink, setActivelink] = useRecoilState(activelinkDefault);
@@ -184,12 +189,14 @@ export const App = () => {
                     '
 		>
 			<div
-				className='app-header 
+				className={`app-header 
                             w-full h-[4rem] flex justify-center items-center 
                             text-[22px] text-black font-[400] font-sans text-shadow-custom_01
 							rounded-[25px] rounded-br-[2px] rounded-bl-[2px] 
 							bg-white
-                            '
+							${sm && ` text-[30px]`}
+							
+                            `}
 			>
 				{activelink == 1 && "Users"}
 				{activelink == 2 && (
