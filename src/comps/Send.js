@@ -1,16 +1,11 @@
 /* npm packages */
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import OutsideClickHandler from "react-outside-click-handler";
+import React, { useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
-import FormData from "form-data";
-
-const scrollIntoView = require("scroll-into-view");
 
 /* helpers */
 import { ImagePreview } from "./ImagePreview";
 import { UploadImageButton } from "./UploadImageButton";
+import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
 export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSendMessage, controls }) => {
 	const textareaRef = useRef(null);
@@ -46,22 +41,22 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 						
 						'
 		>
-			<div className='bg-white flex flex-row w-full  p-1 '>
+			<div className='bg-white flex flex-row items-end justify-center w-full  p-1 '>
 				<UploadImageButton setImage={setImage} />
 
 				<div
 					tabIndex='0'
 					onClick={() => textareaRef.current.focus()}
-					className='textare_parent bg-white py-[0.45rem] px-2 mx-2
+					className='textare_parent bg-white py-[0.5rem] px-2 mx-1
                                 flex flex-col flex-grow justify-center items-center 
-                                rounded-[20px] border-[0.5px] border-black
+                                rounded-[20px] border-[1px] border-gray-300
 
                                 '
 				>
 					{image && <ImagePreview image={image} setImage={setImage} />}
 
 					<textarea
-						className={`textarea w-full h-[1rem] leading-[16px] max-h-[6rem] border-0 
+						className={`textarea w-full h-[0rem] leading-[16px] max-h-[6rem] border-0 
                                     overflow-auto outline-none shadow-none 
                                     resize-none px-1 py-0 
 									text-[14px] font-sans text-black
@@ -74,7 +69,7 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 						onChange={handleTextChange}
 						placeholder='Whats up...'
 						rows={1}
-						onKeyDown={handleKeyDown}
+						// onKeyDown={handleKeyDown}
 					/>
 				</div>
 
@@ -83,23 +78,20 @@ export const Send = ({ text, setText, image, setImage, handleKeyDown, handleSend
 					animate={controls}
 					ref={sendButtonRef}
 					onClick={handleSendMessage}
-					className={`rounded-full min-w-[34px] min-h-[34px] 
+					className={`rounded-full min-w-[32px] min-h-[32px] 
                                 flex flex-row-1 justify-center items-center
-                                bg-white border-[0.5px]  hover:ring-[1px]
-                                ${
-									text.length || image
-										? "cursor-pointer border-black"
-										: "pointer-events-none border-gray-300"
-								}
+								bg-white
+                                ${text.length || image ? "cursor-pointer" : "pointer-events-none opacity-20"}
 
                                 `}
 				>
 					<span
-						className={` ${
-							text.length || image ? "text-black" : "text-gray-300"
-						}  	text-[18px] pl-[3px] hover:text-blue-600`}
+						className={` blockk text-white  bg-slate-900 
+									rounded-full min-w-[24px] min-h-[24px] 
+									flex flex-row-1 justify-center items-center
+									`}
 					>
-						➤
+						<Fontawesome type={"faArrowUp"} fontSize={"1.1rem"} />
 					</span>
 				</motion.div>
 			</div>

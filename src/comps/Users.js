@@ -87,11 +87,11 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 														flex flex-col justify-center items-center mt-[3px]'
 										>
 											<span className='today text-[10px] text-black font-sans text-shadow-custom_01'>
-												{formatDate(user.lastseen)}
+												{formatDate(user.lastseen, "YYYY.MMM.DD")}
 											</span>
 
 											<span className='clock text-[10px] text-black font-sans text-shadow-custom_01'>
-												{formatTime(user.lastseen, "hh:mm a")}
+												{formatTime(user.lastseen, "hh:mm A")}
 											</span>
 										</span>
 									)}

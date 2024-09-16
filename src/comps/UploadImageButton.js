@@ -2,6 +2,9 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 
+/* images */
+import uploadImages from "../store/image/image-2.svg";
+
 /* helper */
 import { Fontawesome } from "../store/fontawesome/Fontawesome";
 
@@ -36,10 +39,12 @@ export const UploadImageButton = ({ setImage }) => {
 				className='rounded-full min-w-[34px] min-h-[34px] bg-transparent
                             flex flex-row-1 justify-center items-center
                             label_avatar cursor-pointer text-[12px]
-                            hover:ring-[1px] border-[0.5px] border-black
+							
                         '
 			>
-				<Fontawesome type={"faImage"} />
+				<span className="text-blue-300">
+					<img src={uploadImages} className='w-[22px] h-[22px]' />
+				</span>
 			</motion.label>
 		</>
 	);

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { produce } from "immer";
 
 /* apis */
-import { formatDate, formatTime } from "../store/days/days";
+import { formatDate, formatTime, formatTimeago } from "../store/days/days";
 
 /* states */
 import { newConnectionDefault } from "../store/states/socket_states";
@@ -108,9 +108,8 @@ export const Chats = ({
 		const unreadMessages = getUnreadMessageCounts(messages, _id);
 		setGroupedByIdUMC(unreadMessages);
 
-
 		/* clear time out id then set it again */
-		clearTimeout(currTimeoutId)
+		clearTimeout(currTimeoutId);
 		const timeoutId = setTimeout(() => {
 			setChatsLoading(false);
 		}, 2200);
@@ -178,13 +177,15 @@ export const Chats = ({
 													'
 									>
 										{recipient.online ? (
-											<span className='text-green-500'>online</span>
+											<span className='text-green-500  text-[12px]'>online now</span>
 										) : (
 											<div className='text-gray-500 text-[12px]'>
 												<div className='flex gap-1 justify-end pt-[2px]'>
-													<span>{formatTime(recipient.lastseen, "hh:mm a")}</span>
+													{/* <span>{formatDate(recipient.lastseen)}</span>
 													<span>＠</span>
-													<span>{formatDate(recipient.lastseen)}</span>
+													
+													<span>{formatTime(recipient.lastseen, "hh:mm A")}</span> */}
+													<span>{formatTimeago(recipient.lastseen)}</span>
 												</div>
 											</div>
 										)}
@@ -196,7 +197,7 @@ export const Chats = ({
 										<span
 											className='font-[400] text-gray-800 mr-1
 														flex justify-start items-start
-														text-[12px]
+														text-[12px] leading-[16px]
 																'
 										>
 											{mess.sender._id == _id ? (
@@ -210,7 +211,7 @@ export const Chats = ({
 										</span>
 										<span
 											className='block text-[12px] w-full 
-														italic flex justify-start items-center
+														flex justify-start items-center
 														font-sans font-[300px] text-shadow-none
 														text-gray-500 leading-[15px]
 														'

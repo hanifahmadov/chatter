@@ -136,7 +136,7 @@ export const Message = ({
 		<div
 			className='message_container w-full h-full 
 						flex flex-col justify-start overflow-scroll scrollbar-none 
-						px-1 bg-white
+						px-1 bg-white py-1
 						
 						'
 		>
@@ -156,14 +156,14 @@ export const Message = ({
 						<div
 							className='message-date
 	                        flex flex-col justify-center items-center
-	                        sticky top-2
+	                        sticky top-0 mb-[3px] 
 	                        '
 						>
 							<span
 								className='text-[10px] px-3 py-[2px]
-	                            			rounded-full 
-											text-black font-sans bg-white 
-											border-[0.5px] border-gray-100
+	                            			rounded-full bg-white
+											text-black font-sans
+											border-[0.5px] border-gray-200
 
 	                            '
 							>
@@ -218,7 +218,7 @@ export const Message = ({
 															flex flex-col
 															px-4 pt-[3px] pb-[2px]
 															rounded-3xl 
-															text-gray-700 
+															text-black
 															border-[0.5px] border-gray-200
 															${owner ? " rounded-br-none" : "rounded-tl-none"}
 															${owner ? "bg-blue-50" : "bg-slate-50"}
@@ -238,7 +238,7 @@ export const Message = ({
 													<span
 														className={`text-[9px] font-sans
 															${owner ? "self-end" : "self-start"} 
-															text-gray-500 text-end mt-[2px]
+															text-gray-500 text-end mt-[0px]
 															`}
 													>
 														{formatTime(m.createdAt)}

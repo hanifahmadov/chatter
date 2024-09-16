@@ -16,11 +16,11 @@ export const ImagePreview = ({ image, setImage }) => {
 			/>
 			<span
 				onClick={() => setImage(null)}
-				className='faCircleXmark relative right-[12px] bottom-[0px] 
-                            bg-white leading-[0px] rounded-full                                                            
+				className='faCircleXmark relative right-[13px] top-[-1px] 
+                            bg-red-500 leading-[0px] rounded-full                                                            
                             '
 			>
-				<Fontawesome type={"faCircleXmark"} color={"gray"} />
+				<Fontawesome type={"faCircleXmark"} color={"#fff"} fontSize={"1.1rem"} />
 			</span>
 		</div>
 	);

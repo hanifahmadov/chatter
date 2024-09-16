@@ -188,7 +188,7 @@ export const App = () => {
                             w-full h-[4rem] flex justify-center items-center 
                             text-[22px] text-black font-[400] font-sans text-shadow-custom_01
 							rounded-[25px] rounded-br-[2px] rounded-bl-[2px] 
-							shadow-custom_04 bg-white
+							bg-white
                             '
 			>
 				{activelink == 1 && "Users"}
@@ -199,6 +199,8 @@ export const App = () => {
 						prevActivelink={prevActivelink}
 						setMessages={setMessages}
 						setChatsLoading={setChatsLoading}
+						setImage={setImage}
+						setText={setText}
 					/>
 				)}
 				{activelink == 2.2 && "Chats"}
@@ -209,7 +211,7 @@ export const App = () => {
 
 			<div
 				className='app-body
-                            w-full h-[calc(100%-4rem-4rem-1rem)] 
+                            w-full h-[calc(100%-4rem-4rem-0.5rem)] 
                             flex flex-frow bg-white
                             
                             '
@@ -293,19 +295,22 @@ export const App = () => {
 				className='app-footer 
                             min-h-[4rem] w-full bg-white
 							rounded-[25px] rounded-tr-[3px] rounded-tl-[3px]
-							shadow-custom_04 relative
+							relative
 							'
 			>
 				{activelink == 2 ? (
-					<Send
-						text={text}
-						setText={setText}
-						image={image}
-						setImage={setImage}
-						handleKeyDown={handleKeyDown}
-						handleSendMessage={handleSendMessage}
-						controls={controls}
-					/>
+					<div className={messageLoading && "pointer-events-none opacity-40"}>
+						<Send
+							text={text}
+							setText={setText}
+							image={image}
+							setImage={setImage}
+							handleKeyDown={handleKeyDown}
+							handleSendMessage={handleSendMessage}
+							controls={controls}
+							messageLoading={messageLoading}
+						/>
+					</div>
 				) : (
 					<Nav
 						activelink={activelink}

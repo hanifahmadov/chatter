@@ -132,7 +132,7 @@ export const PersistentLayout = () => {
 		<div className='h-full w-full flex items-center justify-center text-[15px] text-shadow-custom_01 font-medium'>
 			{isLoading ? (
 				<div className='flex items-center justify-center'>
-					<div className='flex  ml-1 text-[16px]'>
+					<div className='flex  ml-1 text-[24px] text-shadow-custom_01 font-[400]'>
 						<span className='animate-dot-1'>L</span>
 						<span className='animate-dot-2'>o</span>
 						<span className='animate-dot-3'>a</span>

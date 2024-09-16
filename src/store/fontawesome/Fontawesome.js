@@ -56,7 +56,8 @@ import {
 	faGear,
 	faArrowLeft,
 	faAngleLeft,
-	faCheck
+	faCheck,
+	faArrowUp
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -109,7 +110,8 @@ library.add(
 	faGear,
 	faArrowLeft,
 	faAngleLeft,
-	faCheck
+	faCheck,
+	faArrowUp
 );
 
 const defineType = (type) => {
@@ -202,6 +204,8 @@ const defineType = (type) => {
 			return faAngleLeft;
 		case "faCheck":
 			return faCheck;
+		case "faArrowUp":
+			return faArrowUp;
 		default:
 			return null;
 	}
