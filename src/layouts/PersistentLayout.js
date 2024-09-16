@@ -136,7 +136,7 @@ export const PersistentLayout = () => {
 			{isLoading ? (
 				<div className='flex items-center justify-center'>
 					<div
-						className={`flex  ml-1 ${sm ? "text-[27px]" : "text-[18px]"} 
+						className={`flex  ml-1 ${sm ? "text-[20px]" : "text-[16px]"} 
 									text-shadow-custom_01 font-[400]
 									
 									`}

@@ -191,10 +191,10 @@ export const App = () => {
 			<div
 				className={`app-header 
                             w-full h-[4rem] flex justify-center items-center 
-                            text-[22px] text-black font-[400] font-sans text-shadow-custom_01
+                            text-[22px] text-black font-[500] font-sans text-shadow-custom_01
 							rounded-[25px] rounded-br-[2px] rounded-bl-[2px] 
 							bg-white
-							${sm && ` text-[26px]`}
+							${sm && ` text-[24px]`}
 							
                             `}
 			>

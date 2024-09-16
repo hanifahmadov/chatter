@@ -56,7 +56,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 						<div
 							key={index}
 							className={`min-h-[50px] min-w-[300px] 
-										${sm ? "w-[100%] px-1 py-2" : " w-[90%] p-1"} 
+										${sm ? "w-[100%] px-1 py-2" : " w-[95%] p-1"} 
 										border-[1px] border-gray-200 rounded-[10px] overflow-hidden
 										flex gap-3 flex-row justify-start items-center flex-nowrap
 										bg-white 
@@ -64,15 +64,15 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									`}
 						>
 							<div
-								className={`user-avatar ${sm ? "w-[5.5rem]" : "w-auto"}
-                                            overflow-hidden ml-2 relative 
+								className={`user-avatar min-w-[71px]
+                                            overflow-hidden ml-1 relative 
 											flex flex-col items-center justify-center
                                             `}
 							>
 								<img
 									src={user.avatar}
-									className={`${sm ? "h-[55px] w-[55px]" : "h-[50px] w-[50px]"}
-                                       			object-cover p-[2px]
+									className={`${sm ? "h-[45px] w-[45px]" : "h-[40px] w-[40px]"}
+                                       			object-cover p-[1px]
                                                 text-shadow-custom_02 rounded-full
 												border-[2px] 
 												${user.online ? "border-solid border-green-400" : " border-solid border-gray-300"}
@@ -81,7 +81,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 
 								<div
 									className={`flex flex-col items-center justify-center w-full
-												${sm ? "leading-[18px] text-[12px] " : "leading-[14px] text-[10px]"}
+												${sm ? "text-[12px] " : "text-[10px]"}
 												`}
 								>
 									{user.online ? (
@@ -120,10 +120,10 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 
                                             '
 							>
-								<div className='row-top flex gap-[5px] flex-col mb-2 leading-none'>
+								<div className='row-top flex gap-[5px] flex-col mb-1 leading-none'>
 									<div
-										className={`${sm ? "text-[18px]" : "text-[16px]"}
-													flex justify-start items-center
+										className={`${sm ? "text-[16px]" : "text-[14px]"}
+													flex justify-start items-center font-[600]
 													text-shadow-custom_01 h-full 
 
 													`}
