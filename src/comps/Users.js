@@ -86,8 +86,10 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 								>
 									{user.online ? (
 										<span
-											className='text-[10px] font-sans text-green-500 block
-															flex flex-col justify-center items-center mt-[3px]'
+											className='text-green-500 block
+														flex flex-col justify-center items-center
+														mt-[3px]
+														'
 										>
 											Online
 										</span>

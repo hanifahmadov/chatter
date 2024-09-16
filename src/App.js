@@ -194,7 +194,7 @@ export const App = () => {
                             text-[22px] text-black font-[400] font-sans text-shadow-custom_01
 							rounded-[25px] rounded-br-[2px] rounded-bl-[2px] 
 							bg-white
-							${sm && ` text-[30px]`}
+							${sm && ` text-[26px]`}
 							
                             `}
 			>
