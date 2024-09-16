@@ -58,7 +58,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 							className={`min-h-[50px] min-w-[300px] 
 										${sm ? "w-[100%] px-1 py-2" : " w-[95%] p-1"} 
 										border-[1px] border-gray-200 rounded-[10px] overflow-hidden
-										flex gap-3 flex-row justify-start items-center flex-nowrap
+										flex gap-[2px] flex-row justify-start items-center flex-nowrap
 										bg-white 
 
 									`}
@@ -74,7 +74,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									className={`${sm ? "h-[45px] w-[45px]" : "h-[40px] w-[40px]"}
                                        			object-cover p-[1px]
                                                 text-shadow-custom_02 rounded-full
-												border-[2px] 
+												border-[1px] 
 												${user.online ? "border-solid border-green-400" : " border-solid border-gray-300"}
                                                 `}
 								/>
@@ -123,8 +123,8 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 								<div className='row-top flex gap-[5px] flex-col mb-1 leading-none'>
 									<div
 										className={`${sm ? "text-[16px]" : "text-[14px]"}
-													flex justify-start items-center font-[600]
-													text-shadow-custom_01 h-full 
+													flex justify-start items-center font-[500]
+													h-full 
 
 													`}
 									>
@@ -132,9 +132,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									</div>
 
 									<span
-										className={`${sm ? "text-[14px]" : "text-[12px]"}
-													text-shadow-custom_01 
-													`}
+										className={`${sm ? "text-[14px]" : "text-[12px]"}`}
 									>
 										{user.email}
 									</span>

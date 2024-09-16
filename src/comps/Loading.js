@@ -34,8 +34,8 @@ export const Loading = ({ chatsLoading, messageLoading }) => {
 							className={chatsLoading ? "w-[20rem] h-[17rem]" : "w-[10rem] h-[15rem]"}
 						/>
 						<div
-							className='flex gap-[1px]
-										text-[16px] text-gray-400
+							className='flex gap-[0px]
+										text-[14px]
 										absolute bottom-[3rem]
 										'
 						>

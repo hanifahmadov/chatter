@@ -155,8 +155,8 @@ export const Chats = ({
 							<div className='user_avatar_parent '>
 								<img
 									src={recipient.avatar}
-									className={`max-h-[45px] min-h-[45px] max-w-[45px] min-w-[45px] 
-                                                rounded-full border-[1.5px] ${
+									className={`max-h-[42px] min-h-[42px] max-w-[42px] min-w-[42px] 
+                                                rounded-full border-[1px] ${
 													recipient.online ? "border-green-500 " : "border-gray-300 "
 												}
                                                 object-cover p-[2px]
@@ -166,7 +166,7 @@ export const Chats = ({
 							</div>
 							<div className='user_content flex flex-grow flex-col items-start justify-center px-2'>
 								<div className='content_top flex w-full justify-start items-center'>
-									<span className='text-[16px] font-[400]'>
+									<span className='text-[14px] font-[500] text-black'>
 										{recipient.username.charAt(0).toUpperCase() +
 											recipient.username.slice(1).toLowerCase()}
 									</span>
@@ -179,7 +179,7 @@ export const Chats = ({
 										{recipient.online ? (
 											<span className='text-green-500  text-[12px]'>online now</span>
 										) : (
-											<div className='text-gray-500 text-[12px]'>
+											<div className='text-gray-900 text-[12px]'>
 												<div className='flex gap-1 justify-end pt-[2px]'>
 													{/* <span>{formatDate(recipient.lastseen)}</span>
 													<span>＠</span>
