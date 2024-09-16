@@ -56,7 +56,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 						<div
 							key={index}
 							className={`min-h-[50px] min-w-[300px] 
-										${sm ? "w-[100%] p-2" : " w-[90%] p-1"} 
+										${sm ? "w-[100%] px-1 py-2" : " w-[90%] p-1"} 
 										border-[1px] border-gray-200 rounded-[10px] overflow-hidden
 										flex gap-3 flex-row justify-start items-center flex-nowrap
 										bg-white 
@@ -64,14 +64,14 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									`}
 						>
 							<div
-								className={`user-avatar ${sm ? "w-[6rem]" : "w-auto"}
+								className={`user-avatar ${sm ? "w-[5.5rem]" : "w-auto"}
                                             overflow-hidden ml-2 relative 
 											flex flex-col items-center justify-center
                                             `}
 							>
 								<img
 									src={user.avatar}
-									className={`${sm ? "h-[55px] w-[55px] " : "h-[50px] w-[50px]"}
+									className={`${sm ? "h-[55px] w-[55px]" : "h-[50px] w-[50px]"}
                                        			object-cover p-[2px]
                                                 text-shadow-custom_02 rounded-full
 												border-[2px] 
@@ -81,7 +81,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 
 								<div
 									className={`flex flex-col items-center justify-center w-full
-												${sm ? "leading-[18px]" : "leading-[14px]"}
+												${sm ? "leading-[18px] text-[12px] " : "leading-[14px] text-[10px]"}
 												`}
 								>
 									{user.online ? (
@@ -93,10 +93,9 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 										</span>
 									) : (
 										<span
-											className={`${sm ? "text-[13px]" : " text-[10px]"}  
-														block text-black font-sans
-														flex flex-col justify-center items-center mt-[3px]
-														
+											className={`block text-black font-sans
+														flex flex-col justify-center items-center
+														mt-[3px]
 														`}
 										>
 											<span className={`today text-black font-sans text-shadow-custom_01 `}>
@@ -121,8 +120,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 							>
 								<div className='row-top flex gap-[5px] flex-col mb-2 leading-none'>
 									<div
-										className={`${sm ? "text-[20px]" : "text-[16px]"}
-													text-black font-[400] font-sans
+										className={`${sm ? "text-[18px]" : "text-[16px]"}
 													flex justify-start items-center
 													text-shadow-custom_01 h-full 
 
@@ -132,14 +130,14 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									</div>
 
 									<span
-										className={`${sm ? "text-[16px]" : "text-[12px]"}
+										className={`${sm ? "text-[14px]" : "text-[12px]"}
 													text-shadow-custom_01 
 													`}
 									>
 										{user.email}
 									</span>
 
-									<div className={`${sm ? "text-[16px]" : "text-[12px]"}`}>
+									<div className={`${sm ? "text-[14px]" : "text-[12px]"}`}>
 										<div className='flex gap-2 flex-row text-center justify-center items-center'>
 											<div
 												className='flex flex-row gap-1 justify-center items-center
@@ -152,7 +150,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 
 											<span
 												className={` ${
-													sm ? "text-[15px]" : "text-[10px]"
+													sm ? "text-[12px]" : "text-[10px]"
 												} text-shadow-custom_01`}
 											>
 												{formatDate(user.createdAt)}
@@ -162,7 +160,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 								</div>
 
 								<div
-									className={`${sm ? "text-[18px]" : "text-[12px]"}
+									className={`${sm ? "text-[16px]" : "text-[12px]"}
 												row-bottom w-full flex flex-row gap-2
 												`}
 								>
