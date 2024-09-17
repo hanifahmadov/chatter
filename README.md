@@ -47,7 +47,8 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 **`api`** `=` `chatterapi.hanifahmadov.site`
 
-**Authentication:**
+**Authentication:** <hr/>
+
 
 -   **POST** `api/signup` - Register a new user with optional avatar upload.
 
@@ -72,4 +73,4 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
     -   **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
     -   **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
 
-    > endpoint expects the user's `_id` in the request body.
+        > Endpoint expects the user's `_id` in the request body.
