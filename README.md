@@ -48,7 +48,6 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 **`api`** `=` `chatterapi.hanifahmadov.site`
 
 -   ### **Authentication:**
-    ---
 
     -   [x] **POST** `api/signup` - Register a new user with optional avatar upload.
 
@@ -66,7 +65,7 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
             - `access-token` `:` containing the user's ID and email, valid for 1 day, for signed user checks
 
             - `refresh-token` `:` alid for 1 day or 7 days based on the  
-            [ ]`remember` parameter, for secure cookies, padge reload auth.
+            `remember` parameter, for secure cookies, when page reload auth.
 
     -   [x] **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
 
@@ -78,5 +77,5 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
             > Endpoint expects the user's `_id` in the request body.
 
-    
-    -   [ ] **POST** `api/change-pwd` - Change Password - `!important`
+
+    -   [ ] **POST** `api/change-pwd` - Change Password - `later`
