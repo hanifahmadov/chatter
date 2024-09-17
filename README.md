@@ -133,6 +133,5 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 ##  Testing 
 
-
-    -   **NOT DONE YET**
+-   [ ]  **NOT DONE YET**
 
