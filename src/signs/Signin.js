@@ -150,16 +150,15 @@ export const Signin = () => {
 				<form className='flex gap-3 flex-col' onSubmit={handleFormSubmit}>
 					<input
 						type='email'
-						className='border border-gray-300 px-3 py-2
+						className={`border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-shadow-custom_01
-								text-black text-[14px] font-sans
+								${sm ? "text-[15px]" : "text-[14px]"}
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
-								'
+								`}
 						placeholder='Enter email address'
 						autoComplete='true'
 						value={email}
@@ -168,16 +167,14 @@ export const Signin = () => {
 
 					<input
 						type='password'
-						className='border border-gray-300 px-3 py-2
+						className={`border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								text-[14px] text-black font-sans
-								text-shadow-custom_01
+								${sm ? "text-[15px]" : "text-[14px]"}
 								placeholder:px-1 
 								placeholder:text-gray-300
-								placeholder:text-shadow-custom_000
-								'
+								`}
 						placeholder='Enter password'
 						autoComplete='true'
 						value={pwd}
