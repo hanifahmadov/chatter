@@ -114,4 +114,4 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
     -   [x] **Mark Messages as Read**
 
         -   **POST** `/api/messages/:recipientId/mark-read`
-        -   **Description:** All new messages are marked as `unread`, and these unread `popup-counts` stay active until the user reads these messages. Marking these new messages as `isRead`:`false` after the user sees these messages.
+        -   **Description:** All new messages are marked as `unread`, and these unread `popup-counts` stay active until the user reads these messages. Marking these new messages as `isRead`:`false` after the user sees these messages...
