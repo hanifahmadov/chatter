@@ -1,4 +1,4 @@
-<div className="text-[30px]">
+<div style={{fontSize: "30px"}}>
 
 ## Chatter
 
