@@ -130,9 +130,9 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 ## Testing
 
--   [ ] **HAVENT DONE YET**
+-   [ ] HAVENT DONE YET
 
 
     > This project is open to being developed into better versions (or designs) and will add new features as new ideas come up
-    
+
 **Thanks for reading ♡**
