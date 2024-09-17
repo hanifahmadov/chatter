@@ -18,7 +18,7 @@ import {
 } from "../store/states/app_state";
 
 export const Signin = () => {
-	/* mobile first */
+	/* mobile first*/
 	const theme = useTheme();
 	const { sm, md } = theme.device;
 
@@ -150,15 +150,16 @@ export const Signin = () => {
 				<form className='flex gap-3 flex-col' onSubmit={handleFormSubmit}>
 					<input
 						type='email'
-						className={`border border-gray-300 px-3 py-2
+						className='border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								${sm ? "text-[15px]" : "text-[14px]"}
+								text-shadow-custom_01
+								text-black text-[14px] font-sans
 								placeholder:px-1 
 								placeholder:text-gray-300
 								placeholder:text-shadow-custom_000
-								`}
+								'
 						placeholder='Enter email address'
 						autoComplete='true'
 						value={email}
@@ -167,14 +168,16 @@ export const Signin = () => {
 
 					<input
 						type='password'
-						className={`border border-gray-300 px-3 py-2
+						className='border border-gray-300 px-3 py-2
 								w-full 
 								rounded-md focus:outline-none 
 								focus:ring-1 focus:ring-blue-200
-								${sm ? "text-[15px]" : "text-[14px]"}
+								text-[14px] text-black font-sans
+								text-shadow-custom_01
 								placeholder:px-1 
 								placeholder:text-gray-300
-								`}
+								placeholder:text-shadow-custom_000
+								'
 						placeholder='Enter password'
 						autoComplete='true'
 						value={pwd}
@@ -189,13 +192,12 @@ export const Signin = () => {
 								? "bg-blue-600 text-white opacity-50 cursor-not-allowed"
 								: "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
 						} 
-							${sm ? "text-[15px]" : "text-[14px]"}
-						    font-bold 
-							py-[7px] px-3 
-						  	rounded
-						  	text-shadow-custom_01 
-						 	w-full 
+						    font-bold py-[7px] px-3 
+						  	rounded font-[400] 
+						  	text-shadow-custom_02 
+						 	w-full text-[14px]
 						  	transition-colors duration-200 ease-in-out
+                               
                             `}
 					>
 						sign in
@@ -203,29 +205,25 @@ export const Signin = () => {
 				</form>
 			</div>
 
-			<div className='signin_footer mt-5 text-sm'>
-				<div
-					className={`${sm ? "text-[15px]" : "text-[14px]"}
-								text-shadow-custom_01
-								`}
-				>
+			<div className='signin_footer mt-6 text-sm'>
+				<div className={`text-shadow-custom_01 ${sm ? "text-[14px] " : "text-[14px] "}`}>
 					Dont have an account?
 				</div>
 
 				<div
 					onClick={() => navigate("/welcome/signup")}
-					className={`text-shadow-custom_01
-								${sm ? " text-[15px]" : " text-[14px]"}
-								text-blue-900 
-								bg-white hover:bg-gray-50
-								cursor-pointer 
-								inline-block
-								px-4 py-[5px] mt-2
-								rounded
-								text-center
-								border-[1px]
-								transition-colors duration-200 ease-in-out
-								`}
+					className='
+                            font-[500] text-[14px] text-blue-900 
+							bg-white hover:bg-gray-50
+							cursor-pointer 
+							inline-block
+							px-4 py-[5px] mt-2
+							rounded
+							text-center
+							border-[1px]
+							transition-colors duration-200 ease-in-out
+							tracking-tight
+							'
 				>
 					Sign up.
 				</div>

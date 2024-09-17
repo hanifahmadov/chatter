@@ -220,12 +220,13 @@ export const Signup = () => {
 
 				<div
 					onClick={() => navigate("/welcome/signin")}
-					className='text-shadow-custom_01 
-                                    font-[400] text-[14px] text-blue-700 
+					className=' 
+                                    text-[14px] text-blue-900 
+									font-[500]
 									hover:bg-gray-50
 									cursor-pointer 
 									inline-block
-									px-4 py-[3px] mt-2
+									px-4 py-[5px] mt-2
 									rounded
 									text-center
                                     bg-white
@@ -233,7 +234,7 @@ export const Signup = () => {
 									transition-colors duration-200 ease-in-out
 									'
 				>
-					Sign in
+					Sign in.
 				</div>
 			</div>
 		</motion.div>
