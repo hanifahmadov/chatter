@@ -76,9 +76,9 @@ export const Settings = ({ activelink, setActivelink }) => {
 			<div className='flex flex-col gap-2 mt-5'>
 				<span
 					className='
-								w-[180px]  py-2 opacity-[0.4] cursor-not-allowed
-								text-shadow-custom_02 text-white text-[14px] text-center 
-								bg-blue-500 rounded-sm font-[600] inline-block
+								w-[150px] py-[4px] opacity-40 cursor-not-allowed
+								text-shadow-custom_01 text-white text-[14px] text-center 
+								bg-blue-500 rounded-sm font-[500] inline-block
 								
 								'
 				>
@@ -87,9 +87,9 @@ export const Settings = ({ activelink, setActivelink }) => {
 				<motion.span
 					whileTap={{ scale: 1.05 }}
 					onClick={handleSignOut}
-					className=' w-[180px] py-2 mt-1 cursor-pointer hover:bg-blue-600
-								text-shadow-custom_02 text-white text-[14px] text-center 
-			                    bg-blue-500 rounded-sm font-[600] inline-block
+					className=' w-[150px] py-[4px] mt-1 cursor-pointer hover:bg-blue-600
+								text-shadow-custom_01 text-white text-[14px] text-center 
+			                    bg-blue-500 rounded-sm font-[500] inline-block
 			                   
 			                    '
 				>
