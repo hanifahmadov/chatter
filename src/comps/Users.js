@@ -64,7 +64,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									`}
 						>
 							<div
-								className={`user-avatar min-w-[71px] ${sm && "px-2"}
+								className={`user-avatar max-w-[75px] min-w-[75px] ${sm && "px-2"}
                                             overflow-hidden ml-1 relative 
 											flex flex-col items-center justify-center
                                             `}
