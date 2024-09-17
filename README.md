@@ -109,7 +109,7 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
     -   [x] **Get Last Message and Unread Count**
 
         -   **GET** `/api/messages/:recipientId/last-message`
-        -   **Description:** Retrieves the last message between the current `signed-in user` and a specified `recipient`, along with the count of `unread messages` from that recipient. This call happens when the user clicks the `__Chats__` link, and it displays all users' chat history (last message between these users) and the recipient details.
+        -   **Description:** Retrieves the last message between the current `signed-in user` and a specified `recipient`, along with the count of `unread messages` from that recipient. This call happens when the user clicks the __`chats`__ link, and it displays all users' chat history (last message between these users) and the recipient details.
 
     -   [x] **Mark Messages as Read**
 
