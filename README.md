@@ -88,11 +88,12 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
         -   **Authentication:** Requires a valid access token.
         -   **Headers:** `Bearer <access_token>`
         -   **Body Parameters:**
+            <br/>
 
-        | Parameter     | Type   | Required | Description                                         |
-        | ------------- | ------ | -------- | --------------------------------------------------- |
-        | `text`        | String | Yes/No   | The message content.                                |
-        | `ownerId`     | String | Yes      | The user Id of the signed user.                     |
-        | `recipientId` | String | Yes      | The user ID of the message recipient.               |
-        | `baseurl`     | String | Yes      | The base URL for accessing uploaded media files.    |
-        | `image`       | File   | No/Yes   | An optional image file to be sent with the message. |
+            | Parameter     | Type     | Required | Description                                         |
+            | ------------- | -------- | -------- | --------------------------------------------------- |
+            | `text`        | String   | Yes/No   | The message content.                                |
+            | `ownerId`     | ObjectId | Yes      | The user Id of the signed user.                     |
+            | `recipientId` | ObjectId | Yes      | The user ID of the message recipient.               |
+            | `baseurl`     | String   | Yes      | The base URL for accessing uploaded media files.    |
+            | `image`       | File     | No/Yes   | An optional image file to be sent with the message. |
