@@ -42,8 +42,7 @@ export const Settings = ({ activelink, setActivelink }) => {
 			<div>
 				<img
 					src={avatar}
-					className='h-[160px] w-[160px] 
-								sm:h-[130px] sm:w-[130px]
+					className='h-[100px] w-[100px] 
                                 border-[5px] border-solid 
                                 border-white object-cover p-[0px]
                                 text-shadow-custom_02  rounded-lg bg-white
@@ -53,31 +52,23 @@ export const Settings = ({ activelink, setActivelink }) => {
 
 			<div className='flex flex-col justify-center items-center mt-4'>
 				<span
-					className='text-[30px] text-black font-[400] font-sans
-								text-shadow-custom_01
-
-								'
+					className='text-[18px] text-black font-[500] font-sans
+								text-shadow-custom_01'
 				>
 					{username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}
 				</span>
 
-				<span
-					className='text-[14px] text-gray-700 font-sans
-								font-[400] relative bottom-[5px]
-								'
-				>
-					{email}
-				</span>
+				<span className='text-[14px] relative bottom-[5px]'>{email}</span>
 
 				<span className='mt-2'>
 					<div className='flex gap-2 flex-col text-center leading-[12px]'>
 						<div className='flex flex-row gap-1 justify-center items-center text-gray-700'>
-							<span className='text-[14px] text-shadow-custom_01'>✩</span>
-							<span className='text-[14px] text-black font-sans'>Member since</span>
-							<span className='text-[14px] text-shadow-custom_01 block'>✩</span>
+							<span className='text-[12px] text-shadow-custom_01'>✩</span>
+							<span className='text-[12px] text-black font-sans'>Member since</span>
+							<span className='text-[12px] text-shadow-custom_01 block'>✩</span>
 						</div>
 
-						<span className='text-[14px] text-gray-700 font-sans'>{formatDate(createdAt)}</span>
+						<span className='text-[12px]'>{formatDate(createdAt)}</span>
 					</div>
 				</span>
 			</div>
@@ -85,9 +76,9 @@ export const Settings = ({ activelink, setActivelink }) => {
 			<div className='flex flex-col gap-2 mt-5'>
 				<span
 					className='
-								w-[180px]  py-1 opacity-[0.4] cursor-not-allowed
+								w-[180px]  py-2 opacity-[0.4] cursor-not-allowed
 								text-shadow-custom_02 text-white text-[14px] text-center 
-								bg-blue-500 rounded-sm font-[500] inline-block
+								bg-blue-500 rounded-sm font-[600] inline-block
 								
 								'
 				>
@@ -96,9 +87,9 @@ export const Settings = ({ activelink, setActivelink }) => {
 				<motion.span
 					whileTap={{ scale: 1.05 }}
 					onClick={handleSignOut}
-					className=' w-[180px] py-1 mt-1 cursor-pointer hover:bg-blue-600
+					className=' w-[180px] py-2 mt-1 cursor-pointer hover:bg-blue-600
 								text-shadow-custom_02 text-white text-[14px] text-center 
-			                    bg-blue-500 rounded-sm font-[500] inline-block
+			                    bg-blue-500 rounded-sm font-[600] inline-block
 			                   
 			                    '
 				>
