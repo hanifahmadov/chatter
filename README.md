@@ -1,5 +1,3 @@
-<div style={{fontSize: "30px"}}>
-
 ## Chatter
 
 **[chatter.hanifahmadov.site](https://chatter.hanifahmadov.site/welcome)**
@@ -47,9 +45,11 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 ### API Endpoints
 
-**`baseurl`** `=` `chatterapi.hanifahmadov.site`
+**`api`** `=` `chatterapi.hanifahmadov.site`
 
 **Authentication:**
 
--   POST
-</div>
+-   **POST** `api/signup` - Register a new user with all credetials. `singup` route has the `signup_multer.single("avatar")` to handle the user avatar uploaded any avatar during `signup`.
+    **multer** will save the image to the server publicaly accessable images folder (through `nginx`), and will write the avatar acceess url into `mongodb atlas` database.
+
+-   **GET** `api/signin` -Authenticate a user and retrieve a token.
