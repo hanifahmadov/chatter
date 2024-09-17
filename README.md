@@ -121,5 +121,5 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
     -   [x] **Keep User Logged In**
 
         -   **GET** `/api/refreshAccess`
-        -   **Description:** Refreshes the user's `access-token` using the refresh token stored in `HTTP-only cookies`. This endpoint allows a user to maintain an authenticated session upon page reload without requiring re-login.
-        -   **Authentication** No  `access-token` required, but a **valid** (`not expired`) refresh token must be present in cookies.
+        -   **Description:** Refreshes the user's `access-token` using the refresh token stored in **`HTTP-only cookies`**. This endpoint allows a user to maintain an authenticated session upon page reload without requiring re-login.
+        -   **Authentication** No  `access-token` required, but a **valid** (`not expired`) refresh token must be present in **`cookies`**.
