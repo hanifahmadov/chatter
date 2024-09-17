@@ -47,10 +47,11 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 **`api`** `=` `chatterapi.hanifahmadov.site`
 
-**Authentication:** <hr/>
+**Authentication:** 
+---
 
 
--   **POST** `api/signup` - Register a new user with optional avatar upload.
+-   [x] **POST** `api/signup` - Register a new user with optional avatar upload.
 
     - **File Upload Handling:** - use `multer` middleware (`signup_multer.single("avatar")`) to handle single file upload under the field name avatar.
 
@@ -58,7 +59,7 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
     -   **Password Hashing:** - uses bcrypt to hash the password with a predefined number of salt rounds (`bcryptSaltRounds`).
 
--   **POST** `api/signin` - Sign in a user and performing the following steps:
+-   [x] **POST** `api/signin` - Sign in a user and performing the following steps:
 
     -   **Credentials verification:** - Verifies that the provided `email` exists in the database and uses `bcrypt.compare` to validate the provided password against the stored hashed password.
     -   **Token Generation:** - Generates 2 `JWT` tokens:
@@ -67,10 +68,13 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
         `refresh-token` `:` alid for 1 day or 7 days based on the [ ]`remember` parameter, for secure cookies, padge reload auth.
 
--   **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
+-  [x] **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
 
     -   **Clearing the JWT Cookie:** Removes the `jwt` cookie from the client's browser.
     -   **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
     -   **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
 
         > Endpoint expects the user's `_id` in the request body.
+
+
+- [ ] **POST** `api/change-pwd` -  Change Password - `!important`
