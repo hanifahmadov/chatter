@@ -10,7 +10,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 	const theme = useTheme();
 	const { sm, md } = theme.device;
 
-	console.log("sm sm md md", sm, md);
+
 
 	/* handle user send message */
 	const handleSendMessage = (user) => {
@@ -64,7 +64,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									`}
 						>
 							<div
-								className={`user-avatar min-w-[71px]
+								className={`user-avatar min-w-[71px] ${sm && "px-2"}
                                             overflow-hidden ml-1 relative 
 											flex flex-col items-center justify-center
                                             `}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilCallback } from "recoil";
 import { motion } from "framer-motion";
+import { useTheme } from "styled-components";
 
 /* apis */
 import { signin_api } from "../apis/signsCall";
@@ -17,6 +18,10 @@ import {
 } from "../store/states/app_state";
 
 export const Signin = () => {
+	/* mobile first */
+	const theme = useTheme();
+	const { sm, md } = theme.device;
+
 	/* location & navigation */
 	const navigate = useNavigate();
 	/* tracking the setTimeout Ids on signin_api error catch */
@@ -201,21 +206,24 @@ export const Signin = () => {
 			</div>
 
 			<div className='signin_footer mt-5 text-sm'>
-				<div className='text-shadow-custom_01 text-[14px]'>Dont have an account?</div>
+				<div className={`${sm ? "text-[16px] font-[500]" : "text-[14px]"}`}>
+					Dont have an account?
+				</div>
 
 				<div
 					onClick={() => navigate("/welcome/signup")}
-					className='text-shadow-custom_01
-                                    font-[400] text-[14px] text-blue-700 
-									bg-white hover:bg-gray-50
-									cursor-pointer 
-									inline-block
-									px-4 py-[3px] mt-2
-									rounded
-									text-center
-									border-[1px]
-									transition-colors duration-200 ease-in-out
-									'
+					className={`
+								${sm ? " text-[16px]" : " text-[14px]"}
+                                font-[500] text-blue-700 
+								bg-white hover:bg-gray-50
+								cursor-pointer 
+								inline-block
+								px-4 py-[3px] mt-2
+								rounded
+								text-center
+								border-[1px]
+								transition-colors duration-200 ease-in-out
+								`}
 				>
 					Sign up
 				</div>
