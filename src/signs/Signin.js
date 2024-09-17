@@ -192,12 +192,13 @@ export const Signin = () => {
 								? "bg-blue-600 text-white opacity-50 cursor-not-allowed"
 								: "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
 						} 
-						    font-bold py-[7px] px-3 
-						  	rounded font-[400] 
-						  	text-shadow-custom_02 
-						 	w-full text-[14px]
+							${sm ? "text-[15px]" : "text-[14px]"}
+						    font-bold 
+							py-[7px] px-3 
+						  	rounded
+						  	text-shadow-custom_01 
+						 	w-full 
 						  	transition-colors duration-200 ease-in-out
-                               
                             `}
 					>
 						sign in
@@ -206,26 +207,30 @@ export const Signin = () => {
 			</div>
 
 			<div className='signin_footer mt-5 text-sm'>
-				<div className={`${sm ? "text-[16px] font-[500]" : "text-[14px]"}`}>
+				<div
+					className={`${sm ? "text-[15px]" : "text-[14px]"}
+								text-shadow-custom_01
+								`}
+				>
 					Dont have an account?
 				</div>
 
 				<div
 					onClick={() => navigate("/welcome/signup")}
-					className={`
-								${sm ? " text-[16px]" : " text-[14px]"}
-                                font-[500] text-blue-700 
+					className={`text-shadow-custom_01
+								${sm ? " text-[15px]" : " text-[14px]"}
+								text-blue-900 
 								bg-white hover:bg-gray-50
 								cursor-pointer 
 								inline-block
-								px-4 py-[3px] mt-2
+								px-4 py-[5px] mt-2
 								rounded
 								text-center
 								border-[1px]
 								transition-colors duration-200 ease-in-out
 								`}
 				>
-					Sign up
+					Sign up.
 				</div>
 			</div>
 		</motion.div>
