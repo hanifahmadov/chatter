@@ -47,7 +47,7 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 **`api`** `=` `chatterapi.hanifahmadov.site`
 
--   ### **Authentication:**
+-   ### Authentication:
 
     -   [x] **POST** `api/signup` - Register a new user with optional avatar upload.
 
@@ -79,7 +79,7 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
     -   [ ] **POST** `api/change-pwd` - Change Password - `later`
 
--   ### **Messaging:**
+-   ### Messaging:
 
     -   [x] **Send a Message:**
 
