@@ -125,5 +125,14 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
         -   **Authentication** No  `access-token` required, but a **valid** (`not expired`) refresh token must be present in **`cookies`**.
 
             > If successful, the user remains authenticated, and the application can continue without interruption.
-            
+
             > If not(`token expired or missing`), the application should prompt the user to log in again.
+
+
+
+
+##  Testing 
+
+
+    -   **NOT DONE YET**
+
