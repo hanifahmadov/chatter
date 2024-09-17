@@ -26,12 +26,12 @@ A real-time chat application inspired by a social app. This project focuses on d
 
 The projects offers:
 
--   [x] User authentication (Sign Up, Sign In, Sign Out)
+-   [x] User authentication (`Sign Up`, `Sign In`, `Sign Out`)
 -   [x] Real-time messaging with instant updates
--   [x] User status indicators (online/offline)
+-   [x] User status indicators (`online/offline`)
 -   [ ] Message timestamps and read receipts
 -   [x] Responsive design for mobile and desktop
--   [ ] Profile customization (avatar upload, status message)
+-   [ ] Profile customization (`avatar upload`, `status message`)
 
 ### Backend Server Deployment
 
@@ -49,17 +49,27 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 **Authentication:**
 
--   **POST** `api/signup` - Register a new user. If an avatar is uploaded during signup, the `multer.single` middleware handles the file upload. Multer saves the image to a publicly accessible images folder (served via nginx), and the avatar's URL is stored in the MongoDB Atlas database.
+-   **POST** `api/signup` - Register a new user with optional avatar upload.
 
--   **POST** `api/signin` -Authenticate a user and retrieve a token.
+    - **File Upload Handling:** - use `multer` middleware (`signup_multer.single("avatar")`) to handle single file upload under the field name avatar.
+
+        > The uploaded file is saved to a publicly accessible images folder (served via `nginx`).
+
+    -   **Password Hashing:** - uses bcrypt to hash the password with a predefined number of salt rounds (`bcryptSaltRounds`).
+
+-   **POST** `api/signin` - Sign in a user and performing the following steps:
+
+    -   **Credentials verification:** - Verifies that the provided `email` exists in the database and uses `bcrypt.compare` to validate the provided password against the stored hashed password.
+    -   **Token Generation:** - Generates 2 `JWT` tokens:
+
+        `access-token` `:` containing the user's ID and email, valid for 1 day, for signed user checks
+
+        `refresh-token` `:` alid for 1 day or 7 days based on the [ ]`remember` parameter, for secure cookies, padge reload auth.
 
 -   **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
 
-    - **Clearing the JWT Cookie:** Removes the `jwt` cookie from the client's browser.
-    - **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
-    - **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
+    -   **Clearing the JWT Cookie:** Removes the `jwt` cookie from the client's browser.
+    -   **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
+    -   **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
 
-    > [!NOTE] 
-    
-    > Expects the user's `_id` in the request body.
-
+    > endpoint expects the user's `_id` in the request body.
