@@ -49,7 +49,17 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
 **Authentication:**
 
--   **POST** `api/signup` - Register a new user with all credetials. `singup` route has the `signup_multer.single("avatar")` to handle the user avatar uploaded any avatar during `signup`.
-    **multer** will save the image to the server publicaly accessable images folder (through `nginx`), and will write the avatar acceess url into `mongodb atlas` database.
+-   **POST** `api/signup` - Register a new user. If an avatar is uploaded during signup, the `multer.single` middleware handles the file upload. Multer saves the image to a publicly accessible images folder (served via nginx), and the avatar's URL is stored in the MongoDB Atlas database.
 
--   **GET** `api/signin` -Authenticate a user and retrieve a token.
+-   **POST** `api/signin` -Authenticate a user and retrieve a token.
+
+-   **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
+
+    - **Clearing the JWT Cookie:** Removes the `jwt` cookie from the client's browser.
+    - **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
+    - **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
+
+    > [!NOTE] 
+    
+    > Expects the user's `_id` in the request body.
+
