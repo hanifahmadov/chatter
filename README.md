@@ -106,9 +106,12 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
         -   **Description:** Retrieves all messages whenever a user signs in.
         -   **Response:** All db-retrieved messages have the `sender` and `recipient` fields populated. However, all sensitive fields are excluded from the response, such as `accessToken` and `hashedPassword`.
 
+    -   [x] **Get Last Message and Unread Count**
+
+        -   **GET** `/api/messages/:recipientId/last-message`
+        -   **Description:** Retrieves the last message between the current `signed-in user` and a specified `recipient`, along with the count of `unread messages` from that recipient. This call happens when the user clicks the `__Chats__` link, and it displays all users' chat history (last message between these users) and the recipient details.
+
     -   [x] **Mark Messages as Read**
 
         -   **POST** `/api/messages/:recipientId/mark-read`
         -   **Description:** All new messages are marked as `unread`, and these unread `popup-counts` stay active until the user reads these messages. Marking these new messages as `isRead`:`false` after the user sees these messages.
-    
-    -   [x] 
