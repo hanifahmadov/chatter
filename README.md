@@ -109,16 +109,17 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
     -   [x] **Get Last Message and Unread Count**
 
         -   **GET** `/api/messages/:recipientId/last-message`
-        -   **Description:** Retrieves the last message between the current `signed-in user` and a specified `recipient`, along with the count of `unread messages` from that recipient. This call happens when the user clicks the __`chats`__ link, and it displays all users' chat history (last message between these users) and the recipient details.
+        -   **Description:** Retrieves the last message between the current `signed-in user` and a specified `recipient`, along with the count of `unread messages` from that recipient. This call happens when the user clicks the **`chats`** link, and it displays all users' chat history (last message between these users) and the recipient details.
 
     -   [x] **Mark Messages as Read**
 
         -   **POST** `/api/messages/:recipientId/mark-read`
         -   **Description:** All new messages are marked as `unread`, and these unread `popup-counts` stay active until the user reads these messages. Marking these new messages as `isRead`:`false` after the user sees these messages.
 
+-   ### Page Reload
 
--   ### Page Reload: 
+    -   [x] **Keep User Logged In**
 
-    - [X] **Keep User Logged In**
-
-        -   **POST** `/api/messages/:recipientId/mark-read`
+        -   **GET** `/api/refreshAccess`
+        -   **Description:** Refreshes the user's `access-token` using the refresh token stored in `HTTP-only cookies`. This endpoint allows a user to maintain an authenticated session upon page reload without requiring re-login.
+        -   **Authentication** No  `access-token` required, but a **valid** (`not expired`) refresh token must be present in cookies.
