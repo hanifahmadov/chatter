@@ -62,20 +62,37 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
         -   **Credentials verification:** - Verifies that the provided `email` exists in the database and uses `bcrypt.compare` to validate the provided password against the stored hashed password.
         -   **Token Generation:** - Generates 2 `JWT` tokens:
 
-            - `access-token` `:` containing the user's ID and email, valid for 1 day, for signed user checks
+            -   `access-token` `:` containing the user's ID and email, valid for 1 day, for signed user checks
 
-            - `refresh-token` `:` alid for 1 day or 7 days based on the  
-            `remember` parameter, for secure cookies, when page reload auth.
+            -   `refresh-token` `:` alid for 1 day or 7 days based on the  
+                `remember` parameter, for secure cookies, when page reload auth.
 
     -   [x] **DELETE** `api/signout` - Sign out the user. This endpoint logs out the user by:
 
         -   **Clearing the JWT Cookie:** Removes the `jwt` cookie from the client's browser.
-        
+
         -   **Invalidating the Access Token:** Sets the user's `accessToken` to `null` in the database.
-        
+
         -   **Updating Last Seen:** Updates the user's `lastseen` timestamp to the current date and time.
 
             > Endpoint expects the user's `_id` in the request body.
 
-
     -   [ ] **POST** `api/change-pwd` - Change Password - `later`
+
+-   ### **Messaging:**
+
+    -   [x] **Send a Message:**
+
+        -   **POST** `/api/messages/create`
+        -   **Description:** Sends a message from the authenticated user to a recipient. Supports optional image upload and real-time notification to connected clients via Socket.IO.
+        -   **Authentication:** Requires a valid access token.
+        -   **Headers:** `Bearer <access_token>`
+        -   **Body Parameters:**
+
+        | Parameter     | Type   | Required | Description                                         |
+        | ------------- | ------ | -------- | --------------------------------------------------- |
+        | `text`        | String | Yes/No   | The message content.                                |
+        | `ownerId`     | String | Yes      | The user Id of the signed user.                     |
+        | `recipientId` | String | Yes      | The user ID of the message recipient.               |
+        | `baseurl`     | String | Yes      | The base URL for accessing uploaded media files.    |
+        | `image`       | File   | No/Yes   | An optional image file to be sent with the message. |
