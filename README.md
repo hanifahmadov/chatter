@@ -90,10 +90,18 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
         -   **Body Parameters:**
             <br/>
 
-            | Parameter     | Type     | Required | Description                                         |
-            | ------------- | -------- | -------- | --------------------------------------------------- |
-            | `text`        | String   | Yes/No   | The message content.                                |
-            | `ownerId`     | ObjectId | Yes      | The user Id of the signed user.                     |
-            | `recipientId` | ObjectId | Yes      | The user ID of the message recipient.               |
-            | `baseurl`     | String   | Yes      | The base URL for accessing uploaded media files.    |
-            | `image`       | File     | No/Yes   | An optional image file to be sent with the message. |
+            | Parameter     | Type     | Required | Description                                                 |
+            | ------------- | -------- | -------- | ----------------------------------------------------------- |
+            | `text`        | String   | Yes / No | The message content. Requirement depends on file if upload. |
+            | `ownerId`     | ObjectId | Yes      | The user Id of the signed user.                             |
+            | `recipientId` | ObjectId | Yes      | The user ID of the message recipient.                       |
+            | `baseurl`     | String   | Yes      | The base URL for accessing uploaded media files.            |
+            | `image`       | File     | No       | An optional image file to be sent with the message.         |
+
+            > If a file is uploaded, the message content is not required. Otherwise, the message content is required.
+
+    -   [x] **Get all Messages**
+
+        -   **GET** `/api/messages/read`
+        -   **Description:** Retrieves all messages whenever a user signs in.
+        -   **Response:** All db-retrieved messages have the `sender` and `recipient` fields populated. However, all sensitive fields are excluded from the         response, such as `accessToken` and `hashedPassword`.
