@@ -3,8 +3,6 @@
 __demo__ 
 
 
-- [x] https://github.com/octo-org/octo-repo/issues/740 :tada: : tada :
-
 A real-time chat application inspired by a social app. This project focuses on delivering a text messaging between users. It serves as a platform for learning and showcasing skills in full-stack development, real-time communication, and responsive design.
 
 __Tech Stack:__
@@ -25,9 +23,9 @@ __Tech Stack:__
 __Features__
 
 The projects offers:
-+ User authentication (Sign Up, Sign In, Sign Out)
-+ Real-time messaging with instant updates
-+ User status indicators (online/offline)
-+ Message timestamps and read receipts
-+ Responsive design for mobile and desktop
-+ Profile customization (avatar upload, status message)
+- [x] User authentication (Sign Up, Sign In, Sign Out)
+- [x] Real-time messaging with instant updates
+- [x] User status indicators (online/offline)
+- [ ] Message timestamps and read receipts
+- [x] Responsive design for mobile and desktop
+- [ ] Profile customization (avatar upload, status message)
