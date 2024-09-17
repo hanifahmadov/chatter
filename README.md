@@ -104,4 +104,11 @@ Backend server is hosted on a CentOS virtual machine (droplet) on the DigitalOce
 
         -   **GET** `/api/messages/read`
         -   **Description:** Retrieves all messages whenever a user signs in.
-        -   **Response:** All db-retrieved messages have the `sender` and `recipient` fields populated. However, all sensitive fields are excluded from the         response, such as `accessToken` and `hashedPassword`.
+        -   **Response:** All db-retrieved messages have the `sender` and `recipient` fields populated. However, all sensitive fields are excluded from the response, such as `accessToken` and `hashedPassword`.
+
+    -   [x] **Mark Messages as Read**
+
+        -   **POST** `/api/messages/:recipientId/mark-read`
+        -   **Description:** All new messages are marked as `unread`, and these unread `popup-counts` stay active until the user reads these messages. Marking these new messages as `isRead`:`false` after the user sees these messages.
+    
+    -   [x] 
