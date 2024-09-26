@@ -138,7 +138,7 @@ export const Users = ({ users, setActivelink, setCurrRecipient, setPrevActivelin
 									</span>
 
 									<div className={`${sm ? "text-[14px]" : "text-[12px]"}`}>
-										<div className='flex gap-2 flex-row text-center justify-center items-center'>
+										<div className='flex gap-2 flex-row text-center justify-start items-center'>
 											<div
 												className='flex flex-row gap-1 justify-center items-center
 															text-black ext-shadow-custom_01
