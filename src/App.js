@@ -55,6 +55,8 @@ export const App = () => {
 	const [newConnection] = useRecoilState(newConnectionDefault);
 	const [newMessage] = useRecoilState(newMessageDefault);
 
+	const [newMessageRecivied, setNewMessageRecivied] = useState(false);
+
 	/* signed-user & curr-recipient*/
 	const [{ accessToken, _id, avatar }] = useRecoilState(signedUserDefault);
 	const [currRecipient, setCurrRecipient] = useRecoilState(currRecipientDefault);
@@ -85,6 +87,12 @@ export const App = () => {
 
 		send_message(accessToken, data)
 			.then((res) => {
+
+				/* trigger to recall all messages on new message recivied */
+				setNewMessageRecivied((prev) => !prev);
+
+
+				/* set defaults */
 				setText("");
 				setImage(undefined);
 			})
@@ -99,6 +107,8 @@ export const App = () => {
 	 * 	when cmd + enter
 	 * 	jump to new line
 	 */
+
+	/* !!! this keydown is not in use  */
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter") {
 			if (e.metaKey || e.ctrlKey) {
@@ -179,7 +189,7 @@ export const App = () => {
 			.catch((error) => {
 				console.log("all message error >> ", error);
 			});
-	}, [newMessage, unreadCountUpdated]);
+	}, [newMessage, unreadCountUpdated, newMessageRecivied]);
 
 	return (
 		<div
@@ -312,7 +322,7 @@ export const App = () => {
 							setText={setText}
 							image={image}
 							setImage={setImage}
-							handleKeyDown={handleKeyDown}
+							// handleKeyDown={handleKeyDown}
 							handleSendMessage={handleSendMessage}
 							controls={controls}
 							messageLoading={messageLoading}
